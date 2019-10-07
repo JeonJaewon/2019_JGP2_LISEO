@@ -9,10 +9,10 @@ print(" "*18,'5. 종료')
 print("="*50)
 
 select=input("원하시는 항목을 선택해 주세요.")
-if select==1: #마이페이지
-elif select==2: #강의 정보 열람
-elif select==3: #내 강의
-elif select==4: #학생 관리
+if select==1: #마이페이지->MyPage
+elif select==2: #강의 정보 열람->ClassView
+elif select==3: #내 강의->MyClass
+elif select==4: #학생 관리->StudentCare
 elif select==5: #종료
     exit()
 else:
