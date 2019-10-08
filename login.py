@@ -39,7 +39,7 @@ def start():
             time.sleep(2)
             # 화면 지우기 추가할 것=>파이참에는 없는 기능?
             os.system('cls')
-            print(start())  # 2번 반복하여 불러올 시 에러 생김
+            #검거 print(start())  # 2번 반복하여 불러올 시 에러 생김
 
 
     teacher.close()
