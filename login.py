@@ -1,5 +1,4 @@
 import main
-import login
 import time
 import os
 
@@ -28,7 +27,7 @@ def start():
             time.sleep(2)
             # 화면 지우기 추가할 것=>파이참에는 없는 기능?
             os.system('cls')
-            print(login.start()) #2번 반복하여 불러올 시 에러 생김
+        # 반복문 안에 있으므로 start()를 굳이 다시 쓸 필요 없다.
 
     print(main.screen())
     t.close()
