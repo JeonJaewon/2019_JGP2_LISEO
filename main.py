@@ -35,6 +35,7 @@ def screen():
             print("1-5사이의 항목을 선택해 주세요.")#숫자입력규칙 적용필요
             time.sleep(2)
             os.system('cls')
-login.start()
+code = login.start() # code 어떤 학생 어떤 선생인지 체크하는 변수
+
 screen()
     #메인화면 출력

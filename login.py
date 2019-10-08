@@ -29,7 +29,8 @@ def start():
 
         if name in LoginInfo:
             os.system('cls')
-            break
+            return name
+            #break
         else:
             print("해당하는 고유번호가 없습니다. 다시 입력해 주세요.")
             time.sleep(2)
