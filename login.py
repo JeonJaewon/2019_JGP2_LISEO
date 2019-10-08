@@ -1,33 +1,34 @@
+import login
 import time
 import os
 
-print("="*50)
-print(" "*22, "LISEO")
-print("="*50)  # 로그인 화면의 화면 제목
 
-t=open("teacher.txt",'r')
-s=open("student.txt",'r')
+t = open("teacher.txt", 'r', encoding='UTF-8')
+s = open("student.txt", 'r', encoding='UTF-8')
 tdata = t.read()
 sdata = s.read()
 
-name = input("사용자의 고유번호를 입력해주세요: ")
-if name in tdata:
-    os.system('cls')
-    import main
-    print(main)
+while True:
+    print("="*50)
+    print(" "*22, "LISEO")
+    print("="*50)  # 로그인 화면의 화면 제목
 
-elif name in sdata:
-    os.system('cls')
-    import main
-    print(main)
+    name = input("사용자의 고유번호를 입력해주세요: ")
+    if name in tdata:
+        break
 
-else:
-    print("해당하는 고유번호가 없습니다. 다시 입력해 주세요.")
-    time.sleep(2)
-    # 화면 지우기 추가할 것=>파이참에는 없는 기능?
-    os.system('cls')
-    import login
-    print(login) #2번 반복하여 불러올 시 에러 생김
+    elif name in sdata:
+        break
+
+    else:
+        print("해당하는 고유번호가 없습니다. 다시 입력해 주세요.")
+        time.sleep(2)
+        # 화면 지우기 추가할 것=>파이참에는 없는 기능?
+        os.system('cls')
+        print(login) #2번 반복하여 불러올 시 에러 생김
+import main
+os.system('cls')
+print(main)
 t.close()
 s.close()
 
