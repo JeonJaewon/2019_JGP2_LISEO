@@ -1,4 +1,9 @@
+import os
 import time
+#import MyPage
+#import ClassView
+#import MyClass
+#import StudentCare
 
 print("="*50)
 print(" "*18,'1. 마이페이지')
@@ -16,7 +21,7 @@ elif select==4: #학생 관리->StudentCare
 elif select==5: #종료
     exit()
 else:
-    print("1-5사이의 항목을 선택해 주세요.")
+    print("1-5사이의 항목을 선택해 주세요.")#숫자입력규칙 적용필요
     time.sleep(2)
-    #모든 화면 지우기
+    os.system('cls')
     #메인화면 출력

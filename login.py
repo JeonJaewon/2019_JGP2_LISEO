@@ -1,4 +1,5 @@
 import time
+import os
 
 print("="*50)
 print(" "*22, "LISEO")
@@ -11,16 +12,22 @@ sdata = s.read()
 
 name = input("사용자의 고유번호를 입력해주세요: ")
 if name in tdata:
-    print('정답')
-    #로그인화면 출력해야함
+    os.system('cls')
+    import main
+    print(main)
+
 elif name in sdata:
-    print('정답')
-    #로그인화면 출력해야함
+    os.system('cls')
+    import main
+    print(main)
+
 else:
+    print("해당하는 고유번호가 없습니다. 다시 입력해 주세요.")
     time.sleep(2)
     # 화면 지우기 추가할 것=>파이참에는 없는 기능?
-    print('오답')
-
+    os.system('cls')
+    import login
+    print(login) #2번 반복하여 불러올 시 에러 생김
 t.close()
 s.close()
 
