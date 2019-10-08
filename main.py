@@ -6,7 +6,6 @@ import login
 #import MyClass
 #import StudentCare
 
-login.start()
 def screen():
     while True:
         print("="*50)
@@ -36,5 +35,6 @@ def screen():
             print("1-5사이의 항목을 선택해 주세요.")#숫자입력규칙 적용필요
             time.sleep(2)
             os.system('cls')
+login.start()
 screen()
     #메인화면 출력
