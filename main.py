@@ -1,6 +1,7 @@
 import os
 import time
 import login
+import studentManager
 #import MyPage
 #import ClassView
 import myClass
@@ -26,12 +27,14 @@ def screen(code, classCode, roomCode, schedule):
             myClass.myClass(code, classCode, roomCode, schedule)
         elif select==4: #학생 관리->StudentCare
             print('you select : ', select)
+            studentManager.studentManagerScreen(code)
         elif select==5: #종료
             exit(0) # return 으로 해도 무방
         else:
             print("1-5사이의 항목을 선택해 주세요.")    # 숫자입력규칙 적용필요
             time.sleep(2)
             os.system('cls')
+
 code = login.start() # code 어떤 학생 어떤 선생인지 체크하는 변수
 
 # test용
