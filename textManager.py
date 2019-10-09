@@ -1,4 +1,4 @@
-def readText_Student(*code): # code 없어도 되고 있으면 작동
+def readText_Student():
     student = open("student.txt", 'r', encoding='UTF-8')
     StudentInfo = [] # 2차원 list 로 학생정보 저장
     i = 0
@@ -11,12 +11,12 @@ def readText_Student(*code): # code 없어도 되고 있으면 작동
         del(StudentLogin[3:]) # 강의 정보들 str 삭제
         StudentInfo.append(StudentLogin) # 학생 정보 저장
         StudentInfo[i].append(lecture) # 강의 정보 저장
-        if str(code[0]) == StudentInfo[i][0]: # txt돌면서 맞는 고유번호 확인
-            return StudentInfo[i] # 해당하는 정보만 반환
+        #if str(code[0]) == StudentInfo[i][0]: # txt돌면서 맞는 고유번호 확인
+        #    return StudentInfo[i] # 해당하는 정보만 반환
         i += 1
     return StudentInfo # 학생 정보 반환
 
-def readText_Teacher(*code):
+def readText_Teacher():
     teacher = open("teacher.txt", 'r', encoding='UTF-8')
     TeacherInfo = [] # 2차원 list 로 선생정보 저장
     i = 0
@@ -29,8 +29,8 @@ def readText_Teacher(*code):
         del(TeacherLogin[3:])
         TeacherInfo.append(TeacherLogin)
         TeacherInfo[i].append(lecture)
-        if str(code[0]) == TeacherInfo[i][0]: # txt돌면서 맞는 고유번호 확인
-            return TeacherInfo[i] # 해당하는 정보만 반환
+        #if str(code[0]) == TeacherInfo[i][0]: # txt돌면서 맞는 고유번호 확인
+        #    return TeacherInfo[i] # 해당하는 정보만 반환
         i += 1
     return TeacherInfo # 선생님 정보 반환
 
