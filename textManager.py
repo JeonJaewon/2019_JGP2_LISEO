@@ -1,4 +1,6 @@
-def readText():
+def readText(ind):
+
+
 
 
 def writeText_Student():
