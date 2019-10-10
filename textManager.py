@@ -15,7 +15,7 @@ def readText_Student():
     return StudentInfo # 학생 정보 반환
 
 # 고유 번호 확인용(학생)
-def readText_Student(code):
+def readText_Student_c(code):
     student = open("student.txt", 'r', encoding='UTF-8')
     StudentInfo = []  # 2차원 list 로 학생정보 저장
     i = 0
@@ -49,7 +49,7 @@ def readText_Teacher():
     return TeacherInfo # 선생님 정보 반환
 
 #고유 번호 확인용(선생님)
-def readText_Teacher(code):
+def readText_Teacher_c(code):
     teacher = open("teacher.txt", 'r', encoding='UTF-8')
     TeacherInfo = [] # 2차원 list 로 선생정보 저장
     i = 0
@@ -110,9 +110,11 @@ def Re_TeaClass():
 
 def Re_Student(number,content):
     student = readText_Student()
-    if number == 1: # 이쪽은 학생 정보 삭제 content = 고유번호
+    print('Re_Student 동작')
+    if number == '1': # 이쪽은 학생 정보 삭제 content = 고유번호
         # 몇번째줄 지워야 되는지 체크
         i = 0
+        print('2')
         re_line = -1 # re_line 값이 없을 수도 있음
         while i < len(student):
             if content == student[i][0]:  # 맞는 고유번호인지 확인
@@ -120,6 +122,7 @@ def Re_Student(number,content):
                 break
             i += 1
         r_list = []
+        print('3')
         read_s = open("student.txt", 'r', encoding='UTF-8')
         # list안에 str로 한줄 씩 받기
         while True:
@@ -137,7 +140,7 @@ def Re_Student(number,content):
 
 
     else: #이쪽은 학생 정보 추가
-        re = open("student.txt", 'a', encoding='UTF-8')  # txt 문장 추가
+        re = open("student.txt", 'a+', encoding='UTF-8')  # txt 문장 추가
         aa = len(student) + 1 # 고유 번호 지정
         bb = 'S' + str(aa) # 고유 번호 생성
         cc = '\n'+ bb + ',' + number +','+ content # 한 문장으로 합치기 number = 이름 content = 전화번호
