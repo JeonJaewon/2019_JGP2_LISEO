@@ -6,7 +6,7 @@ def readText_Student():
         StudentData = student.readline() # student.txt 파일 읽기
         if not StudentData: # txt 마지막 줄에 도달하면 break
             break
-        StudentLogin = StudentData.rstrip("\n").split(',') # rstrip으로 개행문자 제거
+        StudentLogin = StudentData.rstrip("\n").split(' ') # rstrip으로 개행문자 제거
         lecture = StudentLogin[3:] # 강의 정보들 따로 list
         del(StudentLogin[3:]) # 강의 정보들 str 삭제
         StudentInfo.append(StudentLogin) # 학생 정보 저장
@@ -23,7 +23,7 @@ def readText_Student_c(code):
         StudentData = student.readline()  # student.txt 파일 읽기
         if not StudentData:  # txt 마지막 줄에 도달하면 break
             break
-        StudentLogin = StudentData.rstrip("\n").split(',')  # rstrip으로 개행문자 제거
+        StudentLogin = StudentData.rstrip("\n").split(' ')  # rstrip으로 개행문자 제거
         lecture = StudentLogin[3:]  # 강의 정보들 따로 list
         del (StudentLogin[3:])  # 강의 정보들 str 삭제
         StudentInfo.append(StudentLogin)  # 학생 정보 저장
@@ -40,7 +40,7 @@ def readText_Teacher():
         TeacherData = teacher.readline()
         if not TeacherData:
             break
-        TeacherLogin = TeacherData.rstrip("\n").split(',')# rstrip으로 개행문자 제거
+        TeacherLogin = TeacherData.rstrip("\n").split(' ')# rstrip으로 개행문자 제거
         lecture = TeacherLogin[3:]
         del(TeacherLogin[3:])
         TeacherInfo.append(TeacherLogin)
@@ -57,7 +57,7 @@ def readText_Teacher_c(code):
         TeacherData = teacher.readline()
         if not TeacherData:
             break
-        TeacherLogin = TeacherData.rstrip("\n").split(',')# rstrip으로 개행문자 제거
+        TeacherLogin = TeacherData.rstrip("\n").split(' ')# rstrip으로 개행문자 제거
         lecture = TeacherLogin[3:]
         del(TeacherLogin[3:])
         TeacherInfo.append(TeacherLogin)
@@ -73,7 +73,7 @@ def readText__Class():
         ClassData = Class.readline()
         if not ClassData:
             break
-        ClassLogin = ClassData.rstrip("\n").split(',')# rstrip으로 개행문자 제거
+        ClassLogin = ClassData.rstrip("\n").split(' ')# rstrip으로 개행문자 제거
         ClassInfo.append(ClassLogin)
     return ClassInfo # 강의 정보 반환
 
@@ -84,7 +84,7 @@ def readText_Room():
         RoomData = room.readline()
         if not RoomData:
             break
-        RoomLogin = RoomData.rstrip("\n").split(',')# rstrip으로 개행문자 제거
+        RoomLogin = RoomData.rstrip("\n").split(' ')# rstrip으로 개행문자 제거
         RoomInfo.append(RoomLogin)
     return RoomInfo # 장소 정보 반환
 

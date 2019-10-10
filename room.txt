@@ -1,6 +1,5 @@
 R1 1교시 T1
 R2 3교시 T2
-R3 empty
-R4 empty
-R5 empty
-
+R3
+R4
+R5
