@@ -1,5 +1,5 @@
 def readText_Student():
-    student = open("student.txt", 'r', encoding='UTF-8')
+    student = open("student.txt", 'r', encoding='UTF-8-SIG')
     StudentInfo = [] # 2차원 list 로 학생정보 저장
     i = 0
     while True:
@@ -16,24 +16,26 @@ def readText_Student():
 
 # 고유 번호 확인용(학생)
 def readText_Student_c(code):
-    student = open("student.txt", 'r', encoding='UTF-8')
+    student = open("student.txt", 'r', encoding='UTF-8-SIG')
     StudentInfo = []  # 2차원 list 로 학생정보 저장
     i = 0
     while True:
         StudentData = student.readline()  # student.txt 파일 읽기
+
         if not StudentData:  # txt 마지막 줄에 도달하면 break
-            break
+            return -1
         StudentLogin = StudentData.rstrip("\n").split(',')  # rstrip으로 개행문자 제거
         lecture = StudentLogin[3:]  # 강의 정보들 따로 list
         del (StudentLogin[3:])  # 강의 정보들 str 삭제
         StudentInfo.append(StudentLogin)  # 학생 정보 저장
         StudentInfo[i].append(lecture)  # 강의 정보 저장
+        print(StudentInfo[i][0])
         if code == StudentInfo[i][0]: # 맞는 고유번호 확인
             return StudentInfo[i] # 해당하는 정보만 반환
         i += 1
 
 def readText_Teacher():
-    teacher = open("teacher.txt", 'r', encoding='UTF-8')
+    teacher = open("teacher.txt", 'r', encoding='UTF-8-SIG')
     TeacherInfo = [] # 2차원 list 로 선생정보 저장
     i = 0
     while True:
@@ -50,7 +52,7 @@ def readText_Teacher():
 
 #고유 번호 확인용(선생님)
 def readText_Teacher_c(code):
-    teacher = open("teacher.txt", 'r', encoding='UTF-8')
+    teacher = open("teacher.txt", 'r', encoding='UTF-8-SIG')
     TeacherInfo = [] # 2차원 list 로 선생정보 저장
     i = 0
     while True:
@@ -67,7 +69,7 @@ def readText_Teacher_c(code):
         i += 1
 
 def readText__Class():
-    Class = open("class.txt", 'r', encoding='UTF-8')
+    Class = open("class.txt", 'r', encoding='UTF-8-SIG')
     ClassInfo = [] # 2차원 list 로 강의정보 저장
     while True:
         ClassData = Class.readline()
@@ -78,7 +80,7 @@ def readText__Class():
     return ClassInfo # 강의 정보 반환
 
 def readText_Room():
-    room = open("room.txt", 'r', encoding='UTF-8')
+    room = open("room.txt", 'r', encoding='UTF-8-SIG')
     RoomInfo = [] # 2차원 list 로 장소정보 저장
     while True:
         RoomData = room.readline()
@@ -91,21 +93,21 @@ def readText_Room():
 
 
 def Re_UserInfo():
-    student = open("student.txt", 'w', encoding='UTF-8')
-    teacher = open("teacher.txt", 'w', encoding='UTF-8')
+    student = open("student.txt", 'w', encoding='UTF-8-SIG')
+    teacher = open("teacher.txt", 'w', encoding='UTF-8-SIG')
 
 def Re_StuClass():
-    student = open("student.txt", 'w', encoding='UTF-8')
-    teacher = open("teacher.txt", 'w', encoding='UTF-8')
-    Class = open("class.txt", 'w', encoding='UTF-8')
-    room = open("room.txt", 'w', encoding='UTF-8')
+    student = open("student.txt", 'w', encoding='UTF-8-SIG')
+    teacher = open("teacher.txt", 'w', encoding='UTF-8-SIG')
+    Class = open("class.txt", 'w', encoding='UTF-8-SIG')
+    room = open("room.txt", 'w', encoding='UTF-8-SIG')
 
 
 def Re_TeaClass():
-    student = open("student.txt", 'w', encoding='UTF-8')
-    teacher = open("teacher.txt", 'w', encoding='UTF-8')
-    Class = open("class.txt", 'w', encoding='UTF-8')
-    room = open("room.txt", 'w', encoding='UTF-8')
+    student = open("student.txt", 'w', encoding='UTF-8-SIG')
+    teacher = open("teacher.txt", 'w', encoding='UTF-8-SIG')
+    Class = open("class.txt", 'w', encoding='UTF-8-SIG')
+    room = open("room.txt", 'w', encoding='UTF-8-SIG')
 
 
 def Re_Student(number,content):
@@ -123,7 +125,7 @@ def Re_Student(number,content):
             i += 1
         r_list = []
         print('3')
-        read_s = open("student.txt", 'r', encoding='UTF-8')
+        read_s = open("student.txt", 'r', encoding='UTF-8-SIG')
         # list안에 str로 한줄 씩 받기
         while True:
             StudentData = read_s.readline()  # student.txt 파일 읽기
@@ -132,7 +134,7 @@ def Re_Student(number,content):
                 break
         del r_list[re_line] # re_line 값이 없을 수도 있음/ 해당 줄 삭제
         # txt 초기화 후 다시 쓰기
-        write_s = open("student.txt", 'w', encoding='UTF-8') # student.txt 초기화
+        write_s = open("student.txt", 'w', encoding='UTF-8-SIG') # student.txt 초기화
         i = 0
         while i < len(r_list):
             write_s.write(str(r_list[i])) # student.txt 쓰기
@@ -140,7 +142,7 @@ def Re_Student(number,content):
 
 
     else: #이쪽은 학생 정보 추가
-        re = open("student.txt", 'a+', encoding='UTF-8')  # txt 문장 추가
+        re = open("student.txt", 'a+', encoding='UTF-8-SIG')  # txt 문장 추가
         aa = len(student) + 1 # 고유 번호 지정
         bb = 'S' + str(aa) # 고유 번호 생성
         cc = '\n'+ bb + ',' + number +','+ content # 한 문장으로 합치기 number = 이름 content = 전화번호
