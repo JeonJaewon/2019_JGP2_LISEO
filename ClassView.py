@@ -20,7 +20,7 @@ def start(myID):
     while True:
         line=fileData.readline()
         if not line: break
-        line=line.split(',')
+        line=line.split(' ')
         classData.append(line)
     del classData[0]
     myClassList = []
@@ -37,7 +37,7 @@ def start(myID):
             line=studentData.readline()
             if not line:
                 break
-            line=line.split(',')
+            line=line.split(' ')
             if line[0]==myID:
                 #수강강의 저장
                 for i in range(len(line)-3):

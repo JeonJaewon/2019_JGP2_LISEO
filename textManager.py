@@ -24,7 +24,7 @@ def readText_Student_c(code):
 
         if not StudentData:  # txt 마지막 줄에 도달하면 break
             return -1
-        StudentLogin = StudentData.rstrip("\n").split(',')  # rstrip으로 개행문자 제거
+        StudentLogin = StudentData.rstrip("\n").split(' ')  # rstrip으로 개행문자 제거
         lecture = StudentLogin[3:]  # 강의 정보들 따로 list
         del (StudentLogin[3:])  # 강의 정보들 str 삭제
         StudentInfo.append(StudentLogin)  # 학생 정보 저장
