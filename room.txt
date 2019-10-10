@@ -1,5 +1,6 @@
-#1.강의실
-R1
-R2
-R3
+R1 1교시 T1
+R2 3교시 T2
+R3 empty
+R4 empty
+R5 empty
 
