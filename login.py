@@ -10,14 +10,14 @@ def start():
         TeacherData = teacher.readline()
         if not TeacherData:
             break
-        TeacherLogin = TeacherData.split(',', maxsplit=3)
+        TeacherLogin = TeacherData.split(' ', maxsplit=3)
         LoginInfo.append(TeacherLogin[0])
 
     while True:
         StudentData = student.readline()
         if not StudentData:
             break
-        StudentLogin = StudentData.split(',', maxsplit=3)
+        StudentLogin = StudentData.split(' ', maxsplit=3)
         LoginInfo.append(StudentLogin[0])
 
     while True:

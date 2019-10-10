@@ -109,7 +109,7 @@ def screen(code):
     choice=input("1. 정보수정\n2. 뒤로가기")
     if choice==1:
         os.system('cls')
-        if(not modifyInfo(code))
+        if(not modifyInfo(code)):
             os.system('cls')
             screen(code)
     elif choice==2:
