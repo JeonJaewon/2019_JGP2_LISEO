@@ -32,12 +32,12 @@ def addStudentInfo(): # 학생 정보 추가
 def deleteStudentInfo(): # 학생 정보 삭제
     print("삭제하려는 학생의 고유번호를 입력하세요. : ")
     deleteCode = input()
-    textManager.Re_Student('1', deleteCode)
     # 존재하는 학생인지 확인
-    print("입력한 학생의 정보를 찾을 수 없습니다.")
-    return
-
-    print("해당 학생의 정보가 성공적으로 삭제되었습니다.")
+    if(textManager.Re_Student('1', deleteCode) == -1):
+        print("입력한 학생의 정보를 찾을 수 없습니다.")
+        return
+    else:
+        print("해당 학생의 정보가 성공적으로 삭제되었습니다.")
     # -정보 제거-
 
 def studentManagerScreen(code):

@@ -112,25 +112,27 @@ def Re_TeaClass():
 
 def Re_Student(number,content):
     student = readText_Student()
-    print('Re_Student 동작')
     if number == '1': # 이쪽은 학생 정보 삭제 content = 고유번호
         # 몇번째줄 지워야 되는지 체크
         i = 0
-        print('2')
-        re_line = -1 # re_line 값이 없을 수도 있음
+        re_line = -1 # re_line 값이 없을 수도 있어서 -1 대입
         while i < len(student):
             if content == student[i][0]:  # 맞는 고유번호인지 확인
                 re_line = i  # 몇번 째줄 지워야 하는지 확인
                 break
             i += 1
+        # 찾는 코드가 없으면?
+        if re_line == -1: # re_line 값이 안바꼈으니까
+            return -1 # 틀렸다고 -1 반환
         r_list = []
-        print('3')
         read_s = open("student.txt", 'r', encoding='UTF-8-SIG')
         # list안에 str로 한줄 씩 받기
         while True:
             StudentData = read_s.readline()  # student.txt 파일 읽기
             r_list.append(StudentData) #list에 str 형태로 저장
             if not StudentData:  # txt 마지막 줄에 도달하면 break
+                break
+            elif StudentData == '\n': #txt에 띄어쓰기 된거 제거
                 break
         del r_list[re_line] # re_line 값이 없을 수도 있음/ 해당 줄 삭제
         # txt 초기화 후 다시 쓰기
@@ -140,13 +142,14 @@ def Re_Student(number,content):
             write_s.write(str(r_list[i])) # student.txt 쓰기
             i += 1
 
-
+    #몇 줄인지 확인후 코드 생성 -> 마지막 코드 번호 확인후 +1된 코드 생성
     else: #이쪽은 학생 정보 추가
-        re = open("student.txt", 'a+', encoding='UTF-8-SIG')  # txt 문장 추가
-        aa = len(student) + 1 # 고유 번호 지정
-        bb = 'S' + str(aa) # 고유 번호 생성
-        cc = '\n'+ bb + ',' + number +','+ content # 한 문장으로 합치기 number = 이름 content = 전화번호
-        re.write(cc) # 글 쓰기
+        addstudent = open("student.txt", 'a+', encoding='UTF-8-SIG')  # txt 문장 추가
+        code = student[len(student)-1][0] # 코드 전체 부분
+        codenum = int(code[1])+1  #코드 숫자 부분
+        code = code[0] + str(codenum) #새로운 코드 생성
+        newline = '\n'+ code + ' ' + number +' '+ content # 한 문장으로 합치기 number = 이름 content = 전화번호/공백으로 변경
+        addstudent.write(newline) # 글 쓰기
 
 
 
