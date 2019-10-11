@@ -1,5 +1,5 @@
-R1 1 T1
-R2 3 T2
-R3
-R4
-R5
+R1 C1 N C3 N N
+R2 N N C2 N N
+R3 C4 N N N N
+R4 N N N N N
+R5 N N N N N
