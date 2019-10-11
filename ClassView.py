@@ -34,10 +34,9 @@ def start(myID):
             for className in myClassList[0]:
                 if classData[0]==className:
                     print('★ ', end='')
-            print('(' + classData[0] + ')',end='')  #classID >> className
-            print('') #classID >> className     뒤에 강의 명도 추가해야하는데 없으니 일단 패스
+            print('(' + classData[0] + ') '+classData[5].replace('@',' '))  #classID >> className
             print('강사 : ' + textManager.teacherID_to_teacherName(classData[1])) #teacherID >> teacherName
-            print('연락처 : ' + classData[5])
+            print('연락처 : ' + textManager.teacherID_to_teacherPhone(classData[1]))
             print('강의실 : ' + classData[2])
             print('수업 시간 : '+ textManager.classID_to_classTime(classData[0], classData[2]) + '교시')  #classID >> classTime
             print('수용학생인원 : ' + classData[3] + '명')
@@ -70,7 +69,7 @@ def start(myID):
             studentList = textManager.classID_to_studentList(myClassCode)
             while True:
                 print('========================================')
-                print('('+classData[0]+')'+' 수강 학생 :')
+                print('('+myClassCode+')'+' 수강 학생 :') #classData 그냥 C4 뜨네요.. myClassCode교체
                 for studentCode in studentList:
                     #전재원 (S21), 01017345312
                     studentData = textManager.readText_Student_c(studentCode)
@@ -91,4 +90,3 @@ def start(myID):
         else:
             print('잘못된 입력입니다. 다시 입력해주세요.')
             continue
-start('T1')

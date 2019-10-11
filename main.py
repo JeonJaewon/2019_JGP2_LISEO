@@ -1,6 +1,7 @@
 import os
 import time
 import login
+import ClassView
 import studentManager
 #import MyPage
 #import ClassView
@@ -22,6 +23,7 @@ def screen(code, classCode, roomCode, schedule):
             print('you select : ', select)
         elif select==2: #강의 정보 열람->ClassView
             print('you select : ', select)
+            ClassView.start(code)
         elif select==3: #내 강의->MyClass
             # print('you select : ', select)
             myClass.myClass(code, classCode, roomCode, schedule)

@@ -105,6 +105,11 @@ def teacherID_to_teacherName(code):
     teacherData = readText_Teacher_c(code)
     return teacherData[1]
 
+def teacherID_to_teacherPhone(code):
+    #teacher의 고유번호 >> teacher의 이름 반환함수
+    teacherData = readText_Teacher_c(code)
+    return teacherData[2]
+
 def classID_to_classTime(classCode, roomCode):
     #class의 고유번호, class의 강의교실 고유번호 >> class의 강의시간(교시) 반환함수
     roomInfo = readText_Room()
