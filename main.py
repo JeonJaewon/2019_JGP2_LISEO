@@ -3,7 +3,7 @@ import time
 import login
 import ClassView
 import studentManager
-#import MyPage
+import mypage
 #import ClassView
 import myClass
 #import StudentCare
@@ -21,6 +21,7 @@ def screen(code, classCode, roomCode, schedule):
         select=int(input("원하시는 항목을 선택해 주세요 : "))
         if select==1: #마이페이지->MyPage
             print('you select : ', select)
+            mypage.mypagePrint(code)
         elif select==2: #강의 정보 열람->ClassView
             print('you select : ', select)
             ClassView.start(code)

@@ -129,10 +129,57 @@ def classID_to_studentList(classCode):
     return studentList
 ###################################################
 
+##### 1. 마이페이지 함수 들 ######
+def Re_UserInfo(code):
+    Class = open("class.txt", 'r', encoding='UTF-8-SIG')
+    Classname = readText__Class()
+    where = []
+    i = 0
+    while True:
+        ClassData = Class.readline()
+        if not ClassData:
+            break
+        if ClassData.find(code) != -1: # -1이 아니면 code가 존재한다는 것
+            where.append(i) # where list에 저장!
+        i += 1
+    i = 0
+    for i in where:
+        print('  -  '+Classname[i][5].replace('@',' ')) # @를 띄어쓰기로 치환후 출력
 
-def Re_UserInfo():
-    student = open("student.txt", 'w', encoding='UTF-8-SIG')
-    teacher = open("teacher.txt", 'w', encoding='UTF-8-SIG')
+    Class.close()
+
+def RenewalName(code,oldname,newname):
+    newdata = []
+    if code[0] == 'S': # 학생일 때
+        student = open("student.txt", 'r', encoding='UTF-8-SIG')
+        while True:
+            StudentData = student.readline()  # student.txt 파일 읽기
+            if not StudentData:  # txt 마지막 줄에 도달하면 break
+                break
+            newdata.append(StudentData.replace(oldname, newname)) # 수정
+        i = 0
+        student.close()
+        writestudent = open("student.txt", 'w', encoding='UTF-8-SIG')
+        i = 0
+        while i < len(newdata):
+            writestudent.write(newdata[i])  # student.txt 쓰기
+            i += 1
+        writestudent.close()
+    else: #선생님 일때
+        teacher = open("teacher.txt", 'r', encoding='UTF-8-SIG')
+        while True:
+            TeacherData = teacher.readline()
+            if not TeacherData:
+                break
+            newdata.append(TeacherData.replace(oldname, newname)) # 수정
+        i = 0
+        teacher.close()
+        writeteacher = open("teacher.txt", 'w', encoding='UTF-8-SIG')
+        i = 0
+        while i < len(newdata):
+            writeteacher.write(newdata[i])  # teacher.txt 쓰기
+            i += 1
+        writeteacher.close()
 
 def Re_StuClass():
     student = open("student.txt", 'w', encoding='UTF-8-SIG')
