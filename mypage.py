@@ -95,7 +95,7 @@ def modifyName(code,myInfo):
 def modifyPhone(code,myInfo):
     #전화번호수정
     newPhone = input(">>>")
-    if len(newPhone) == 11:  # type(newPhone)=='int' int로 하면 len이 안되는거 같아오
+    if len(newPhone) == 11 and newPhone.isdecimal():  # type(newPhone)=='int' int로 하면 len이 안되는거 같아오
         # 전화번호수정하고
         textManager.RenewalName(code, myInfo[2], newPhone) #수정!
         return 1
