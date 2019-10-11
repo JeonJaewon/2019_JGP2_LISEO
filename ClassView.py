@@ -1,5 +1,6 @@
 import os
 import textManager
+import time
 
 def start(myID):
     #사용자의 권한 확인
@@ -11,6 +12,7 @@ def start(myID):
         isTeacher = True
     else:
         print('error : 사용자의 ID 형식이 올바르지 않습니다.')
+        time.sleep(2)
         return
     myClassList=[]
     if isTeacher:
@@ -49,6 +51,7 @@ def start(myID):
             # 1번 시 학생이면 돌려내기
             if isTeacher==False:
                 print('사용자는 해당 기능에 접근할 수 없습니다.')
+                time.sleep(2)
                 continue
 
             # 찾아볼 강의 선택 입력받기
@@ -62,6 +65,7 @@ def start(myID):
                     find=True
             if find==False:
                 print('입력하신 강의가 찾을 수 없는 강의이거나, 개설하신 강의가 아닙니다.')
+                time.sleep(2)
                 continue
 
             # 수강생 목록 받기
@@ -81,12 +85,15 @@ def start(myID):
                     break
                 else:
                     print('뒤로가려면 1을 입력하세요')
+                    time.sleep(2)
                     continue
 
         elif select==2:
-            # 2번 시 return 시키기
-            print('뒤로가기입니다.')
+            # 뒤로가기
+            os.system('cls')
             return
         else:
             print('잘못된 입력입니다. 다시 입력해주세요.')
+            time.sleep(2)
             continue
+start('T1')
