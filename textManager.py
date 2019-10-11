@@ -7,10 +7,12 @@ def readText_Student():
         if not StudentData: # txt 마지막 줄에 도달하면 break
             break
         StudentLogin = StudentData.rstrip("\n").split(' ') # rstrip으로 개행문자 제거
+        # 강의 정보만 따로 list에 담는 과정
         lecture = StudentLogin[3:] # 강의 정보들 따로 list
         del(StudentLogin[3:]) # 강의 정보들 str 삭제
         StudentInfo.append(StudentLogin) # 학생 정보 저장
         StudentInfo[i].append(lecture) # 강의 정보 저장
+
         i += 1
     return StudentInfo # 학생 정보 반환
 
@@ -25,10 +27,12 @@ def readText_Student_c(code):
         if not StudentData:  # txt 마지막 줄에 도달하면 break
             return -1
         StudentLogin = StudentData.rstrip("\n").split(' ')  # rstrip으로 개행문자 제거
+        # 강의 정보만 따로 list에 담는 과정
         lecture = StudentLogin[3:]  # 강의 정보들 따로 list
         del (StudentLogin[3:])  # 강의 정보들 str 삭제
         StudentInfo.append(StudentLogin)  # 학생 정보 저장
         StudentInfo[i].append(lecture)  # 강의 정보 저장
+
         print(StudentInfo[i][0])
         if code == StudentInfo[i][0]: # 맞는 고유번호 확인
             return StudentInfo[i] # 해당하는 정보만 반환
@@ -43,10 +47,12 @@ def readText_Teacher():
         if not TeacherData:
             break
         TeacherLogin = TeacherData.rstrip("\n").split(' ')# rstrip으로 개행문자 제거
+        # 강의 정보만 따로 list에 담는 과정
         lecture = TeacherLogin[3:]
         del(TeacherLogin[3:])
         TeacherInfo.append(TeacherLogin)
         TeacherInfo[i].append(lecture)
+
         i += 1
     return TeacherInfo # 선생님 정보 반환
 
@@ -60,10 +66,12 @@ def readText_Teacher_c(code):
         if not TeacherData:
             break
         TeacherLogin = TeacherData.rstrip("\n").split(' ')# rstrip으로 개행문자 제거
+        # 강의 정보만 따로 list에 담는 과정
         lecture = TeacherLogin[3:]
         del(TeacherLogin[3:])
         TeacherInfo.append(TeacherLogin)
         TeacherInfo[i].append(lecture)
+
         if code == TeacherInfo[i][0]: # txt돌면서 맞는 고유번호 확인
             return TeacherInfo[i] # 해당하는 정보만 반환
         i += 1
@@ -113,6 +121,7 @@ def Re_TeaClass():
 def Re_Student(number,content):
     student = readText_Student()
     if number == '1': # 이쪽은 학생 정보 삭제 content = 고유번호
+
         # 몇번째줄 지워야 되는지 체크
         i = 0
         re_line = -1 # re_line 값이 없을 수도 있어서 -1 대입
