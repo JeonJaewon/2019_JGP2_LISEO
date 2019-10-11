@@ -96,4 +96,4 @@ def start(myID):
             print('잘못된 입력입니다. 다시 입력해주세요.')
             time.sleep(2)
             continue
-start('T1')
+#start('T1') 
