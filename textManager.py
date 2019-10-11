@@ -7,12 +7,10 @@ def readText_Student():
         if not StudentData: # txt 마지막 줄에 도달하면 break
             break
         StudentLogin = StudentData.rstrip("\n").split(' ') # rstrip으로 개행문자 제거
-        # 강의 정보만 따로 list에 담는 과정
         lecture = StudentLogin[3:] # 강의 정보들 따로 list
         del(StudentLogin[3:]) # 강의 정보들 str 삭제
         StudentInfo.append(StudentLogin) # 학생 정보 저장
         StudentInfo[i].append(lecture) # 강의 정보 저장
-
         i += 1
     return StudentInfo # 학생 정보 반환
 
@@ -27,13 +25,11 @@ def readText_Student_c(code):
         if not StudentData:  # txt 마지막 줄에 도달하면 break
             return -1
         StudentLogin = StudentData.rstrip("\n").split(' ')  # rstrip으로 개행문자 제거
-        # 강의 정보만 따로 list에 담는 과정
         lecture = StudentLogin[3:]  # 강의 정보들 따로 list
         del (StudentLogin[3:])  # 강의 정보들 str 삭제
         StudentInfo.append(StudentLogin)  # 학생 정보 저장
         StudentInfo[i].append(lecture)  # 강의 정보 저장
-
-        print(StudentInfo[i][0])
+        #print(StudentInfo[i][0]) #test 용도로 출력하는거 같아서 주석처리! ( by 계 )
         if code == StudentInfo[i][0]: # 맞는 고유번호 확인
             return StudentInfo[i] # 해당하는 정보만 반환
         i += 1
@@ -47,12 +43,10 @@ def readText_Teacher():
         if not TeacherData:
             break
         TeacherLogin = TeacherData.rstrip("\n").split(' ')# rstrip으로 개행문자 제거
-        # 강의 정보만 따로 list에 담는 과정
         lecture = TeacherLogin[3:]
         del(TeacherLogin[3:])
         TeacherInfo.append(TeacherLogin)
         TeacherInfo[i].append(lecture)
-
         i += 1
     return TeacherInfo # 선생님 정보 반환
 
@@ -66,12 +60,10 @@ def readText_Teacher_c(code):
         if not TeacherData:
             break
         TeacherLogin = TeacherData.rstrip("\n").split(' ')# rstrip으로 개행문자 제거
-        # 강의 정보만 따로 list에 담는 과정
         lecture = TeacherLogin[3:]
         del(TeacherLogin[3:])
         TeacherInfo.append(TeacherLogin)
         TeacherInfo[i].append(lecture)
-
         if code == TeacherInfo[i][0]: # txt돌면서 맞는 고유번호 확인
             return TeacherInfo[i] # 해당하는 정보만 반환
         i += 1
@@ -98,7 +90,33 @@ def readText_Room():
         RoomInfo.append(RoomLogin)
     return RoomInfo # 장소 정보 반환
 
+###### classView.py에 필요하여 추가! by 계 #####
+#def classID_to_className(code):
+    #근데 강의 이름정보(ex-그린조아의 윈프너무조아)가 어디에도 없어서 주석처리.
 
+def teacherID_to_teacherName(code):
+    #teacher의 고유번호 >> teacher의 이름 반환함수
+    teacherData = readText_Teacher_c(code)
+    return teacherData[1]
+
+def classID_to_classTime(classCode, roomCode):
+    #class의 고유번호, class의 강의교실 고유번호 >> class의 강의시간(교시) 반환함수
+    roomInfo = readText_Room()
+    roomCode=int(roomCode[1:])
+    for j in range(1, 6):
+        if roomInfo[roomCode-1][j]==classCode:
+            return str(j)
+
+def classID_to_studentList(classCode):
+    #class의 고유번호 >> class의 수강학생 리스트 반환함수
+    studentList=[]
+    studentInfo = readText_Student()
+    for studentData in studentInfo:
+        for i in range(len(studentData[3])):
+            if studentData[3][i]==classCode:
+                studentList.append(studentData[0])
+    return studentList
+###################################################
 
 def Re_UserInfo():
     student = open("student.txt", 'w', encoding='UTF-8-SIG')
@@ -121,7 +139,6 @@ def Re_TeaClass():
 def Re_Student(number,content):
     student = readText_Student()
     if number == '1': # 이쪽은 학생 정보 삭제 content = 고유번호
-
         # 몇번째줄 지워야 되는지 체크
         i = 0
         re_line = -1 # re_line 값이 없을 수도 있어서 -1 대입
