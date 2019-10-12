@@ -177,7 +177,7 @@ def classID_to_classTime(classCode, roomCode):
     roomInfo = readText_Room()
     roomCode=int(roomCode[1:])
     for j in range(1, 6):
-        if roomInfo[roomCode-1][j]==classCode:
+        if roomInfo[j][roomCode-1]==classCode:
             return str(j)
 
 def classID_to_studentList(classCode):

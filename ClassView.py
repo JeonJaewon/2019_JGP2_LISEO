@@ -34,6 +34,8 @@ def start(myID):
             print('강사 : ' + textManager.teacherID_to_teacherName(classData[1])) #teacherID >> teacherName
             print('연락처 : ' + textManager.teacherID_to_teacherPhone(classData[1]))
             print('강의실 : ' + classData[2])
+            print(classData[0])
+            print(classData[2])
             print('수업 시간 : '+ textManager.classID_to_classTime(classData[0], classData[2]) + '교시')  #classID >> classTime
             print('수용학생인원 : ' + classData[3] + '명')
             print('========================================')
@@ -90,4 +92,4 @@ def start(myID):
             print('잘못된 입력입니다. 다시 입력해주세요.')
             time.sleep(2)
             continue
-#start('T1') 
+start('T1')
