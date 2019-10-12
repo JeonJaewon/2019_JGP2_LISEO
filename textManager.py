@@ -300,21 +300,4 @@ def add_class(teacherCode, roomCode, roomTime, maxSeat, className):
     classCode = 'C'+str(int(readClass[len(readClass)-1][0][1:])+1)
     inputString = '\n'+classCode+'@'+teacherCode+'@'+roomCode+'@'+str(maxSeat)+'@'+str('0')+'@'+className
     writeClass.write(inputString)
-
-    #room.txt에 강의 추가
-    roomData = readText_Room()
-    roomNum = int(roomCode[1:])
-    tempData = roomData[roomTime].split('@')
-    tempData[roomNum-1] = classCode
-    modifyString = tempData[0]
-    for i in range(len(tempData)-1):
-        modifyString+='@'+tempData[i+1]
-    print(modifyString)
-    roomData[roomTime] = modifyString
-    modifyRoom = open('room.txt', 'w', encoding='UTF-8-SIG')
-    for i in range(len(roomData)):
-        modifyRoom.write(roomData[i]+'')
-    
-    #정리
     writeClass.close()
-    modifyRoom.close()
