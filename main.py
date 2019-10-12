@@ -8,7 +8,7 @@ import mypage
 import myClass
 #import StudentCare
 
-def screen(code, classCode, roomCode, schedule):
+def screen(code):
     while True:
         print("="*50)
         print(" "*18,'1. 마이페이지')

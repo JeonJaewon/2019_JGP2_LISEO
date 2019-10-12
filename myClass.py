@@ -43,7 +43,7 @@ def myClass(code):    # code : 해당 학생/선생 정보 배열    classInfo :
                 ans = int(input("원하는 항목 : "))
                 os.system('cls')
                 if ans == 1:
-                    makeClass()
+                    makeClass(code)
                     # textManager.modify_Room("C5",5,"R5",0)
                 elif ans == 2:
                     break
@@ -76,8 +76,7 @@ def cancelClass(classInfo): # 수강 취소
     time.sleep(2)
     os.system('cls')
 
-def printSchedule():
-    schedule=textManager.readText_Room()
+def printSchedule(schedule):
     print("** 현재 강의 시간표 ** ")
     tempStr="  　　"
     for i in schedule[0]:
@@ -93,31 +92,31 @@ def printSchedule():
                 tempStr+="\t"+Class
         print(tempStr)
 
-def makeClass():  # 강의 개설
-    printSchedule()     # 현재 강의 시간표 출력
+def makeClass(code):  # 강의 개설
+    schedule=textManager.readText_Room()
+    printSchedule(schedule)     # 현재 강의 시간표 출력
     print("==============================================")
     className = input("내가 개설할 강의의 이름을 입력하세요. : ")
     classTime = input("내가 개설할 강의의 시간대를 입력하세요. (-교시) : ")
-    # textManager.writeText_Class(className, classTime)
-    # 고유번호도 자동생성되어야 할 듯
-    # textManager.writeText_Teacher(classCode)  # 그리고 생성된 고유번호를 여기에다가 넣는거지
-    # schedule[3][1]   == R1교실(교실 배열의 첫 번째 idx)에서 진행되는 3교시의 수업. 공란일 경우(0으로 정의하자) 수업 X, 강의 고유번호가 있을 경우 수업 이미 O.
-    for i in range(1,len(roomInfo)):
-        if schedule[classTime][i] == 0:
-            # textManager.writeText_Class(classCode)
-            # textManager.writeText_Room(classCode)    # 표 갱신
+    # schedule[3][0]   == R1교실(교실 배열의 첫 번째 idx)에서 진행되는 3교시의 수업. 공란일 경우(0으로 정의하자) 수업 X, 강의 고유번호가 있을 경우 수업 이미 O.
+    for i, Class in enumerate(schedule[int(classTime)]):
+        if Class.replace(u'\ufeff', '') == "N":
+            roomCode = "R"+str(i+1)
+            classCode = textManager.add_class(code, roomCode, classTime, 10, className)    # class.txt에 쓰기
+            textManager.modify_Room(classCode, classTime, roomCode, 0)  # 시간표 갱신
             print("성공적으로 강의가 개설되었습니다.")
             print("강의명 : "+className+", 시간 : "+classTime+"교시")
-            break
-        if i==len(roomInfo)-1:  # 교실 (열) 을 전부 돌았는 데도 빈 자리가 없을 경우
-            print("해당 교시에 이미 강의가 있습니다.")
-            break
+            time.sleep(2)
+            os.system('cls')
+            return
+    # 교실 (열) 을 전부 돌았는 데도 빈 자리가 없을 경우
+    print("해당 교시에 이미 강의가 있습니다.")
     time.sleep(2)
     os.system('cls')
 
-def modifyClass(classInfo, roomInfo): # 강의 정보 수정
+def modifyClass(code): # 강의 정보 수정
     classCode=input("수정할 강의의 고유 번호를 입력하세요. : ")
-    if classCode in classInfo:
+    if classCode in code:   # 여기부터 수정예정
         # className, teacher, classTime, classroom=textManager.writeText_Class(classCode)
         while 1:
             print("("+classCode+") "+"className" + "\n강사 : "+"teacher"+"\n교실 : " + "classroom" + "\n시간 : "+"classTime"+"교시")

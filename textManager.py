@@ -90,6 +90,21 @@ def readText_Class():   # 굳이 언더바가 두 개일 필요는 없어서 고
     Class.close()
     return ClassInfo # 강의 정보 반환
 
+def readText_Class_ttoc(code):   #선생고유번호 넣었을 때 본인 강의 고유번호 리턴
+    Class = open("class.txt", 'r', encoding='UTF-8-SIG')
+    Classcode=[] #1차원 저장
+    i = 0
+    while True:
+        ClassData = Class.readline()
+        if not ClassData:
+            break
+        ClassLogin = ClassData.rstrip("\n").split('@')  # rstrip으로 개행문자 제거
+        if code==ClassLogin[i][1]:
+            Classcode.append(ClassLogin[i][0])
+        i += 1
+    Class.close()
+    return Classcode #본인 강의고유번호배열 반환
+
 def readText_Class_c(code):   # 위에껀 전체, 이건 해당 고유번호 정보만 반환
     Class = open("class.txt", 'r', encoding='UTF-8-SIG')
     ClassInfo = [] # 3차원 list 로 강의정보 저장
@@ -108,6 +123,24 @@ def readText_Class_c(code):   # 위에껀 전체, 이건 해당 고유번호 정
             Class.close()
             return ClassInfo[i] # 해당하는 정보만 반환
         i += 1
+
+def readText_Class_stoc(code):   # 학생코드치면 수업고유번호 반환
+    Class = open("class.txt", 'r', encoding='UTF-8-SIG')
+    ClassInfo = [] # 1차원저장
+    i = 0
+    while True:
+        ClassData = Class.readline()
+        if not ClassData:
+            break
+        ClassLogin = ClassData.rstrip("\n").split('@')# rstrip으로 개행문자 제거
+        # 학생 정보만 따로 list에 담는 과정
+        students = ClassLogin[6:]
+        if code in students:
+            ClassInfo.append(ClassLogin[0])
+        i += 1
+    Class.close()
+    return ClassInfo
+
 
 def readText_Room():
     room = open("room.txt", 'r', encoding='UTF-8-SIG')
@@ -297,9 +330,9 @@ def modify_Room(classCode, time, room, flag):    # flag : 0(추가), 1(삭제)
     roomInfo=readText_Room()
     roomNum=int(room[1:])   # 강의실 코드(R1,..)에서 숫자 부분만 자름
     if flag==0:
-            roomInfo[time][roomNum-1] = classCode
+            roomInfo[int(time)][roomNum-1] = classCode
     elif flag==1:
-        roomInfo[time][roomNum - 1] = "N"
+        roomInfo[int(time)][roomNum - 1] = "N"
     else:
         return -1
     wf = open("room.txt", 'w', encoding='UTF-8-SIG')
@@ -312,41 +345,58 @@ def modify_Room(classCode, time, room, flag):    # flag : 0(추가), 1(삭제)
     wf.write(data)
     wf.close()
 
+
+######## myClass.py 전용 추가 함수 ####### by 계
+#class.txt에 새로 개설한 강의 추가 함수
 def deleteClassText(code):   # flag : 0(추가), 1(학생 삭제), 2(강의 삭제)
-    classFile = open("classTest.txt", 'r', encoding='UTF-8-SIG')
+    classFile = open("class.txt", 'r', encoding='UTF-8-SIG')
     classLines = classFile.readlines() # 라인 전부 읽어오고
     if len(classLines) != 0:
         classLines[0] = classLines[0].replace(u"\ufeff", '')  # utf-8-sig로도 안없어져서 강제로 없앰
-    classWrite = open("classTest.txt", 'w', encoding='UTF-8-SIG') # W로 오픈하면 텍스트 전부 삭제됨.
+    classWrite = open("class.txt", 'w', encoding='UTF-8-SIG') # W로 오픈하면 텍스트 전부 삭제됨.
 
     for line in classLines:
-        if code != line.split(' ')[0]: # code랑 저장해놨던 line들의 코드랑 비교해서
+        if code != line.split('@')[0]: # code랑 저장해놨던 line들의 코드랑 비교해서
             classWrite.write(line) # 같지 않으면, 즉 삭제할려고 했던게 아니면 다시 써준다
+    classFile.close()
+    classWrite.close()
 
 def enrollOrCancelClass(classCode,studentCode, flag):  # flag : 0(수강 신청), 1(수강 취소)
-    classFile = open("classTest.txt", 'r', encoding='UTF-8-SIG')
-    classLines = classFile.readlines()
+    classFile = open("class.txt", 'r', encoding='UTF-8-SIG')
+    classLines = classFile.readlines() # 모든 line 정보를 미리 classLines에 넣어둡니다
     if len(classLines) != 0:
-        classLines[0] = classLines[0].replace(u"\ufeff", '')  # utf-8-sig로도 안없어져서 강제로 없앰
-    classWrite = open("classTest.txt", 'w', encoding='UTF-8-SIG')
+        classLines[0] = classLines[0].replace("u\ufeff", '')  # utf-8-sig로도 안없어져서 강제로 없앰
+    classWrite = open("class.txt", 'w', encoding='UTF-8-SIG') # w로 open 하면서 class.txt는 다 사라집니다
 
-
-
-    if flag == 0:
+    if flag == 0: #수강신청
+        for line in classLines: # 위에서 저장했던 classLine를 반복
+            if classCode == line.split('@')[0]: # 내가 입력한 강의라면
+                classWrite.write(line.rstrip("\n")+'@'+studentCode+"\n") # 내 번호를 붙이고 다시 써준다
+            else:
+                classWrite.write(line) # 아니면 원래 입력 그대로
+    elif flag == 1: #수강취소
         for line in classLines:
-            if classCode != line.split(' ')[0]:
+            if classCode == line.split('@')[0]: # 내가 입력한 강의라면
+                strToList = line.rstrip("\n").split('@')
+                studentStrList = strToList[6:]  # 수강중 학생들 고유번호를 리스트로 받음. 6으로 하드코딩.txt파일 양식 변경시 수정할것.
+                studentStrList.remove(studentCode) # 리스트에서 내 학번을 제거하고
+                # newLine = strToList.join('@')+studentStrList.join('@')+"\n" # 문자열로 합침
+                newLine = '@'.join(strToList[:6])
+                newLine = newLine + '@' +'@'.join(studentStrList)+"\n"
+                classWrite.write(newLine)
+            else:
                 classWrite.write(line)
-    elif flag == 1:
-        for line in classLines:
-            if classCode!= line.split(' ')[0]:
-                classWrite.write(line)
+    classFile.close()
+    classWrite.close()
 
 ######## 강의 개설시 class.txt에 write하는 함수 ####### by 계
-def add_class(teacherCode, roomCode, roomTime, maxSeat, className):
+def add_class(teacherCode, roomCode, classTime, maxSeat, className):
     #class.txt에 내용 추가
     writeClass = open('class.txt', 'a+', encoding='UTF-8-SIG')
     readClass = readText_Class()
     classCode = 'C'+str(int(readClass[len(readClass)-1][0][1:])+1)
-    inputString = '\n'+classCode+'@'+teacherCode+'@'+roomCode+'@'+str(maxSeat)+'@'+str('0')+'@'+className
+    # class.txt 양식 : 강의고유번호 선생고유번호 강의실고유번호 최대수용인원수 교시 이름 수강학생들
+    inputString = '\n'+classCode+'@'+teacherCode+'@'+roomCode+'@'+str(maxSeat)+'@'+classTime+'@'+className
     writeClass.write(inputString)
     writeClass.close()
+    return classCode
