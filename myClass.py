@@ -1,6 +1,6 @@
 import time
 import os
-# import textManager
+import textManager
 
 # 출력 함수 == 메인 함수
 def myClass(code, classInfo, roomInfo, schedule):    # code : 해당 학생/선생 정보 배열    classInfo : 수업들의 코드가 담긴 배열, roomInfo : 강의실의 코드가 담긴 배열
@@ -8,8 +8,11 @@ def myClass(code, classInfo, roomInfo, schedule):    # code : 해당 학생/선�
             while 1:
                 print("내가 수강하는 강의 :")
                 # 해당 학생이 수강하는 강의 목록 출력
-                # Class.txt에서 해당 학생의 고유번호를 검색해 검색되는 행의 강의 정보들을 싹 다 출력
-                # print("(" + classCode + ") " + "className") --> 이런 형식
+                studentInfo = textManager.readText_Student_c(code)  # 해당 학생의 정보를 저장해놓은 1차원 배열
+                classArr = textManager.Re_UserInfo(code)
+                for i in range(len(classArr)):               # --> 반복문이 실행될 때 마다 계속 불러오므로 Data갱신에 대한 걱정 안해도 됨
+                    print("(" + classArr[i][0] + ") " + classArr[i][1])
+                print("-------------------------------------------")
                 print("\t1. 수강 신청")
                 print("\t2. 수강 취소")
                 print("\t3. 뒤로 가기")
@@ -26,8 +29,11 @@ def myClass(code, classInfo, roomInfo, schedule):    # code : 해당 학생/선�
             while 1:
                 print("내가 개설한 강의 :")
                 # 해당 선생이 개설한 강의 목록 출력
-                # Class.txt에서 해당 선생의 고유번호를 검색해 검색되는 행의 강의 정보들을 싹 다 출력
-                # print("(" + classCode + ") " + "className") --> 이런 형식
+                teacherInfo = textManager.readText_Teacher_c(code)  # 해당 선생의 정보를 저장해놓은 1차원 배열
+                for i in range(len(teacherInfo[3])):
+                    className=textManager.classID_to_className(teacherInfo[3][i])
+                    print("(" + teacherInfo[3][i] + ") " + className)
+                print("-------------------------------------------")
                 print("\t1. 강의 개설")
                 print("\t2. 강의 정보 수정")
                 print("\t3. 강의 삭제")

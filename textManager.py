@@ -5,13 +5,14 @@ def readText_Student():
     while True:
         StudentData = student.readline() # student.txt 파일 읽기
         if not StudentData: # txt 마지막 줄에 도달하면 break
-            break
+            return -1
         StudentLogin = StudentData.rstrip("\n").split(' ') # rstrip으로 개행문자 제거
-        lecture = StudentLogin[3:] # 강의 정보들 따로 list
-        del(StudentLogin[3:]) # 강의 정보들 str 삭제
+        # lecture = StudentLogin[3:] # 강의 정보들 따로 list`` # StudentLogin : 강의 정보 저장 위해 임시로 만든 배열
+        # del(StudentLogin[3:]) # 강의 정보들 str 삭제
         StudentInfo.append(StudentLogin) # 학생 정보 저장
-        StudentInfo[i].append(lecture) # 강의 정보 저장
-        i += 1
+        # StudentInfo[i].append(lecture) # 강의 정보 저장
+        # i += 1
+    student.close()
     return StudentInfo # 학생 정보 반환
 
 # 고유 번호 확인용(학생)
@@ -25,13 +26,14 @@ def readText_Student_c(code):
         if not StudentData:  # txt 마지막 줄에 도달하면 break
             return -1
         StudentLogin = StudentData.rstrip("\n").split(' ')  # rstrip으로 개행문자 제거
-        lecture = StudentLogin[3:]  # 강의 정보들 따로 list
-        del (StudentLogin[3:])  # 강의 정보들 str 삭제
+        # lecture = StudentLogin[3:]  # 강의 정보들 따로 list
+        # del (StudentLogin[3:])  # 강의 정보들 str 삭제
         StudentInfo.append(StudentLogin)  # 학생 정보 저장
-        StudentInfo[i].append(lecture)  # 강의 정보 저장
+       #  StudentInfo[i].append(lecture)  # 강의 정보 저장
         #print(StudentInfo[i][0]) #test 용도로 출력하는거 같아서 주석처리! ( by 계 )
         if code == StudentInfo[i][0]: # 맞는 고유번호 확인
-            return StudentInfo[i] # 해당하는 정보만 반환
+            student.close()
+            return StudentInfo[i] # 해당하는 정보만 반환(1차원배열)
         i += 1
 
 def readText_Teacher():
@@ -44,10 +46,11 @@ def readText_Teacher():
             break
         TeacherLogin = TeacherData.rstrip("\n").split(' ')# rstrip으로 개행문자 제거
         lecture = TeacherLogin[3:]
-        del(TeacherLogin[3:])
+        # del(TeacherLogin[3:])
         TeacherInfo.append(TeacherLogin)
-        TeacherInfo[i].append(lecture)
-        i += 1
+        # TeacherInfo[i].append(lecture)
+        # i += 1
+    teacher.close()
     return TeacherInfo # 선생님 정보 반환
 
 #고유 번호 확인용(선생님)
@@ -60,17 +63,18 @@ def readText_Teacher_c(code):
         if not TeacherData:
             break
         TeacherLogin = TeacherData.rstrip("\n").split(' ')# rstrip으로 개행문자 제거
-        lecture = TeacherLogin[3:]
+        # lecture = TeacherLogin[3:]
         del(TeacherLogin[3:])
         TeacherInfo.append(TeacherLogin)
-        TeacherInfo[i].append(lecture)
+        # TeacherInfo[i].append(lecture)
         if code == TeacherInfo[i][0]: # txt돌면서 맞는 고유번호 확인
+            teacher.close()
             return TeacherInfo[i] # 해당하는 정보만 반환
         i += 1
 
-def readText__Class():
+def readText_Class():   # 굳이 언더바가 두 개일 필요는 없어서 고쳤습니다. -혲니
     Class = open("class.txt", 'r', encoding='UTF-8-SIG')
-    ClassInfo = [] # 2차원 list 로 강의정보 저장
+    ClassInfo = [] # 3차원 list 로 강의정보 저장
     i = 0
     while True:
         ClassData = Class.readline()
@@ -78,27 +82,52 @@ def readText__Class():
             break
         ClassLogin = ClassData.rstrip("\n").split(' ')# rstrip으로 개행문자 제거
         # 학생 정보만 따로 list에 담는 과정
-        lecture = ClassLogin[6:]
+        students = ClassLogin[6:]
         del (ClassLogin[6:])
         ClassInfo.append(ClassLogin)
-        ClassInfo[i].append(lecture)
+        ClassInfo[i].append(students)
         i += 1
+    Class.close()
     return ClassInfo # 강의 정보 반환
+
+def readText_Class_c(code):   # 위에껀 전체, 이건 해당 고유번호 정보만 반환
+    Class = open("class.txt", 'r', encoding='UTF-8-SIG')
+    ClassInfo = [] # 3차원 list 로 강의정보 저장
+    i = 0
+    while True:
+        ClassData = Class.readline()
+        if not ClassData:
+            break
+        ClassLogin = ClassData.rstrip("\n").split(' ')# rstrip으로 개행문자 제거
+        # 학생 정보만 따로 list에 담는 과정
+        students = ClassLogin[6:]
+        del (ClassLogin[6:])
+        ClassInfo.append(ClassLogin)
+        ClassInfo[i].append(students)
+        if code == ClassInfo[i][0]: # txt돌면서 맞는 고유번호 확인
+            Class.close()
+            return ClassInfo[i] # 해당하는 정보만 반환
+        i += 1
 
 def readText_Room():
     room = open("room.txt", 'r', encoding='UTF-8-SIG')
-    RoomInfo = [] # 2차원 list 로 장소정보 저장
+    RoomInfo = [] # 2차원 list 로 장소정보 저장 (행 : 교시(0(방이름)~5, 열 : 교실))
     while True:
-        RoomData = room.readline()
-        if not RoomData:
+        RoomRow = room.readline()
+        if not RoomRow:
             break
-        RoomLogin = RoomData.rstrip("\n").split(' ')# rstrip으로 개행문자 제거
-        RoomInfo.append(RoomLogin)
+        RoomCol = RoomRow.rstrip("\n").split('@')# rstrip으로 개행문자 제거
+        RoomInfo.append(RoomRow)
+    room.close()
     return RoomInfo # 장소 정보 반환
 
 ###### classView.py에 필요하여 추가! by 계 #####
-#def classID_to_className(code):
-    #근데 강의 이름정보(ex-그린조아의 윈프너무조아)가 어디에도 없어서 주석처리.
+###### myClass.py에도 필요하여 더 추가! by 혜 #####
+def classID_to_className(code):
+    #class의 고유 번호 >> class의 이름
+    classInfo=readText_Class_c(code)
+    className=classInfo[5].replace("@"," ")     # 강의명의 @를 공백으로 수정
+    return className
 
 def teacherID_to_teacherName(code):
     #teacher의 고유번호 >> teacher의 이름 반환함수
@@ -130,9 +159,9 @@ def classID_to_studentList(classCode):
 ###################################################
 
 ##### 1. 마이페이지 함수 들 ######
-def Re_UserInfo(code):
+def Re_UserInfo(code):   # myClass.py와 같이 쓸려고 했는데 출력 형식이 달라서 같이 못쓰게 생겼네...
     Class = open("class.txt", 'r', encoding='UTF-8-SIG')
-    Classname = readText__Class()
+    Classname = readText_Class()
     where = []
     i = 0
     while True:
@@ -143,10 +172,15 @@ def Re_UserInfo(code):
             where.append(i) # where list에 저장!
         i += 1
     i = 0
+    classArr = []  # [][ 학생/선생이 수강/개설한 강의의 고유 번호, 강의명 ]
     for i in where:
-        print('  -  '+Classname[i][5].replace('@',' ')) # @를 띄어쓰기로 치환후 출력
-
+        classArrCol = []  # [ 학생/선생이 수강/개설한 강의의 고유 번호, 강의명 ]
+        classArrCol.append(Classname[i][0])    # 강의 고유 번호 저장
+        classArrCol.append(Classname[i][5])    # 강의 이름 저장
+        classArr.append(classArrCol)
     Class.close()
+    return classArr
+
 
 def RenewalName(code,oldname,newname):
     newdata = []

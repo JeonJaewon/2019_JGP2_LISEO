@@ -18,7 +18,9 @@ def printStudentinfo(code):
     print(myInfo[1] + " ( " + myInfo[0] + " ) ")
     print("hp : " + myInfo[2])
     print("수강내역")
-    textManager.Re_UserInfo(code) #강의 정보들 출력!
+    classArr=textManager.Re_UserInfo(code)
+    for i in range(len(classArr)):
+        print('  -  '+classArr[i][1].replace('@',' ')) # @를 띄어쓰기로 치환후 출력 #강의 정보들 출력!
     print("="*50)
     screen(code, myInfo)
 
@@ -30,7 +32,9 @@ def printTeacherinfo(code):
     print(myInfo[1]+" ( "+myInfo[0]+" ) ")
     print("hp : "+myInfo[2])
     print("개설강의")
-    textManager.Re_UserInfo(code) #강의 정보들 출력!
+    classArr=textManager.Re_UserInfo(code)
+    for i in range(len(classArr)):
+        print('  -  '+classArr[i][1].replace('@',' ')) # @를 띄어쓰기로 치환후 출력 #강의 정보들 출력!
     print("="*50)
     screen(code, myInfo)
 

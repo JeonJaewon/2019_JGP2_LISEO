@@ -30,7 +30,7 @@ def start(myID):
     while True:
         # 모든 강의정보 출력 ( 자신의 수강 or 개설강의 별표로 표시)
         os.system('cls')
-        classInfo = textManager.readText__Class()
+        classInfo = textManager.readText_Class()
         print('========================================')
         for classData in classInfo:
             for className in myClassList[0]:
