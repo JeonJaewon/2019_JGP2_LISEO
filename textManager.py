@@ -117,7 +117,7 @@ def readText_Room():
         if not RoomRow:
             break
         RoomCol = RoomRow.rstrip("\n").split('@')# rstrip으로 개행문자 제거
-        RoomInfo.append(RoomRow)
+        RoomInfo.append(RoomCol)
     room.close()
     return RoomInfo # 장소 정보 반환
 
@@ -291,3 +291,22 @@ def Re_Student(number,content):
 ########## myClass.py 전용 함수들 ##########
 def modify_Class(code, flag):   # flag : 0(추가), 1(삭제)
     add = open("class.txt", 'a+', encoding='UTF-8-SIG')
+
+def modify_Room(classCode, time, room, flag):    # flag : 0(추가), 1(삭제)
+    roomInfo=readText_Room()
+    roomNum=int(room[1:])   # 강의실 코드(R1,..)에서 숫자 부분만 자름
+    if flag==0:
+            roomInfo[time][roomNum-1] = classCode
+    elif flag==1:
+        roomInfo[time][roomNum - 1] = "N"
+    else:
+        return -1
+    wf = open("room.txt", 'w', encoding='UTF-8-SIG')
+    data=""
+    for i in range(len(roomInfo)):
+        for roomData in roomInfo[i]:
+            data+=roomData+"@"
+        data=data.rstrip('@')    # 위의 반복문대로 하면 맨 오름쪽에 @가 남는데, 그걸 없애고 개행 문자를 추가함
+        data+="\n"
+    wf.write(data)
+    wf.close()

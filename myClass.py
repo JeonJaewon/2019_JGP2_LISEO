@@ -30,9 +30,9 @@ def myClass(code, classInfo, roomInfo, schedule):    # code : 해당 학생/선�
                 print("내가 개설한 강의 :")
                 # 해당 선생이 개설한 강의 목록 출력
                 teacherInfo = textManager.readText_Teacher_c(code)  # 해당 선생의 정보를 저장해놓은 1차원 배열
-                for i in range(len(teacherInfo[3])):
-                    className=textManager.classID_to_className(teacherInfo[3][i])
-                    print("(" + teacherInfo[3][i] + ") " + className)
+                classArr = textManager.Re_UserInfo(code)
+                for i in range(len(classArr)):               # --> 반복문이 실행될 때 마다 계속 불러오므로 Data갱신에 대한 걱정 안해도 됨
+                    print("(" + classArr[i][0] + ") " + classArr[i][1])
                 print("-------------------------------------------")
                 print("\t1. 강의 개설")
                 print("\t2. 강의 정보 수정")
@@ -41,7 +41,8 @@ def myClass(code, classInfo, roomInfo, schedule):    # code : 해당 학생/선�
                 ans = int(input("원하는 항목 : "))
                 os.system('cls')
                 if ans == 1:
-                    makeClass(roomInfo,schedule)
+                    makeClass()
+                    # textManager.modify_Room("C5",5,"R5",0)
                 elif ans == 2:
                     modifyClass(classInfo,roomInfo)
                 elif ans == 3:
@@ -71,8 +72,23 @@ def cancelClass(classInfo): # 수강 취소
     time.sleep(2)
     os.system('cls')
 
-def makeClass(roomInfo, schedule):  # 강의 개설
-    print(schedule)     # 문제의 타임테이블 출력....
+def printSchedule():
+    schedule=textManager.readText_Room()
+    print("** 현재 강의 시간표 ** ")
+    tempStr="  　　"
+    for i in schedule[0]:
+        tempStr+="\t"+i
+    print(tempStr)
+    print("----------------------------------------------")
+    for i in range(1,len(schedule)):
+        tempStr=str(i)+"교시"
+        for Class in schedule[i]:
+            tempStr+="\t"+Class
+        print(tempStr)
+
+def makeClass():  # 강의 개설
+    printSchedule()     # 현재 강의 시간표 출력
+    print("==============================================")
     className = input("내가 개설할 강의의 이름을 입력하세요. : ")
     classTime = input("내가 개설할 강의의 시간대를 입력하세요. (-교시) : ")
     # textManager.writeText_Class(className, classTime)
