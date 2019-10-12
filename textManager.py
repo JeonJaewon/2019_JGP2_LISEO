@@ -1,4 +1,4 @@
-def readText_Student():
+﻿def readText_Student():
     student = open("student.txt", 'r', encoding='UTF-8-SIG')
     StudentInfo = [] # 2차원 list 로 학생정보 저장
     i = 0
@@ -99,8 +99,8 @@ def readText_Class_ttoc(code):   #선생고유번호 넣었을 때 본인 강의
         if not ClassData:
             break
         ClassLogin = ClassData.rstrip("\n").split('@')  # rstrip으로 개행문자 제거
-        if code==ClassLogin[i][1]:
-            Classcode.append(ClassLogin[i][0])
+        if code==ClassLogin[1]:
+            Classcode.append(ClassLogin[0])
         i += 1
     Class.close()
     return Classcode #본인 강의고유번호배열 반환
@@ -320,6 +320,7 @@ def Re_Student(number,content):
         code = code[0] + str(codenum) #새로운 코드 생성
         newline = '\n'+ code + ' ' + number +' '+ content # 한 문장으로 합치기 number = 이름 content = 전화번호/공백으로 변경
         addstudent.write(newline) # 글 쓰기
+
 
 ########## myClass.py 전용 함수들 ##########
 def modify_Class(code, flag):   # flag : 0(추가), 1(삭제)
