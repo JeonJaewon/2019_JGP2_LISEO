@@ -312,6 +312,35 @@ def modify_Room(classCode, time, room, flag):    # flag : 0(추가), 1(삭제)
     wf.write(data)
     wf.close()
 
+def deleteClassText(code):   # flag : 0(추가), 1(학생 삭제), 2(강의 삭제)
+    classFile = open("classTest.txt", 'r', encoding='UTF-8-SIG')
+    classLines = classFile.readlines() # 라인 전부 읽어오고
+    if len(classLines) != 0:
+        classLines[0] = classLines[0].replace(u"\ufeff", '')  # utf-8-sig로도 안없어져서 강제로 없앰
+    classWrite = open("classTest.txt", 'w', encoding='UTF-8-SIG') # W로 오픈하면 텍스트 전부 삭제됨.
+
+    for line in classLines:
+        if code != line.split(' ')[0]: # code랑 저장해놨던 line들의 코드랑 비교해서
+            classWrite.write(line) # 같지 않으면, 즉 삭제할려고 했던게 아니면 다시 써준다
+
+def enrollOrCancelClass(classCode,studentCode, flag):  # flag : 0(수강 신청), 1(수강 취소)
+    classFile = open("classTest.txt", 'r', encoding='UTF-8-SIG')
+    classLines = classFile.readlines()
+    if len(classLines) != 0:
+        classLines[0] = classLines[0].replace(u"\ufeff", '')  # utf-8-sig로도 안없어져서 강제로 없앰
+    classWrite = open("classTest.txt", 'w', encoding='UTF-8-SIG')
+
+
+
+    if flag == 0:
+        for line in classLines:
+            if classCode != line.split(' ')[0]:
+                classWrite.write(line)
+    elif flag == 1:
+        for line in classLines:
+            if classCode!= line.split(' ')[0]:
+                classWrite.write(line)
+
 ######## 강의 개설시 class.txt에 write하는 함수 ####### by 계
 def add_class(teacherCode, roomCode, roomTime, maxSeat, className):
     #class.txt에 내용 추가
@@ -321,4 +350,3 @@ def add_class(teacherCode, roomCode, roomTime, maxSeat, className):
     inputString = '\n'+classCode+'@'+teacherCode+'@'+roomCode+'@'+str(maxSeat)+'@'+str('0')+'@'+className
     writeClass.write(inputString)
     writeClass.close()
-
