@@ -54,7 +54,7 @@ def myClass(code, classInfo, roomInfo, schedule):    # code : 해당 학생/선�
 def enrolement(classInfo):  # 수강 신청
     classCode = input("내가 수강하고 싶은 강의의 고유 번호를 입력하세요. : ")
     if classCode in classInfo:
-        #textManager.writeText_Student(code[0], classCode)    # Student.txt를 수정하는 텍스트 파일 --> classCode 추가
+        #textManager.writeText_Class(code[0], classCode)    # Class.txt를 수정하는 텍스트 파일 --> classCode 추가
         print("수강 신청이 완료되었습니다.")
     else:
         print("존재하지 않은 고유 번호입니다.")
@@ -64,7 +64,6 @@ def enrolement(classInfo):  # 수강 신청
 def cancelClass(classInfo): # 수강 취소
     classCode = input("내가 수강 취소하고 싶은 강의의 고유 번호를 입력하세요. : ")
     if classCode in classInfo:
-        # Student.txt에서 해당 학생이 듣는 수업 고유번호를 삭제하고,
         # Class.txt의 해당 강의 내용 수정 (듣는 인원 -1)
         print("수강 취소가 완료되었습니다.")
     else:
@@ -82,7 +81,6 @@ def makeClass(roomInfo, schedule):  # 강의 개설
     # schedule[3][1]   == R1교실(교실 배열의 첫 번째 idx)에서 진행되는 3교시의 수업. 공란일 경우(0으로 정의하자) 수업 X, 강의 고유번호가 있을 경우 수업 이미 O.
     for i in range(1,len(roomInfo)):
         if schedule[classTime][i] == 0:
-            # textManager.writeText_Teacher(classCode)
             # textManager.writeText_Class(classCode)
             # textManager.writeText_Room(classCode)    # 표 갱신
             print("성공적으로 강의가 개설되었습니다.")
@@ -107,8 +105,7 @@ def modifyClass(classInfo, roomInfo): # 강의 정보 수정
             if ans==1:
                 newName=input("className"+" >> ")
                 # 여기에서 입력조건 검사도 들어가야겠죵?
-                # textManager.writeText_Teacher(classCode)  # 정보 수정된 것 들어감
-                # textManager.writeText_Class(classCode)
+                # textManager.writeText_Class(classCode)   # 정보 수정된 것 들어감
                 # textManager.writeText_Room(classCode)    # 표 갱신
                 print("정보가 성공적으로 수정되었습니다.")
                 break
@@ -121,7 +118,7 @@ def modifyClass(classInfo, roomInfo): # 강의 정보 수정
                     os.system('cls')
                     continue
                 # 새로 입력한 강의실이 현재 강의실 목록에 존재 할 경우
-                # textManager.writeText_Teacher(classCode)  # 정보 수정된 것 들어감
+                # 정보 수정된 것 들어감
                 # textManager.writeText_Class(classCode)
                 # textManager.writeText_Room(classCode)    # 표 갱신
                 print("정보가 성공적으로 수정되었습니다.")
@@ -132,7 +129,7 @@ def modifyClass(classInfo, roomInfo): # 강의 정보 수정
                 # elif schedule[classTime][classroom] != 0:
                 #    print("이미 등록된 강의실입니다.")
                 # else: --> 정상적인 경우
-                    # textManager.writeText_Teacher(classCode)  # 정보 수정된 것 들어감
+                    # 정보 수정된 것 들어감
                     # textManager.writeText_Class(classCode)
                     # textManager.writeText_Room(classCode)    # 표 갱신
                     # print("정보가 성공적으로 수정되었습니다.")
@@ -152,7 +149,7 @@ def deleteClass(classInfo):
     classCode=input("삭제할 강의의 고유 번호를 입력하세요. : ")
     if classCode in classInfo:
         # textManager.writeText_Class(classCode)    --> 해당 강의가 속해있는 줄 모두 삭제ㅔ
-        # textManager.writeText_Teacher(classCode)  --> 선생 정보 변경
+        # --> 선생 정보 변경
         # textManager.writeText_Room(classCode)    # 표 갱신
         # 학생은... 학생이 수강하는 강의는 표시 안한다고 했으니까 없어두 되겠지?
         print("강의 삭제가 완료되었습니다.")

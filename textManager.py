@@ -159,7 +159,7 @@ def classID_to_studentList(classCode):
 ###################################################
 
 ##### 1. 마이페이지 함수 들 ######
-def Re_UserInfo(code):   # myClass.py와 같이 쓸려고 했는데 출력 형식이 달라서 같이 못쓰게 생겼네...
+def Re_UserInfo(code):   # myClass.py와 같이 쓰기 위해 출력함수 대신 강의 고유코드와 이름을 저장하는 배열을 반환하는 걸로 바꿈
     Class = open("class.txt", 'r', encoding='UTF-8-SIG')
     Classname = readText_Class()
     where = []
@@ -288,5 +288,6 @@ def Re_Student(number,content):
         newline = '\n'+ code + ' ' + number +' '+ content # 한 문장으로 합치기 number = 이름 content = 전화번호/공백으로 변경
         addstudent.write(newline) # 글 쓰기
 
-
-
+########## myClass.py 전용 함수들 ##########
+def modify_Class(code, flag):   # flag : 0(추가), 1(삭제)
+    add = open("class.txt", 'a+', encoding='UTF-8-SIG')
