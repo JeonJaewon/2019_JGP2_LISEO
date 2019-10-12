@@ -54,8 +54,6 @@ def modifyInfo(code,myInfo
                 printStudentinfo(code)
             else:
                 printTeacherinfo(code)
-        else:
-            modifyInfo(code,myInfo)
     elif choice == '2':
         if modifyPhone(code,myInfo):
             print("정보가 성공적으로 수정되었습니다.")
@@ -66,8 +64,6 @@ def modifyInfo(code,myInfo
                 printStudentinfo(code)
             else:
                 printTeacherinfo(code)
-        else:
-            modifyInfo(code, myInfo)
     elif choice == '3':
         return 0
     else:
@@ -96,7 +92,7 @@ def modifyName(code,myInfo):
         print("형식에 어긋납니다.다시 입력하십시오")
         time.sleep(2)
         os.system('cls')
-        return 0
+        modifyInfo(code)
     else:
         textManager.RenewalName(code, myInfo[1], newName) #수정!
         return 1
@@ -113,7 +109,7 @@ def modifyPhone(code,myInfo):
         print("형식에 어긋납니다.다시 입력하십시오")
         time.sleep(2)
         os.system('cls')
-        return 0
+        modifyInfo(code, myInfo)
 
 
 def screen(code,myInfo):
