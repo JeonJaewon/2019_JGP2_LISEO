@@ -19,9 +19,9 @@ def myClass(code, classInfo, roomInfo, schedule):    # code : 해당 학생/선�
                 ans = int(input("원하는 항목 : "))
                 os.system('cls')
                 if ans == 1:
-                    enrolement(classInfo)
+                    enrolement(classInfo,code)
                 elif ans == 2:
-                    cancelClass(classInfo)
+                    cancelClass(classInfo,code)
                 elif ans == 3:
                     return
                 # 1,2,3을 제외한 이상한 답이 나왔을 경우는 다시 반복문 처음으로~~~
@@ -52,9 +52,10 @@ def myClass(code, classInfo, roomInfo, schedule):    # code : 해당 학생/선�
                 # 1,2,3,4를 제외한 이상한 답이 나왔을 경우는 다시 반복문 처음으로~~~
 
 
-def enrolement(classInfo):  # 수강 신청
+def enrolement(classInfo,code):  # 수강 신청
     classCode = input("내가 수강하고 싶은 강의의 고유 번호를 입력하세요. : ")
     if classCode in classInfo:
+        textManager.enrollOrCancelClass(classCode,code,0)
         #textManager.writeText_Class(code[0], classCode)    # Class.txt를 수정하는 텍스트 파일 --> classCode 추가
         print("수강 신청이 완료되었습니다.")
     else:
@@ -62,9 +63,11 @@ def enrolement(classInfo):  # 수강 신청
     time.sleep(2)
     os.system('cls')
 
-def cancelClass(classInfo): # 수강 취소
+def cancelClass(classInfo,code): # 수강 취소
     classCode = input("내가 수강 취소하고 싶은 강의의 고유 번호를 입력하세요. : ")
     if classCode in classInfo:
+        textManager.enrollOrCancelClass(classCode,code,1)
+
         # Class.txt의 해당 강의 내용 수정 (듣는 인원 -1)
         print("수강 취소가 완료되었습니다.")
     else:

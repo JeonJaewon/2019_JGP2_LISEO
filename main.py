@@ -41,7 +41,7 @@ def screen(code, classCode, roomCode, schedule):
 code = login.start() # code 어떤 학생 어떤 선생인지 체크하는 변수
 
 # test용
-classCode=["C1", "C2"]  # 수업 고유번호 목록 리스트
+classCode=["C1", "C2", "C3","C4"]  # 수업 고유번호 목록 리스트
 roomCode=["R1", "R2"]   # 강의실 고유번호 목록 리스트
 schedule="얘는 기획서에 나왔던 교시와 강의실에 따른 시간을 표로 나타낸 것을 받아 2차원 리스트에 저장한 것임."
 screen(code, classCode, roomCode, schedule)
