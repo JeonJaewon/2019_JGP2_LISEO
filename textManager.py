@@ -90,6 +90,21 @@ def readText_Class():   # 굳이 언더바가 두 개일 필요는 없어서 고
     Class.close()
     return ClassInfo # 강의 정보 반환
 
+def readText_Class_ttoc(code):   #선생고유번호 넣었을 때 본인 강의 고유번호 리턴
+    Class = open("class.txt", 'r', encoding='UTF-8-SIG')
+    Classcode=[] #1차원 저장
+    i = 0
+    while True:
+        ClassData = Class.readline()
+        if not ClassData:
+            break
+        ClassLogin = ClassData.rstrip("\n").split('@')  # rstrip으로 개행문자 제거
+        if code==ClassLogin[i][1]:
+            Classcode.append(ClassLogin[i][0])
+        i += 1
+    Class.close()
+    return Classcode #본인 강의고유번호배열 반환
+
 def readText_Class_c(code):   # 위에껀 전체, 이건 해당 고유번호 정보만 반환
     Class = open("class.txt", 'r', encoding='UTF-8-SIG')
     ClassInfo = [] # 3차원 list 로 강의정보 저장
