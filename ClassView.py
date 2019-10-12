@@ -20,7 +20,7 @@ def start(myID):
         myClassList=textManager.readText_Class_ttoc(myID)
     else:
         #자신의 수강강의 저장
-        studentData = textManager.readText_class_stoc(myID)
+        myClassList = textManager.readText_class_stoc(myID)
 
     #메인메뉴
     while True:
