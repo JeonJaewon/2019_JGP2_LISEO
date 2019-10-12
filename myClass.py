@@ -44,8 +44,7 @@ def myClass(code):    # code : 해당 학생/선생 정보 배열    classInfo :
                     makeClass(code)
                     # textManager.modify_Room("C5",5,"R5",0)
                 elif ans == 2:
-                    break
-                    # modifyClass(classInfo,roomInfo)
+                    modifyClass(code)
                 elif ans == 3:
                     break
                     # deleteClass(classInfo)
@@ -115,24 +114,23 @@ def makeClass(code):  # 강의 개설
     time.sleep(2)
     os.system('cls')
 
-def modifyClass(code): # 강의 정보 수정
+def modifyClass(code): # 강의 정보 수정 (code : 선생 고유 번호)
+    classArr=textManager.readText_Class_ttoc(code)  # 해당 선생이 개설한 강의의 고유 번호 리스트 출력
     classCode=input("수정할 강의의 고유 번호를 입력하세요. : ")
-    if classCode in code:   # 여기부터 수정예정
-        # className, teacher, classTime, classroom=textManager.writeText_Class(classCode)
+    if classCode in classArr:   # 여기부터 수정예정
+        Class=textManager.readText_Class_c(classCode)   # 해당 고유번호 수업의 정보 리스트 받기
         while 1:
-            print("("+classCode+") "+"className" + "\n강사 : "+"teacher"+"\n교실 : " + "classroom" + "\n시간 : "+"classTime"+"교시")
+            print("("+classCode+") "+Class[5] + "\n강사 : "+Class[1]+"\n교실 : " + Class[2] + "\n시간 : "+Class[4]+"교시")
             print("1. 강의명 수정")
             print("2. 교실 및 시간 변경")
             print("3. 뒤로 가기")
             ans=int(input("원하는 항목 : "))
             if ans==1:
-                newName=input("className"+" >> ")
-                # 여기에서 입력조건 검사도 들어가야겠죵?
-                # textManager.writeText_Class(classCode)   # 정보 수정된 것 들어감
-                # textManager.writeText_Room(classCode)    # 표 갱신
+                newName=input(Class[5]+" >> ")
+                # 여기에서 입력조건 검사도 들어가야겠죵? 근데 입력 조건이 따로 있나
+                textManager.modify_ClassInfo(classCode,newName,-1,-1)
                 print("정보가 성공적으로 수정되었습니다.")
                 break
-
             elif ans==2:
                 newRoom=input("classroom"+" >> ")
                 if not newRoom in roomInfo:     # 새로 입력한 강의실이 현재 강의실 목록에 존재하지 않으면

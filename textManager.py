@@ -92,7 +92,7 @@ def readText_Class():   # 굳이 언더바가 두 개일 필요는 없어서 고
 
 def readText_Class_ttoc(code):   #선생고유번호 넣었을 때 본인 강의 고유번호 리턴
     Class = open("class.txt", 'r', encoding='UTF-8-SIG')
-    Classcode=[] #1차원 저장
+    Classcode=[] #readText_Class_ttoc1차원 저장
     i = 0
     while True:
         ClassData = Class.readline()
@@ -336,13 +336,39 @@ def modify_Room(classCode, time, room, flag):    # flag : 0(추가), 1(삭제)
         roomInfo[int(time)][roomNum - 1] = "N"
     else:
         return -1
-    wf = open("room.txt", 'w', encoding='UTF-8-SIG')
+
     data=""
     for i in range(len(roomInfo)):
         for roomData in roomInfo[i]:
             data+=roomData+"@"
         data=data.rstrip('@')    # 위의 반복문대로 하면 맨 오름쪽에 @가 남는데, 그걸 없애고 개행 문자를 추가함
         data+="\n"
+    wf = open("room.txt", 'w', encoding='UTF-8-SIG')
+    wf.write(data)
+    wf.close()
+
+def modify_ClassInfo(classCode,newName,newTime,newRoom): # 강의실 정보 수정 함수. 인자에 -1이 들어가지 않은 것만 고침
+    Class=readText_Class_c(classCode)
+    if newName != 1:
+        Class[5] = newName
+    if newTime != 1:
+        Class[4] = newTime
+    if newRoom != 1:
+        Class[2] = newRoom
+    idx=int(classCode[1:])-1    # 해당 고유 번호가 전체 강의 목록 3차원 배열에서 몇 층인지
+    classArr=readText_Class()
+    classArr[idx]=Class
+
+    data=""
+    for i in range(len(classArr)):
+        for j in range(6):  # 강의명까지(수강생 목록 전까지) 입력
+           data+=str(classArr[i][j])+"@"
+        if classArr[i][6]:  # 수강생이 있는지 없는지 확인
+            for students in classArr[i][6]:
+                data+=students+"@"
+        data=data.rstrip('@')
+        data+="\n"
+    wf = open("class.txt", 'w', encoding='UTF-8-SIG')
     wf.write(data)
     wf.close()
 
