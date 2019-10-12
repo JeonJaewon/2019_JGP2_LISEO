@@ -49,11 +49,7 @@ def modifyInfo(code,myInfo
             print("정보가 성공적으로 수정되었습니다.")
             time.sleep(2)
             os.system('cls')
-            #마이페이지 화면으로 돌아갑니다.
-            if code[0] == 'S':
-                printStudentinfo(code)
-            else:
-                printTeacherinfo(code)
+            mypagePrint(code)
         else:
             modifyInfo(code,myInfo)
     elif choice == '2':
@@ -61,11 +57,7 @@ def modifyInfo(code,myInfo
             print("정보가 성공적으로 수정되었습니다.")
             time.sleep(2)
             os.system('cls')
-             # 마이페이지 화면으로 돌아갑니다.
-            if code[0] == 'S':
-                printStudentinfo(code)
-            else:
-                printTeacherinfo(code)
+            mypagePrint(code)
         else:
             modifyInfo(code, myInfo)
     elif choice == '3':
