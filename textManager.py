@@ -1,4 +1,4 @@
-def readText_Student():
+﻿def readText_Student():
     student = open("student.txt", 'r', encoding='UTF-8-SIG')
     StudentInfo = [] # 2차원 list 로 학생정보 저장
     i = 0
@@ -321,6 +321,32 @@ def Re_Student(number,content):
         newline = '\n'+ code + ' ' + number +' '+ content # 한 문장으로 합치기 number = 이름 content = 전화번호/공백으로 변경
         addstudent.write(newline) # 글 쓰기
 
+
+########## myClass.py 전용 함수들 ##########
+def modify_Class(code, flag):   # flag : 0(추가), 1(삭제)
+    add = open("class.txt", 'a+', encoding='UTF-8-SIG')
+
+
+def modify_Room(classCode, time, room, flag):    # flag : 0(추가), 1(삭제)
+    roomInfo=readText_Room()
+    roomNum=int(room[1:])   # 강의실 코드(R1,..)에서 숫자 부분만 자름
+    if flag==0:
+            roomInfo[int(time)][roomNum-1] = classCode
+    elif flag==1:
+        roomInfo[int(time)][roomNum - 1] = "N"
+    else:
+        return -1
+    wf = open("room.txt", 'w', encoding='UTF-8-SIG')
+    data=""
+    for i in range(len(roomInfo)):
+        for roomData in roomInfo[i]:
+            data+=roomData+"@"
+        data=data.rstrip('@')    # 위의 반복문대로 하면 맨 오름쪽에 @가 남는데, 그걸 없애고 개행 문자를 추가함
+        data+="\n"
+    wf.write(data)
+    wf.close()
+
+
 ######## myClass.py 전용 추가 함수 ####### by 계
 #class.txt에 새로 개설한 강의 추가 함수
 def deleteClassText(code):   # flag : 0(추가), 1(학생 삭제), 2(강의 삭제)
@@ -365,11 +391,13 @@ def enrollOrCancelClass(classCode,studentCode, flag):  # flag : 0(수강 신청)
     classWrite.close()
 
 ######## 강의 개설시 class.txt에 write하는 함수 ####### by 계
-def add_class(teacherCode, roomCode, roomTime, maxSeat, className):
+def add_class(teacherCode, roomCode, classTime, maxSeat, className):
     #class.txt에 내용 추가
     writeClass = open('class.txt', 'a+', encoding='UTF-8-SIG')
     readClass = readText_Class()
     classCode = 'C'+str(int(readClass[len(readClass)-1][0][1:])+1)
-    inputString = '\n'+classCode+'@'+teacherCode+'@'+roomCode+'@'+str(maxSeat)+'@'+str('0')+'@'+className
+    # class.txt 양식 : 강의고유번호 선생고유번호 강의실고유번호 최대수용인원수 교시 이름 수강학생들
+    inputString = '\n'+classCode+'@'+teacherCode+'@'+roomCode+'@'+str(maxSeat)+'@'+classTime+'@'+className
     writeClass.write(inputString)
     writeClass.close()
+    return classCode
