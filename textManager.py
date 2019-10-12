@@ -117,7 +117,7 @@ def readText_Room():
         if not RoomRow:
             break
         RoomCol = RoomRow.rstrip("\n").split('@')# rstrip으로 개행문자 제거
-        RoomInfo.append(RoomCol)
+        RoomInfo.append(RoomRow)
     room.close()
     return RoomInfo # 장소 정보 반환
 
@@ -292,56 +292,8 @@ def Re_Student(number,content):
 def modify_Class(code, flag):   # flag : 0(추가), 1(삭제)
     add = open("class.txt", 'a+', encoding='UTF-8-SIG')
 
-
-def modify_Room(classCode, time, room, flag):    # flag : 0(추가), 1(삭제)
-    roomInfo=readText_Room()
-    roomNum=int(room[1:])   # 강의실 코드(R1,..)에서 숫자 부분만 자름
-    if flag==0:
-            roomInfo[time][roomNum-1] = classCode
-    elif flag==1:
-        roomInfo[time][roomNum - 1] = "N"
-    else:
-        return -1
-    wf = open("room.txt", 'w', encoding='UTF-8-SIG')
-    data=""
-    for i in range(len(roomInfo)):
-        for roomData in roomInfo[i]:
-            data+=roomData+"@"
-        data=data.rstrip('@')    # 위의 반복문대로 하면 맨 오름쪽에 @가 남는데, 그걸 없애고 개행 문자를 추가함
-        data+="\n"
-    wf.write(data)
-    wf.close()
-
-def deleteClassText(code):   # flag : 0(추가), 1(학생 삭제), 2(강의 삭제)
-    classFile = open("classTest.txt", 'r', encoding='UTF-8-SIG')
-    classLines = classFile.readlines() # 라인 전부 읽어오고
-    if len(classLines) != 0:
-        classLines[0] = classLines[0].replace(u"\ufeff", '')  # utf-8-sig로도 안없어져서 강제로 없앰
-    classWrite = open("classTest.txt", 'w', encoding='UTF-8-SIG') # W로 오픈하면 텍스트 전부 삭제됨.
-
-    for line in classLines:
-        if code != line.split(' ')[0]: # code랑 저장해놨던 line들의 코드랑 비교해서
-            classWrite.write(line) # 같지 않으면, 즉 삭제할려고 했던게 아니면 다시 써준다
-
-def enrollOrCancelClass(classCode,studentCode, flag):  # flag : 0(수강 신청), 1(수강 취소)
-    classFile = open("classTest.txt", 'r', encoding='UTF-8-SIG')
-    classLines = classFile.readlines()
-    if len(classLines) != 0:
-        classLines[0] = classLines[0].replace(u"\ufeff", '')  # utf-8-sig로도 안없어져서 강제로 없앰
-    classWrite = open("classTest.txt", 'w', encoding='UTF-8-SIG')
-
-
-
-    if flag == 0:
-        for line in classLines:
-            if classCode != line.split(' ')[0]:
-                classWrite.write(line)
-    elif flag == 1:
-        for line in classLines:
-            if classCode!= line.split(' ')[0]:
-                classWrite.write(line)
-
-######## 강의 개설시 class.txt에 write하는 함수 ####### by 계
+######## myClass.py 전용 추가 함수 ####### by 계
+#class.txt에 새로 개설한 강의 추가 함수
 def add_class(teacherCode, roomCode, roomTime, maxSeat, className):
     #class.txt에 내용 추가
     writeClass = open('class.txt', 'a+', encoding='UTF-8-SIG')
@@ -350,3 +302,55 @@ def add_class(teacherCode, roomCode, roomTime, maxSeat, className):
     inputString = '\n'+classCode+'@'+teacherCode+'@'+roomCode+'@'+str(maxSeat)+'@'+str('0')+'@'+className
     writeClass.write(inputString)
     writeClass.close()
+
+#class.txt에 classCode에 해당하는 className 정보 수정 함수
+def modify_className(classCode, className):
+    #index 찾기
+    readClass = open('class.txt', 'r', encoding='UTF-8-SIG')
+    classData = readClass.readlines()
+    findIndex=0
+    for i in range(len(classData)):
+        if classData[i].split('@')[0] == classCode:
+            findIndex=i
+            break
+
+    #index 있는 line만 수정
+    tempString = classData[findIndex]
+    tempString = tempString.split('@')
+    tempString[5] = className
+    tempString2=''
+    for word in tempString:
+        tempString2+=word+'@'
+    tempString2=tempString2[:-1]
+    classData[findIndex] = tempString2
+
+    #class.txt 재입력
+    writeClass = open('class.txt', 'w', encoding='UTF-8-SIG')
+    for i in range(len(classData)):
+        writeClass.write(classData[i])
+
+#class.txt에 classCode에 해당하는 roomCode
+def modify_classRoom(classCode, roomCode):
+    #index 찾기
+    readClass = open('class.txt', 'r', encoding='UTF-8-SIG')
+    classData = readClass.readlines()
+    findIndex=0
+    for i in range(len(classData)):
+        if classData[i].split('@')[0] == classCode:
+            findIndex=i
+            break
+
+    #index 있는 line만 수정
+    tempString = classData[findIndex]
+    tempString = tempString.split('@')
+    tempString[2] = roomCode
+    tempString2=''
+    for word in tempString:
+        tempString2+=word+'@'
+    tempString2=tempString2[:-1]
+    classData[findIndex] = tempString2
+
+    #class.txt 재입력
+    writeClass = open('class.txt', 'w', encoding='UTF-8-SIG')
+    for i in range(len(classData)):
+        writeClass.write(classData[i])
