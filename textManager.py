@@ -99,8 +99,8 @@ def readText_Class_ttoc(code):   #선생고유번호 넣었을 때 본인 강의
         if not ClassData:
             break
         ClassLogin = ClassData.rstrip("\n").split('@')  # rstrip으로 개행문자 제거
-        if code==ClassLogin[i][1]:
-            Classcode.append(ClassLogin[i][0])
+        if code==ClassLogin[1]:
+            Classcode.append(ClassLogin[0])
         i += 1
     Class.close()
     return Classcode #본인 강의고유번호배열 반환
