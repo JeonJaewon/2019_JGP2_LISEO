@@ -126,7 +126,7 @@ def readText_Class_c(code):   # 위에껀 전체, 이건 해당 고유번호 정
 
 def readText_Class_stoc(code):   # 학생코드치면 수업고유번호 반환
     Class = open("class.txt", 'r', encoding='UTF-8-SIG')
-    ClassInfo = [] # 3차원 list 로 강의정보 저장
+    ClassInfo = [] # 1차원저장
     i = 0
     while True:
         ClassData = Class.readline()
@@ -135,8 +135,8 @@ def readText_Class_stoc(code):   # 학생코드치면 수업고유번호 반환
         ClassLogin = ClassData.rstrip("\n").split('@')# rstrip으로 개행문자 제거
         # 학생 정보만 따로 list에 담는 과정
         students = ClassLogin[6:]
-        ClassInfo[i].append(students)
-        ClassInfo[i].append(ClassLogin[0])
+        if code in students:
+            ClassInfo.append(ClassLogin[0])
         i += 1
     return ClassInfo
 
