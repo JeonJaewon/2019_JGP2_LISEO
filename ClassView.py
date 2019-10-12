@@ -17,9 +17,7 @@ def start(myID):
     myClassList=[]
     if isTeacher:
         #자신의 개설강의 저장
-        teacherData = textManager.readText_Teacher_c(myID)
-        for i in range(len(teacherData)-3):
-            myClassList.append(teacherData[i+3])
+        myClassList=textManager.readText_Class_ttoc(myID)
     else:
         #자신의 수강강의 저장
         studentData = textManager.readText_Student_c(myID)
