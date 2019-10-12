@@ -1,4 +1,4 @@
-import os
+﻿import os
 import time
 import login
 import ClassView
@@ -39,6 +39,5 @@ def screen(code):
             os.system('cls')
 
 code = login.start() # code 어떤 학생 어떤 선생인지 체크하는 변수
-
 screen(code)
     #메인화면 출력

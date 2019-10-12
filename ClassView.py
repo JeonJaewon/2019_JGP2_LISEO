@@ -3,24 +3,22 @@ import textManager
 import time
 
 def start(myID):
+    myClassList=[]
     #사용자의 권한 확인
     if(myID[0] == 'S'):
         #학생입니다.
         isTeacher = False
+        #자신의 수강강의 저장
+        myClassList = textManager.readText_class_stoc(myID)
     elif(myID[0] == 'T'):
         # 선생님입니다.
         isTeacher = True
+        #자신의 개설강의 저장
+        myClassList=textManager.readText_Class_ttoc(myID)
     else:
         print('error : 사용자의 ID 형식이 올바르지 않습니다.')
         time.sleep(2)
         return
-    myClassList=[]
-    if isTeacher:
-        #자신의 개설강의 저장
-        myClassList=textManager.readText_Class_ttoc(myID)
-    else:
-        #자신의 수강강의 저장
-        myClassList = textManager.readText_class_stoc(myID)
 
     #메인메뉴
     while True:
@@ -29,7 +27,7 @@ def start(myID):
         classInfo = textManager.readText_Class()
         print('========================================')
         for classData in classInfo:
-            for className in myClassList[0]:
+            for className in myClassList:
                 if classData[0]==className:
                     print('★ ', end='')
             print('(' + classData[0] + ') '+classData[5].replace('@',' '))  #classID >> className
