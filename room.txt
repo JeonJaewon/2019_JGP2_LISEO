@@ -1,6 +1,6 @@
 ﻿R1@R2@R3@R4@R5
-C1@C7@C3@C9@N
-N@N@C2@N@N
-C4@N@N@N@N
+C1@C7@N@C9@N
+N@M@N@N@N
+C3@C2@C4@N@N
 C6@N@N@N@N
 C8@N@N@N@C5
