@@ -138,6 +138,7 @@ def readText_Class_stoc(code):   # 학생코드치면 수업고유번호 반환
         if code in students:
             ClassInfo.append(ClassLogin[0])
         i += 1
+    Class.close()
     return ClassInfo
 
 
