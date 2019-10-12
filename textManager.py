@@ -312,6 +312,7 @@ def modify_Room(classCode, time, room, flag):    # flag : 0(추가), 1(삭제)
     wf.write(data)
     wf.close()
 
+
 def deleteClassText(code):   # flag : 0(추가), 1(학생 삭제), 2(강의 삭제)
     classFile = open("classTest.txt", 'r', encoding='UTF-8-SIG')
     classLines = classFile.readlines() # 라인 전부 읽어오고
