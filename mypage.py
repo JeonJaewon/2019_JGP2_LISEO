@@ -86,6 +86,7 @@ def printModifyinfo(code):
 
 def modifyName(code,myInfo):
     #이름수정
+    print(myInfo[1],end="")
     newName = input(">>>")
     if len(newName) > 10:
         print("형식에 어긋납니다.다시 입력하십시오")
@@ -98,6 +99,7 @@ def modifyName(code,myInfo):
 
 def modifyPhone(code,myInfo):
     #전화번호수정
+    print(myInfo[2], end="")
     newPhone = input(">>>")
     if len(newPhone) == 11 and newPhone.isdecimal():  # type(newPhone)=='int' int로 하면 len이 안되는거 같아오
         # 전화번호수정하고
