@@ -6,7 +6,7 @@ def readText_Student():
         StudentData = student.readline() # student.txt 파일 읽기
         if not StudentData: # txt 마지막 줄에 도달하면 break
             return -1
-        StudentLogin = StudentData.rstrip("\n").split(' ') # rstrip으로 개행문자 제거
+        StudentLogin = StudentData.rstrip("\n").split('@') # rstrip으로 개행문자 제거
         # lecture = StudentLogin[3:] # 강의 정보들 따로 list`` # StudentLogin : 강의 정보 저장 위해 임시로 만든 배열
         # del(StudentLogin[3:]) # 강의 정보들 str 삭제
         StudentInfo.append(StudentLogin) # 학생 정보 저장
@@ -25,7 +25,7 @@ def readText_Student_c(code):
 
         if not StudentData:  # txt 마지막 줄에 도달하면 break
             return -1
-        StudentLogin = StudentData.rstrip("\n").split(' ')  # rstrip으로 개행문자 제거
+        StudentLogin = StudentData.rstrip("\n").split('@')  # rstrip으로 개행문자 제거
         # lecture = StudentLogin[3:]  # 강의 정보들 따로 list
         # del (StudentLogin[3:])  # 강의 정보들 str 삭제
         StudentInfo.append(StudentLogin)  # 학생 정보 저장
@@ -44,7 +44,7 @@ def readText_Teacher():
         TeacherData = teacher.readline()
         if not TeacherData:
             break
-        TeacherLogin = TeacherData.rstrip("\n").split(' ')# rstrip으로 개행문자 제거
+        TeacherLogin = TeacherData.rstrip("\n").split('@')# rstrip으로 개행문자 제거
         lecture = TeacherLogin[3:]
         # del(TeacherLogin[3:])
         TeacherInfo.append(TeacherLogin)
@@ -62,7 +62,7 @@ def readText_Teacher_c(code):
         TeacherData = teacher.readline()
         if not TeacherData:
             break
-        TeacherLogin = TeacherData.rstrip("\n").split(' ')# rstrip으로 개행문자 제거
+        TeacherLogin = TeacherData.rstrip("\n").split('@')# rstrip으로 개행문자 제거
         # lecture = TeacherLogin[3:]
         del(TeacherLogin[3:])
         TeacherInfo.append(TeacherLogin)
@@ -80,7 +80,7 @@ def readText_Class():   # 굳이 언더바가 두 개일 필요는 없어서 고
         ClassData = Class.readline()
         if not ClassData:
             break
-        ClassLogin = ClassData.rstrip("\n").split(' ')# rstrip으로 개행문자 제거
+        ClassLogin = ClassData.rstrip("\n").split('@')# rstrip으로 개행문자 제거
         # 학생 정보만 따로 list에 담는 과정
         students = ClassLogin[6:]
         del (ClassLogin[6:])
@@ -98,7 +98,7 @@ def readText_Class_c(code):   # 위에껀 전체, 이건 해당 고유번호 정
         ClassData = Class.readline()
         if not ClassData:
             break
-        ClassLogin = ClassData.rstrip("\n").split(' ')# rstrip으로 개행문자 제거
+        ClassLogin = ClassData.rstrip("\n").split('@')# rstrip으로 개행문자 제거
         # 학생 정보만 따로 list에 담는 과정
         students = ClassLogin[6:]
         del (ClassLogin[6:])
@@ -126,7 +126,7 @@ def readText_Room():
 def classID_to_className(code):
     #class의 고유 번호 >> class의 이름
     classInfo=readText_Class_c(code)
-    className=classInfo[5].replace("@"," ")     # 강의명의 @를 공백으로 수정
+    className=classInfo[5]  #.replace("@"," ")     # 강의명의 @를 공백으로 수정
     return className
 
 def teacherID_to_teacherName(code):
