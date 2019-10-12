@@ -1,4 +1,4 @@
-def readText_Student():
+﻿def readText_Student():
     student = open("student.txt", 'r', encoding='UTF-8-SIG')
     StudentInfo = [] # 2차원 list 로 학생정보 저장
     i = 0
