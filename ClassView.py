@@ -29,7 +29,7 @@ def start(myID):
         classInfo = textManager.readText_Class()
         print('========================================')
         for classData in classInfo:
-            for className in myClassList[0]:
+            for className in myClassList:
                 if classData[0]==className:
                     print('★ ', end='')
             print('(' + classData[0] + ') '+classData[5].replace('@',' '))  #classID >> className
