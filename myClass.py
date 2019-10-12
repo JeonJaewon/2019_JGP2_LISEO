@@ -3,7 +3,7 @@ import os
 import textManager
 
 # 출력 함수 == 메인 함수
-def myClass(code, classInfo, roomInfo, schedule):    # code : 해당 학생/선생 정보 배열    classInfo : 수업들의 코드가 담긴 배열, roomInfo : 강의실의 코드가 담긴 배열
+def myClass(code):    # code : 해당 학생/선생 정보 배열    classInfo : 수업들의 코드가 담긴 배열, roomInfo : 강의실의 코드가 담긴 배열
         if "S" in code[0]:
             while 1:
                 print("내가 수강하는 강의 :")
@@ -44,9 +44,11 @@ def myClass(code, classInfo, roomInfo, schedule):    # code : 해당 학생/선�
                     makeClass()
                     # textManager.modify_Room("C5",5,"R5",0)
                 elif ans == 2:
-                    modifyClass(classInfo,roomInfo)
+                    break
+                    # modifyClass(classInfo,roomInfo)
                 elif ans == 3:
-                    deleteClass(classInfo)
+                    break
+                    # deleteClass(classInfo)
                 elif ans == 4:
                     return
                 # 1,2,3,4를 제외한 이상한 답이 나왔을 경우는 다시 반복문 처음으로~~~
@@ -86,7 +88,10 @@ def printSchedule():
     for i in range(1,len(schedule)):
         tempStr=str(i)+"교시"
         for Class in schedule[i]:
-            tempStr+="\t"+Class
+            if Class.replace(u"\ufeff", '') == "N":
+                tempStr += "\t" + "-"
+            else:
+                tempStr+="\t"+Class
         print(tempStr)
 
 def makeClass():  # 강의 개설

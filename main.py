@@ -27,7 +27,7 @@ def screen(code, classCode, roomCode, schedule):
             ClassView.start(code)
         elif select==3: #내 강의->MyClass
             # print('you select : ', select)
-            myClass.myClass(code, classCode, roomCode, schedule)
+            myClass.myClass(code)
         elif select==4: #학생 관리->StudentCare
             print('you select : ', select)
             studentManager.studentManagerScreen(code)
@@ -45,4 +45,5 @@ classCode=["C1", "C2", "C3","C4"]  # 수업 고유번호 목록 리스트
 roomCode=["R1", "R2"]   # 강의실 고유번호 목록 리스트
 schedule="얘는 기획서에 나왔던 교시와 강의실에 따른 시간을 표로 나타낸 것을 받아 2차원 리스트에 저장한 것임."
 screen(code, classCode, roomCode, schedule)
+screen(code)
     #메인화면 출력
