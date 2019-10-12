@@ -291,3 +291,30 @@ def Re_Student(number,content):
 ########## myClass.py 전용 함수들 ##########
 def modify_Class(code, flag):   # flag : 0(추가), 1(삭제)
     add = open("class.txt", 'a+', encoding='UTF-8-SIG')
+
+######## 강의 개설시 class.txt에 write하는 함수 ####### by 계
+def add_class(teacherCode, roomCode, roomTime, maxSeat, className):
+    #class.txt에 내용 추가
+    writeClass = open('class.txt', 'a+', encoding='UTF-8-SIG')
+    readClass = readText_Class()
+    classCode = 'C'+str(int(readClass[len(readClass)-1][0][1:])+1)
+    inputString = '\n'+classCode+'@'+teacherCode+'@'+roomCode+'@'+str(maxSeat)+'@'+str('0')+'@'+className
+    writeClass.write(inputString)
+
+    #room.txt에 강의 추가
+    roomData = readText_Room()
+    roomNum = int(roomCode[1:])
+    tempData = roomData[roomTime].split('@')
+    tempData[roomNum-1] = classCode
+    modifyString = tempData[0]
+    for i in range(len(tempData)-1):
+        modifyString+='@'+tempData[i+1]
+    print(modifyString)
+    roomData[roomTime] = modifyString
+    modifyRoom = open('room.txt', 'w', encoding='UTF-8-SIG')
+    for i in range(len(roomData)):
+        modifyRoom.write(roomData[i]+'')
+    
+    #정리
+    writeClass.close()
+    modifyRoom.close()
