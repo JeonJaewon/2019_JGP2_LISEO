@@ -10,9 +10,6 @@ def mypagePrint(code):
         printStudentinfo(code)
     else:
         printTeacherinfo(code)
-
-
-
 def printStudentinfo(code):
     #학생정보출력
     print("="*50)
@@ -25,8 +22,6 @@ def printStudentinfo(code):
         print('  -  '+classArr[i][1]) # @를 띄어쓰기로 치환후 출력 #강의 정보들 출력!
     print("="*50)
     screen(code, myInfo)
-
-
 def printTeacherinfo(code):
     #선생님정보출력
     print("="*50)
@@ -39,38 +34,38 @@ def printTeacherinfo(code):
         print('  -  '+classArr[i][1]) # @를 띄어쓰기로 치환후 출력 #강의 정보들 출력!
     print("="*50)
     screen(code, myInfo)
-
-def modifyInfo(code,myInfo
-               ):
+def modifyInfo(code,myInfo):
     #정보수정화면
-    printModifyinfo(code)
-    print("1. 이름수정\n2. 전화번호수정\n3. 뒤로가기")
-    choice = input("원하시는 항목을 선택해 주세요 : ")
-    main.rule(choice) #숫자입력규칙 적용
-    if choice == '1':
-        if modifyName(code,myInfo):
-            print("정보가 성공적으로 수정되었습니다.")
+    while True:
+        printModifyinfo(code)
+        print("1. 이름수정\n2. 전화번호수정\n3. 뒤로가기")
+        choice = input("원하시는 항목을 선택해 주세요 : ")
+        if main.rule(choice)==0: #숫자입력규칙 적용
             time.sleep(2)
             os.system('cls')
-            #마이페이지 화면으로 돌아갑니다.
             mypagePrint(code)
-    elif choice == '2':
-        if modifyPhone(code,myInfo):
-            print("정보가 성공적으로 수정되었습니다.")
+        if choice == '1':
+            if modifyName(code,myInfo)==1:
+                print("정보가 성공적으로 수정되었습니다.")
+                time.sleep(2)
+                os.system('cls')
+                #마이페이지 화면으로 돌아갑니다.
+                mypagePrint(code)
+        elif choice == '2':
+            if modifyPhone(code,myInfo)==1:
+                print("정보가 성공적으로 수정되었습니다.")
+                time.sleep(2)
+                os.system('cls')
+                 # 마이페이지 화면으로 돌아갑니다.
+                mypagePrint(code)
+        elif choice == '3':
+            return 0
+        else:
+            print("선택지 내의 숫자를 입력하여주세요")
             time.sleep(2)
             os.system('cls')
-             # 마이페이지 화면으로 돌아갑니다.
+            #printModifyinfo(code) 기획서에 맞게 수정(by최)
             mypagePrint(code)
-    elif choice == '3':
-        return 0
-    else:
-        print("선택지 내의 숫자를 입력하여주세요")
-        time.sleep(2)
-        os.system('cls')
-        #printModifyinfo(code) 기획서에 맞게 수정(by최)
-        mypagePrint(code)
-
-
 def printModifyinfo(code):
     #정보수정화면 정보 출력화면
     print("=" * 50)
@@ -81,7 +76,6 @@ def printModifyinfo(code):
     print(myInfo[1] + " ( " + myInfo[0] + " ) ")
     print("hp : " + myInfo[2])
     print("=" * 50)
-
 def modifyName(code,myInfo):
     #이름수정
     print(myInfo[1], end="")
@@ -90,11 +84,10 @@ def modifyName(code,myInfo):
         print("형식에 어긋납니다.다시 입력하십시오")
         time.sleep(2)
         os.system('cls')
-        modifyInfo(code,myInfo)
+        return 0
     else:
         textManager.RenewalName(code, myInfo[1], newName) #수정!
         return 1
-
 def modifyPhone(code,myInfo):
     #전화번호수정
     print(myInfo[2], end="")
@@ -104,24 +97,26 @@ def modifyPhone(code,myInfo):
         textManager.RenewalName(code, myInfo[2], newPhone) #수정!
         return 1
     else:
-        print("형식에 어긋납니다.다시 입력하십시오")
+        print("형식에 맞게 다시 입력하십시오.")
         time.sleep(2)
         os.system('cls')
-        modifyInfo(code, myInfo)
-
-
+        return 0
 def screen(code,myInfo):
     print("1. 정보수정\n2. 뒤로가기")
     choice = input("원하시는 항목을 선택해 주세요 : ")
-    main.rule(choice)
+    if main.rule(choice)==0:
+        time.sleep(2)
+        os.system('cls')
+        mypagePrint(code)
     if choice == '1':
+        #"1. 정보수정" 이동
         os.system('cls')
         modifyInfo(code, myInfo)
     elif choice == '2':
+        #"2. 뒤로가기" 이동
         return 0
     else:
         print("선택지 내의 숫자를 입력하여주세요")  # 숫자입력규칙 적용필요
         time.sleep(2)
         os.system('cls')
         mypagePrint(code) # 재출력 / 정보도 함께 보여줘야 될거 같습니다
-
