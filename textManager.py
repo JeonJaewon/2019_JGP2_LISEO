@@ -159,6 +159,11 @@ def readText_Room():
             break
         RoomCol = RoomRow.rstrip("\n").split('@')# rstrip으로 개행문자 제거
         RoomInfo.append(RoomCol)
+    for j, roomName in enumerate(RoomInfo[0]):
+        for i,tempStr in enumerate(roomName):
+            if tempStr.replace("u\ufeff", '')==",":     # ,나오기 전까지 자르기
+                RoomInfo[0][j]=RoomInfo[0][j][:i]
+                break
     room.close()
     return RoomInfo # 장소 정보 반환
 
@@ -168,8 +173,29 @@ def readText_RoomName():    # 강의실 이름 정보만 반환
     if not RoomRow:
         return -1
     RoomCol = RoomRow.rstrip("\n").split('@')# rstrip으로 개행문자 제거
+    for j, roomName in enumerate(RoomCol):
+        for i,tempStr in enumerate(roomName):
+            if tempStr.replace("u\ufeff", '')==",":     # ,나오기 전까지 자르기
+                # roomName=roomName[:i-1] --> 이건 값 수정이 안되는군요.
+                RoomCol[j]=RoomCol[j][:i]
+                break
     room.close()
     return RoomCol # 장소 정보 반환
+
+def readText_RoomMaxNum():  # 강의실 최대 수용 인원 정보 반환 (강의실 이름 정보 반환하는 1차원 배열과 일대일 대응)
+    room = open("room.txt", 'r', encoding='UTF-8-SIG')
+    RoomRow = room.readline()
+    if not RoomRow:
+        return -1
+    RoomCol = RoomRow.rstrip("\n").split('@')# rstrip으로 개행문자 제거
+    for j,roomName in enumerate(RoomCol):
+        for i,tempStr in enumerate(roomName):
+            if tempStr.replace("u\ufeff", '')==",":     # ,나오기 전까지 자르기
+                # roomName=roomName[i+1:] --> 이건 값 수정이 안되는군요.
+                RoomCol[j]=RoomCol[j][i+1:]
+                break
+    room.close()
+    return RoomCol
 
 ###### classView.py에 필요하여 추가! by 계 #####
 ###### myClass.py에도 필요하여 더 추가! by 혜 #####

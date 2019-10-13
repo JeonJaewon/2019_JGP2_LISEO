@@ -76,19 +76,20 @@ def cancelClass(code): # 수강 취소
     os.system('cls')
 
 def printSchedule(schedule):
+    roomMaxNum=textManager.readText_RoomMaxNum()    # 강의실 최대 수용 인원 저장 배열
     print("** 현재 강의 시간표 ** ")
     tempStr="  　　"
-    for i in schedule[0]:
-        tempStr+="\t"+i
+    for i,room in enumerate(schedule[0]):
+        tempStr+="\t"+room+"("+roomMaxNum[i]+"명)"
     print(tempStr)
     print("----------------------------------------------")
     for i in range(1,len(schedule)):
         tempStr=str(i)+"교시"
         for Class in schedule[i]:
             if Class.replace(u"\ufeff", '') == "N":
-                tempStr += "\t" + "-"
+                tempStr += "\t" + "-" + "\t\t"
             else:
-                tempStr+="\t"+Class
+                tempStr+="\t" + Class + "\t\t"
         print(tempStr)
 
 def makeClass(code):  # 강의 개설
@@ -96,20 +97,24 @@ def makeClass(code):  # 강의 개설
     printSchedule(schedule)     # 현재 강의 시간표 출력
     print("==============================================")
     className = input("내가 개설할 강의의 이름을 입력하세요. : ")
+    classRoom = input("강의를 진행할 강의실의 고유번호를 입력하세요. : ")
     classTime = input("내가 개설할 강의의 시간대를 입력하세요. (-교시) : ")
     # schedule[3][0]   == R1교실(교실 배열의 첫 번째 idx)에서 진행되는 3교시의 수업. 공란일 경우(0으로 정의하자) 수업 X, 강의 고유번호가 있을 경우 수업 이미 O.
-    for i, Class in enumerate(schedule[int(classTime)]):
-        if Class.replace(u'\ufeff', '') == "N":
-            roomCode = "R"+str(i+1)
-            classCode = textManager.add_class(code, roomCode, classTime, 10, className)    # class.txt에 쓰기
-            textManager.modify_Room(classCode, classTime, roomCode, 0)  # 시간표 갱신
-            print("성공적으로 강의가 개설되었습니다.")
-            print("강의명 : "+className+", 시간 : "+classTime+"교시")
-            time.sleep(2)
-            os.system('cls')
-            return
-    # 교실 (열) 을 전부 돌았는 데도 빈 자리가 없을 경우
-    print("해당 교시에 이미 강의가 있습니다.")
+    # for i, Class in enumerate(schedule[int(classTime)]):
+        # if Class.replace(u'\ufeff', '') == "N":
+            # roomCode = "R"+str(i+1)
+    roomIdx=classRoom[1:]-1
+    if schedule[classTime][roomIdx].replace(u'\ufeff', '') == "N":
+        classCode = textManager.add_class(code, classRoom, classTime, 10, className)    # class.txt에 쓰기
+        textManager.modify_Room(classCode, classTime, classRoom, 0)  # 시간표 갱신
+        print("성공적으로 강의가 개설되었습니다.")
+        print("강의명 : "+className+", 시간 : "+classTime+"교시")
+        # time.sleep(2)
+        # os.system('cls')
+        # return
+    # 교실 (열) 을 전부 돌았는 데도 빈 자리가 없을 경우 ---> (수정) 해당 자리에 강의가 있을 경우
+    else:
+        print("해당 교시에 이미 강의가 있습니다.")
     time.sleep(2)
     os.system('cls')
 
