@@ -58,7 +58,6 @@ def enrolement(code):  # 수강 신청
     classCode = input("내가 수강하고 싶은 강의의 고유 번호를 입력하세요. : ")
     if classCode in classInfo:
         textManager.enrollOrCancelClass(classCode,code,0)
-        print("수강 신청이 완료되었습니다.")
     else:
         print("존재하지 않은 고유 번호입니다.")
     time.sleep(2)
@@ -69,7 +68,6 @@ def cancelClass(code): # 수강 취소
     classCode = input("내가 수강 취소하고 싶은 강의의 고유 번호를 입력하세요. : ")
     if classCode in classInfo:
         textManager.enrollOrCancelClass(classCode,code,1)
-        print("수강 취소가 완료되었습니다.")
     else:
         print("존재하지 않은 고유 번호입니다.")
     time.sleep(2)

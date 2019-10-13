@@ -421,8 +421,15 @@ def enrollOrCancelClass(classCode,studentCode, flag):  # flag : 0(수강 신청)
 
     if flag == 0: #수강신청
         for line in classLines: # 위에서 저장했던 classLine를 반복
-            if classCode == line.split('@')[0]: # 내가 입력한 강의라면
-                classWrite.write(line.rstrip("\n")+'@'+studentCode+"\n") # 내 번호를 붙이고 다시 써준다
+            if classCode == line.split('@')[0]: # 내가 입력한 강의와 고유번호가 같다면
+                strToList = line.rstrip("\n").split('@')
+                studentStrList = strToList[6:]
+                if studentCode in studentStrList: # 이미 수강중인 강의일때
+                    classWrite.write(line)
+                    print("이미 수강중인 강의입니다.")
+                else:
+                    classWrite.write(line.rstrip("\n")+'@'+studentCode+"\n") # 내 번호를 붙이고 다시 써준다
+                    print("수강 신청이 완료되었습니다.")
             else:
                 classWrite.write(line) # 아니면 원래 입력 그대로
     elif flag == 1: #수강취소
@@ -430,11 +437,15 @@ def enrollOrCancelClass(classCode,studentCode, flag):  # flag : 0(수강 신청)
             if classCode == line.split('@')[0]: # 내가 입력한 강의라면
                 strToList = line.rstrip("\n").split('@')
                 studentStrList = strToList[6:]  # 수강중 학생들 고유번호를 리스트로 받음. 6으로 하드코딩.txt파일 양식 변경시 수정할것.
-                studentStrList.remove(studentCode) # 리스트에서 내 학번을 제거하고
-                # newLine = strToList.join('@')+studentStrList.join('@')+"\n" # 문자열로 합침
-                newLine = '@'.join(strToList[:6])
-                newLine = newLine + '@' +'@'.join(studentStrList)+"\n"
-                classWrite.write(newLine)
+                if studentCode not in studentStrList: # 수강중인 강의가 아니라면
+                    classWrite.write(line)
+                    print("수강중인 강의가 아닙니다.")
+                else:
+                    studentStrList.remove(studentCode) # 리스트에서 내 학번을 제거하고
+                    newLine = '@'.join(strToList[:6])
+                    newLine = newLine + '@' +'@'.join(studentStrList)+"\n" # 내 학번을 합친 문자열을 새로 넣어줌
+                    classWrite.write(newLine)
+                    print("수강 취소가 완료되었습니다.")
             else:
                 classWrite.write(line)
     classFile.close()
