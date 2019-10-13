@@ -63,8 +63,9 @@ def studentManagerScreen(code):
             break
         else:
             print("메뉴에 없는 번호입니다")
-            time.sleep(2)
-            os.system('cls')
-            break
+            #기획서에 메인메뉴가 아닌 학생 관리 재출력이라고 되어있어서 수정
+            #time.sleep(2)
+            #os.system('cls')
+            #break
         time.sleep(2)
         os.system('cls')
