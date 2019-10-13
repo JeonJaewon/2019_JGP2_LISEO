@@ -1,6 +1,8 @@
+#-*- coding: utf-8 -*-
 import os
 import time
 import textManager
+import main
 
 def mypagePrint(code):
     #권한에 따라 마이페이지 정보 출력
@@ -44,8 +46,9 @@ def modifyInfo(code,myInfo
     printModifyinfo(code)
     print("1. 이름수정\n2. 전화번호수정\n3. 뒤로가기")
     choice = input("원하시는 항목을 선택해 주세요 : ")
+    main.rule(choice) #숫자입력규칙 적용
     if choice == '1':
-        if modifyName(code,myInfo): #if의 용도가 무엇이죠? (by최)
+        if modifyName(code,myInfo):
             print("정보가 성공적으로 수정되었습니다.")
             time.sleep(2)
             os.system('cls')
@@ -61,7 +64,7 @@ def modifyInfo(code,myInfo
     elif choice == '3':
         return 0
     else:
-        print("선택지 내의 숫자를 입력하여주세요")  # 숫자입력규칙 적용필요
+        print("선택지 내의 숫자를 입력하여주세요")
         time.sleep(2)
         os.system('cls')
         #printModifyinfo(code) 기획서에 맞게 수정(by최)
@@ -81,7 +84,7 @@ def printModifyinfo(code):
 
 def modifyName(code,myInfo):
     #이름수정
-    print(myInfo[1],end="")
+    print(myInfo[1], end="")
     newName = input(">>>")
     if len(newName) > 10:
         print("형식에 어긋납니다.다시 입력하십시오")
@@ -110,6 +113,7 @@ def modifyPhone(code,myInfo):
 def screen(code,myInfo):
     print("1. 정보수정\n2. 뒤로가기")
     choice = input("원하시는 항목을 선택해 주세요 : ")
+    main.rule(choice)
     if choice == '1':
         os.system('cls')
         modifyInfo(code, myInfo)
