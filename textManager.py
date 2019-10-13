@@ -124,6 +124,13 @@ def readText_Class_c(code):   # 위에껀 전체, 이건 해당 고유번호 정
             return ClassInfo[i] # 해당하는 정보만 반환
         i += 1
 
+def readText_ClassCode():   # 수업의 고유번호만 모아놓은 배열
+    ClassInfo=readText_Class()
+    classCodeArr = []
+    for i in range(len(ClassInfo)):
+        classCodeArr.append(ClassInfo[i][0])
+    return classCodeArr
+
 def readText_Class_stoc(code):   # 학생코드치면 수업고유번호 반환
     Class = open("class.txt", 'r', encoding='UTF-8-SIG')
     ClassInfo = [] # 1차원저장
@@ -391,7 +398,7 @@ def modify_ClassInfo(classCode,newName,newTime,newRoom): # 강의실 정보 수�
 
 ######## myClass.py 전용 추가 함수 ####### by 계
 #class.txt에 새로 개설한 강의 추가 함수
-def deleteClassText(code):   # flag : 0(추가), 1(학생 삭제), 2(강의 삭제)
+def deleteClassText(code):
     classFile = open("class.txt", 'r', encoding='UTF-8-SIG')
     classLines = classFile.readlines() # 라인 전부 읽어오고
     if len(classLines) != 0:

@@ -46,8 +46,7 @@ def myClass(code):    # code : 해당 학생/선생 정보 배열    classInfo :
                 elif ans == 2:
                     modifyClass(code)
                 elif ans == 3:
-                    break
-                    # deleteClass(classInfo)
+                    deleteClass()
                 elif ans == 4:
                     return
                 # 1,2,3,4를 제외한 이상한 답이 나왔을 경우는 다시 반복문 처음으로~~~
@@ -165,13 +164,13 @@ def modifyClass(code): # 강의 정보 수정 (code : 선생 고유 번호)
     time.sleep(2)
     os.system('cls')
 
-def deleteClass(classInfo):
+def deleteClass():
     classCode=input("삭제할 강의의 고유 번호를 입력하세요. : ")
+    classInfo=textManager.readText_ClassCode()
     if classCode in classInfo:
-        # textManager.writeText_Class(classCode)    --> 해당 강의가 속해있는 줄 모두 삭제ㅔ
-        # --> 선생 정보 변경
-        # textManager.writeText_Room(classCode)    # 표 갱신
-        # 학생은... 학생이 수강하는 강의는 표시 안한다고 했으니까 없어두 되겠지?
+        deletedClass = textManager.readText_Class_c(classCode)   # 삭제하려고 하는 강의의 정보
+        textManager.deleteClassText(classCode)  # --> 해당 강의가 속해있는 줄 모두 삭제
+        textManager.modify_Room(classCode, deletedClass[4], deletedClass[2], 1) # 표 갱신
         print("강의 삭제가 완료되었습니다.")
     else:
         print("존재하지 않은 고유 번호입니다.")
