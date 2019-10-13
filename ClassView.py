@@ -2,7 +2,7 @@
 import os
 import textManager
 import time
-import main
+#import main       #충돌나는거같아서 주석처리
 
 def start(myID):
     myClassList=[]
@@ -43,7 +43,7 @@ def start(myID):
         print('1. 수강생 정보 확인')
         print('2. 뒤로가기')
         select = input('선택 : ')
-        if main.rule(select)==0:
+        if __import__('main').rule(select)==0:
             time.sleep(2)
             os.system('cls')
             continue
@@ -81,7 +81,7 @@ def start(myID):
                 print('========================================')
                 print('1. 뒤로 가기')
                 mySelect = input('')
-                if main.rule(mySelect) == 0:
+                if __import__('main').rule(mySelect) == 0:
                     time.sleep(2)
                     os.system('cls')
                     continue

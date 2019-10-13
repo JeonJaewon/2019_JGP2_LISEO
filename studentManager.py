@@ -2,7 +2,7 @@
 import time
 import os
 import textManager
-import main
+#import main    #여기도 충돌나는거같은거 수정
 
 #함수 정의
 def checkIfTeacher(code): # 고유번호가 학생인지 선생인지 검사
@@ -67,7 +67,7 @@ def studentManagerScreen(code):
         print(" " * 5, '2. 학생 정보 삭제')
         print(" " * 5, '3. 뒤로가기')
         menu = input('원하시는 항목을 선택해 주세요 : ')
-        if main.rule(menu)==0:
+        if __import__('main').rule(menu)==0:
             time.sleep(2)
             os.system('cls')
             continue
