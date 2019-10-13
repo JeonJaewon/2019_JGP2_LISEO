@@ -2,6 +2,7 @@
 import os
 import textManager
 import time
+import main
 
 def start(myID):
     myClassList=[]
@@ -41,7 +42,12 @@ def start(myID):
         #메뉴
         print('1. 수강생 정보 확인')
         print('2. 뒤로가기')
-        select = int(input('선택 : '))
+        select = input('선택 : ')
+        if main.rule(select)==0:
+            time.sleep(2)
+            os.system('cls')
+            continue
+        select = int(select)
         if select==1:
             # 1번 시 학생이면 돌려내기
             if isTeacher==False:
@@ -74,7 +80,12 @@ def start(myID):
                     print(studentCode[1]+' ('+studentCode[0]+'), '+studentCode[2])
                 print('========================================')
                 print('1. 뒤로 가기')
-                mySelect = int(input(''))
+                mySelect = input('')
+                if main.rule(mySelect) == 0:
+                    time.sleep(2)
+                    os.system('cls')
+                    continue
+                mySelect=int(mySelect)
                 if mySelect==1:
                     break
                 else:
