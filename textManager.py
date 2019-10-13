@@ -5,7 +5,7 @@
     while True:
         StudentData = student.readline() # student.txt 파일 읽기
         if not StudentData: # txt 마지막 줄에 도달하면 break
-            return -1
+            break # ㅂㄷㅂㄷ...
         StudentLogin = StudentData.rstrip("\n").split('@') # rstrip으로 개행문자 제거
         # lecture = StudentLogin[3:] # 강의 정보들 따로 list`` # StudentLogin : 강의 정보 저장 위해 임시로 만든 배열
         # del(StudentLogin[3:]) # 강의 정보들 str 삭제
@@ -24,7 +24,7 @@ def readText_Student_c(code):
         StudentData = student.readline()  # student.txt 파일 읽기
 
         if not StudentData:  # txt 마지막 줄에 도달하면 break
-            return -1
+            break # ㅂㄷㅂㄷ...
         StudentLogin = StudentData.rstrip("\n").split('@')  # rstrip으로 개행문자 제거
         # lecture = StudentLogin[3:]  # 강의 정보들 따로 list
         # del (StudentLogin[3:])  # 강의 정보들 str 삭제
@@ -184,9 +184,10 @@ def classID_to_studentList(classCode):
     #class의 고유번호 >> class의 수강학생 리스트 반환함수
     studentList=[]
     studentInfo = readText_Student()
+    #범위가 바뀌고 여기를 바꿔야 되고
     for studentData in studentInfo:
-        for i in range(len(studentData[3])):
-            if studentData[3][i]==classCode:
+        for i in range(len(studentData[2])):
+            if studentData[2][i]==classCode:
                 studentList.append(studentData[0])
     return studentList
 ###################################################

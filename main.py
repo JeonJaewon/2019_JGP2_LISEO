@@ -1,12 +1,10 @@
 ﻿import os
 import time
 import login
-import ClassView
-import studentManager
 import mypage
-#import ClassView
+import ClassView
 import myClass
-#import StudentCare
+import studentManager
 
 def screen(code):
     while True:

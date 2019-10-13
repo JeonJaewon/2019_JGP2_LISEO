@@ -50,27 +50,22 @@ def modifyInfo(code,myInfo
             time.sleep(2)
             os.system('cls')
             #마이페이지 화면으로 돌아갑니다.
-            if code[0] == 'S':
-                printStudentinfo(code)
-            else:
-                printTeacherinfo(code)
+            mypagePrint(code)
     elif choice == '2':
         if modifyPhone(code,myInfo):
             print("정보가 성공적으로 수정되었습니다.")
             time.sleep(2)
             os.system('cls')
              # 마이페이지 화면으로 돌아갑니다.
-            if code[0] == 'S':
-                printStudentinfo(code)
-            else:
-                printTeacherinfo(code)
+            mypagePrint(code)
     elif choice == '3':
         return 0
     else:
         print("선택지 내의 숫자를 입력하여주세요")  # 숫자입력규칙 적용필요
         time.sleep(2)
         os.system('cls')
-        printModifyinfo(code)
+        #printModifyinfo(code) 기획서에 맞게 수정(by최)
+        mypagePrint(code)
 
 
 def printModifyinfo(code):
@@ -92,7 +87,7 @@ def modifyName(code,myInfo):
         print("형식에 어긋납니다.다시 입력하십시오")
         time.sleep(2)
         os.system('cls')
-        modifyInfo(code)
+        modifyInfo(code,myInfo)
     else:
         textManager.RenewalName(code, myInfo[1], newName) #수정!
         return 1
@@ -124,5 +119,5 @@ def screen(code,myInfo):
         print("선택지 내의 숫자를 입력하여주세요")  # 숫자입력규칙 적용필요
         time.sleep(2)
         os.system('cls')
-        screen(code, myInfo) # 재출력
+        mypagePrint(code) # 재출력 / 정보도 함께 보여줘야 될거 같습니다
 

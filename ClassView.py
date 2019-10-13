@@ -9,7 +9,7 @@ def start(myID):
         #학생입니다.
         isTeacher = False
         #자신의 수강강의 저장
-        myClassList = textManager.readText_class_stoc(myID)
+        myClassList = textManager.readText_Class_stoc(myID)
     elif(myID[0] == 'T'):
         # 선생님입니다.
         isTeacher = True
@@ -34,8 +34,6 @@ def start(myID):
             print('강사 : ' + textManager.teacherID_to_teacherName(classData[1])) #teacherID >> teacherName
             print('연락처 : ' + textManager.teacherID_to_teacherPhone(classData[1]))
             print('강의실 : ' + classData[2])
-            print(classData[0])
-            print(classData[2])
             print('수업 시간 : '+ textManager.classID_to_classTime(classData[0], classData[2]) + '교시')  #classID >> classTime
             print('수용학생인원 : ' + classData[3] + '명')
             print('========================================')
@@ -56,7 +54,7 @@ def start(myID):
             myClassCode=input('고유번호: ')
             print('========================================')
             find=False
-            for className in myClassList[0]:
+            for className in myClassList:
                 if myClassCode==className:
                     find=True
             if find==False:
@@ -65,8 +63,7 @@ def start(myID):
                 continue
 
             # 수강생 목록 받기
-            textManager.classID_to_studentList(myClassCode)
-            studentList = textManager.classID_to_studentList(myClassCode)
+            studentList = textManager.classID_to_studentList(myClassCode) # 클래스에서 학생번호 빼온다음 그걸로 student.txt 접근
             while True:
                 print('========================================')
                 print('('+myClassCode+')'+' 수강 학생 :') #classData 그냥 C4 뜨네요.. myClassCode교체
@@ -92,4 +89,3 @@ def start(myID):
             print('잘못된 입력입니다. 다시 입력해주세요.')
             time.sleep(2)
             continue
-start('T1')
