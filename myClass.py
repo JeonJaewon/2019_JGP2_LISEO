@@ -28,17 +28,19 @@ def myClass(code):    # code : 해당 학생/선생 정보 배열    classInfo :
                 # 1,2,3을 제외한 이상한 답이 나왔을 경우는 다시 반복문 처음으로~~~
         else:
             while 1:
-                print("내가 개설한 강의 :")
                 # 해당 선생이 개설한 강의 목록 출력
                 teacherInfo = textManager.readText_Teacher_c(code)  # 해당 선생의 정보를 저장해놓은 1차원 배열
                 classArr = textManager.Re_UserInfo(code)
+                print("==========================================")
+                print("내가 개설한 강의")
                 for i in range(len(classArr)):               # --> 반복문이 실행될 때 마다 계속 불러오므로 Data갱신에 대한 걱정 안해도 됨
                     print("(" + classArr[i][0] + ") " + classArr[i][1])
-                print("-------------------------------------------")
+                print("==========================================")
                 print("\t1. 강의 개설")
                 print("\t2. 강의 정보 수정")
                 print("\t3. 강의 삭제")
                 print("\t4. 뒤로 가기")
+                print("==========================================")
                 ans = int(input("원하는 항목 : "))
                 os.system('cls')
                 if ans == 1:

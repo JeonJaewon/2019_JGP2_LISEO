@@ -39,7 +39,6 @@ def screen(code):
             print("1-5사이의 항목을 선택해 주세요.")    # 숫자입력규칙 적용필요
             time.sleep(2)
             os.system('cls')
-
 def rule(number): #1.1에서 2^31-1의 정수 2.띄어쓰기 불가 3.최고 자릿수 0 불가 4.아스키코드 불가
     numMax="2147483647"
     for i in range(len(number)):
@@ -58,7 +57,5 @@ def rule(number): #1.1에서 2^31-1의 정수 2.띄어쓰기 불가 3.최고 자
                 print("숫자입력규칙에 어긋납니다.") #실험용
                 return 0
     return 1  # 성공하면 1을 출력, 실패하면 0을 출력!
-
 code = login.start() # code 어떤 학생 어떤 선생인지 체크하는 변수
 screen(code)
-    #메인화면 출력

@@ -342,7 +342,7 @@ def Re_Student(number,content):
         code = student[len(student)-1][0] # 코드 전체 부분
         codenum = int(code[1])+1  #코드 숫자 부분
         code = code[0] + str(codenum) #새로운 코드 생성
-        newline = '\n'+ code + '@' + number +'@'+ content # 한 문장으로 합치기 number = 이름 content = 전화번호/공백으로 변경
+        newline = code + '@' + number +'@'+ content+'\n' # 한 문장으로 합치기 number = 이름 content = 전화번호/공백으로 변경
         addstudent.write(newline) # 글 쓰기
 
 
@@ -451,3 +451,14 @@ def add_class(teacherCode, roomCode, classTime, maxSeat, className):
     writeClass.write(inputString)
     writeClass.close()
     return classCode
+
+##### studentManager.py 전용 함수 ####### by 계
+# studentID >>> 수강중인 강의목록
+def studentID_to_classList(studentCode):
+    classInfo = readText_Class()
+    classList=[]
+    for classData in classInfo:
+        for code in classData[6]:
+            if code==studentCode:
+                classList.append(classData[0])
+    return classList

@@ -2,6 +2,7 @@
 import time
 import os
 import textManager
+import main
 
 #함수 정의
 def checkIfTeacher(code): # 고유번호가 학생인지 선생인지 검사
@@ -11,7 +12,22 @@ def checkIfTeacher(code): # 고유번호가 학생인지 선생인지 검사
         return True
 
 def printStudentList(): # 모든 학생 리스트 출력
-    print()
+    studentInfo=textManager.readText_Student()
+    print('==================================')
+    print('학생 리스트')
+    for studentData in studentInfo:
+        # 수강중인 강의 목록 가져오기
+        if len(studentData)<=1:
+            break
+        classListString=''
+        classList=textManager.studentID_to_classList(studentData[0])
+        for classCode in classList:
+            classListString+=classCode+', '
+        classListString=classListString[:-2]
+
+        #출력
+        print(studentData[0] + ' '+studentData[1] + ' ('+studentData[2]+') '+ '-'+' '+classListString)
+    print('==================================')
 
 def addStudentInfo(): # 학생 정보 추가
     print("새로 추가할 학생의 이름을 입력하세요 '('10자 이내 문자')'")
@@ -31,8 +47,7 @@ def addStudentInfo(): # 학생 정보 추가
     textManager.Re_Student(studentName,studentTel)
 
 def deleteStudentInfo(): # 학생 정보 삭제
-    print("삭제하려는 학생의 고유번호를 입력하세요. : ")
-    deleteCode = input()
+    deleteCode=input("삭제하려는 학생의 고유번호를 입력하세요. : ")
     # 존재하는 학생인지 확인
     if(textManager.Re_Student('1', deleteCode) == -1):
         print("입력한 학생의 정보를 찾을 수 없습니다.")
@@ -48,13 +63,15 @@ def studentManagerScreen(code):
             break
 
         printStudentList()
-        print("=" * 50)
-        print(" " * 18, '1. 학생 정보 추가')
-        print(" " * 18, '2. 학생 정보 삭제')
-        print(" " * 18, '3. 뒤로가기')
-        print("=" * 50)
-        print("원하시는 항목을 선택해 주세요 : ")
-        menu = int(input())
+        print(" " * 5, '1. 학생 정보 추가')
+        print(" " * 5, '2. 학생 정보 삭제')
+        print(" " * 5, '3. 뒤로가기')
+        menu = input('원하시는 항목을 선택해 주세요 : ')
+        if main.rule(menu)==0:
+            time.sleep(2)
+            os.system('cls')
+            continue
+        menu = int(menu)
 
         if menu == 1:
             addStudentInfo()
