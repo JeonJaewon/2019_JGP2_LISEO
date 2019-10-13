@@ -23,7 +23,7 @@ def screen(code):
             continue
         if select=='1': #마이페이지->MyPage
             print('you select : ', select)
-            mypage.mypagePrint(code)
+            mypage.screen(code)
         elif select=='2': #강의 정보 열람->ClassView
             print('you select : ', select)
             ClassView.start(code)
