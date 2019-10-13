@@ -182,14 +182,20 @@ def classID_to_classTime(classCode, roomCode):
 
 def classID_to_studentList(classCode):
     #class의 고유번호 >> class의 수강학생 리스트 반환함수
-    studentList=[]
-    studentInfo = readText_Student()
+    #studentInfo = readText_Student()
+    whostudent = [] #어떤 학생이 이 강의를 듣는가?
+    classInfo = readText_Class() # 이젠 student.txt에 없음
     #범위가 바뀌고 여기를 바꿔야 되고
-    for studentData in studentInfo:
-        for i in range(len(studentData[2])):
-            if studentData[2][i]==classCode:
-                studentList.append(studentData[0])
-    return studentList
+    i = 0
+    while i < len(classInfo):
+        if classCode == classInfo[i][0]:
+            j = 0
+            while j < len(classInfo[i][6]):
+                studentInfo = readText_Student_c(classInfo[i][6][j])
+                whostudent.append(studentInfo)
+                j += 1
+        i += 1
+    return whostudent
 ###################################################
 
 ##### 1. 마이페이지 함수 들 ######

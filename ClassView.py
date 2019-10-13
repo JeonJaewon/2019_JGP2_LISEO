@@ -63,14 +63,14 @@ def start(myID):
                 continue
 
             # 수강생 목록 받기
-            studentList = textManager.classID_to_studentList(myClassCode) # 클래스에서 학생번호 빼온다음 그걸로 student.txt 접근
+            studentList = textManager.classID_to_studentList(myClassCode)
             while True:
                 print('========================================')
                 print('('+myClassCode+')'+' 수강 학생 :') #classData 그냥 C4 뜨네요.. myClassCode교체
                 for studentCode in studentList:
                     #전재원 (S21), 01017345312
-                    studentData = textManager.readText_Student_c(studentCode)
-                    print(studentData[1]+' ('+studentData[0]+'), '+studentData[2])
+                    #studentData = textManager.readText_Student_c(studentCode)
+                    print(studentCode[1]+' ('+studentCode[0]+'), '+studentCode[2])
                 print('========================================')
                 print('1. 뒤로 가기')
                 mySelect = int(input(''))
