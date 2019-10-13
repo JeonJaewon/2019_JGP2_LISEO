@@ -309,7 +309,7 @@ def Re_Student(number,content):
             ClassData = readclass.readline()
             if not ClassData:
                 break
-            newdata.append(ClassData.replace(' '+content, '')) # 고유번호 찾아서 빈칸으로 만듬
+            newdata.append(ClassData.replace('@'+content, '')) # 고유번호 찾아서 빈칸으로 만듬
         readclass.close()
         writeclass = open("class.txt", 'w', encoding='UTF-8-SIG')
         i = 0
@@ -325,7 +325,7 @@ def Re_Student(number,content):
         code = student[len(student)-1][0] # 코드 전체 부분
         codenum = int(code[1])+1  #코드 숫자 부분
         code = code[0] + str(codenum) #새로운 코드 생성
-        newline = '\n'+ code + ' ' + number +' '+ content # 한 문장으로 합치기 number = 이름 content = 전화번호/공백으로 변경
+        newline = '\n'+ code + '@' + number +'@'+ content # 한 문장으로 합치기 number = 이름 content = 전화번호/공백으로 변경
         addstudent.write(newline) # 글 쓰기
 
 
