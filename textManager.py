@@ -154,6 +154,15 @@ def readText_Room():
     room.close()
     return RoomInfo # 장소 정보 반환
 
+def readText_RoomName():    # 강의실 이름 정보만 반환
+    room = open("room.txt", 'r', encoding='UTF-8-SIG')
+    RoomRow = room.readline()
+    if not RoomRow:
+        return -1
+    RoomCol = RoomRow.rstrip("\n").split('@')# rstrip으로 개행문자 제거
+    room.close()
+    return RoomCol # 장소 정보 반환
+
 ###### classView.py에 필요하여 추가! by 계 #####
 ###### myClass.py에도 필요하여 더 추가! by 혜 #####
 def classID_to_className(code):

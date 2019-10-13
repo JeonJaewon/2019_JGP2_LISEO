@@ -57,7 +57,6 @@ def enrolement(classInfo,code):  # 수강 신청
     classCode = input("내가 수강하고 싶은 강의의 고유 번호를 입력하세요. : ")
     if classCode in classInfo:
         textManager.enrollOrCancelClass(classCode,code,0)
-        #textManager.writeText_Class(code[0], classCode)    # Class.txt를 수정하는 텍스트 파일 --> classCode 추가
         print("수강 신청이 완료되었습니다.")
     else:
         print("존재하지 않은 고유 번호입니다.")
@@ -132,30 +131,30 @@ def modifyClass(code): # 강의 정보 수정 (code : 선생 고유 번호)
                 print("정보가 성공적으로 수정되었습니다.")
                 break
             elif ans==2:
-                newRoom=input("classroom"+" >> ")
-                if not newRoom in roomInfo:     # 새로 입력한 강의실이 현재 강의실 목록에 존재하지 않으면
+                schedule = textManager.readText_Room()
+                newRoom=input(Class[2]+" >> ")
+                if not newRoom in schedule[0]:     # 새로 입력한 강의실이 현재 강의실 목록에 존재하지 않으면
                     print("존재하지 않는 강의실입니다.")
                     time.sleep(2)
                     os.system('cls')
                     continue
                 # 새로 입력한 강의실이 현재 강의실 목록에 존재 할 경우
                 # 정보 수정된 것 들어감
-                # textManager.writeText_Class(classCode)
-                # textManager.writeText_Room(classCode)    # 표 갱신
-                print("정보가 성공적으로 수정되었습니다.")
+                # 사실 들어가는 척만 함. 나중에 newTime까지 입력받고 한꺼번에 넣을거임.
+                # print("정보가 성공적으로 수정되었습니다.") --> newTime까지 입력받아야 수정 가능한지 여부 검사 가능할 듯.
 
                 newTime=input("classTime"+" >> ")
-                # if 숫자입력규칙 어긋남:
-                #   print("존재하지 않는 시간대입니다.")
-                # elif schedule[classTime][classroom] != 0:
-                #    print("이미 등록된 강의실입니다.")
-                # else: --> 정상적인 경우
+                if not newTime>=1 and newTime<=5:    # 숫자입력규칙 어긋남
+                    print("존재하지 않는 시간대입니다.")
+                elif schedule[newTime][newRoom] != 0:
+                    print("이미 등록된 강의실입니다.")
+                else: # --> 정상적인 경우
                     # 정보 수정된 것 들어감
-                    # textManager.writeText_Class(classCode)
-                    # textManager.writeText_Room(classCode)    # 표 갱신
-                    # print("정보가 성공적으로 수정되었습니다.")
-                    # break
-
+                    textManager.modify_Room(classCode, Class[4], Class[2], 1)  # 시간표에서 해당 수업 삭제하고
+                    textManager.modify_ClassInfo(classCode, -1, newTime, newRoom)  # class.txt 정보 수정
+                    textManager.modify_Room(classCode, Class[4], Class[2], 0)  # 바뀐 시간대로 시간표 갱신
+                    print("정보가 성공적으로 수정되었습니다.")
+                    break
             elif ans==3:
                 break
             time.sleep(2)   # 위의 ans case문 안에서 if로 걸러진 것들은 다 이 밑으로 내려가겠져? (존재하지 않는 강의실 경우 제외)
