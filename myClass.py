@@ -56,10 +56,14 @@ def myClass(code):    # code : 해당 학생/선생 정보 배열    classInfo :
 
 
 def enrolement(code):  # 수강 신청
-    classInfo=textManager.readText_ClassCode()
+    classCodeInfo=textManager.readText_ClassCode()
     classCode = input("내가 수강하고 싶은 강의의 고유 번호를 입력하세요. : ")
-    if classCode in classInfo:
-        textManager.enrollOrCancelClass(classCode,code,0)
+    if classCode in classCodeInfo:
+        classInfo=textManager.readText_Class_c(classCode)
+        if int(classInfo[3].replace(u"\ufeff", '')) > len(classInfo[6]):    # 최대인원 > 현재 수강인원
+            textManager.enrollOrCancelClass(classCode,code,0)
+        else:
+            print("해당 강의의 정원이 다 찼습니다.")
     else:
         print("존재하지 않은 고유 번호입니다.")
     time.sleep(2)
