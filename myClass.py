@@ -2,7 +2,7 @@
 import time
 import os
 import textManager
-
+import rule
 # 출력 함수 == 메인 함수
 def myClass(code):    # code : 해당 학생/선생 정보 배열    classInfo : 수업들의 코드가 담긴 배열, roomInfo : 강의실의 코드가 담긴 배열
         if "S" in code[0]:

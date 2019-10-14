@@ -2,6 +2,7 @@
 import os
 import time
 import textManager
+import rule
 #import main  #import main이라고 써놔서 main.py에서 여기로 넘어올떄 충돌생기는것 같아서 주석처리했습니다. ( by 계)
 
 def printStudentinfo(code):
@@ -35,7 +36,7 @@ def modifyInfo(code,myInfo):
         print("1. 이름수정\n2. 전화번호수정\n3. 뒤로가기")
         choice = input("원하시는 항목을 선택해 주세요 : ")
 
-        if __import__('main').rule(choice)==0: #숫자입력규칙 적용, import main 주석처리해서 __import__로 즉석해서 import함
+        if rule.numberRule(choice)==0: #숫자입력규칙 적용, import main 주석처리해서 __import__로 즉석해서 import함
             time.sleep(2)
             os.system('cls')
             return 0
@@ -107,7 +108,7 @@ def screen(code):
         choice = input("원하시는 항목을 선택해 주세요 : ")
 
         #숫자입력규칙
-        if __import__('main').rule(choice)==0: #숫자입력규칙 적용, import main 주석처리해서 __import__로 즉석해서 import함
+        if rule.numberRule(choice)==0: #숫자입력규칙 적용, import main 주석처리해서 __import__로 즉석해서 import함
             time.sleep(2)
             os.system('cls')
             continue
