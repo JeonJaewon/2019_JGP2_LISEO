@@ -21,7 +21,12 @@ def screen(code):
         print(" "*18,'5. 종료')
         print("="*50)
         select= input("원하시는 항목을 선택해 주세요 : ") or '입력실패'
-        if rule.numberRule(select)==0:
+        if select=='입력실패' :
+            print("접근 할 선택지 번호를 입력해 주세요.")
+            time.sleep(2)
+            os.system('cls')
+            continue
+        elif rule.numberRule(select)==0:
             time.sleep(2)
             os.system('cls')
             continue
@@ -35,10 +40,6 @@ def screen(code):
             studentManager.studentManagerScreen(code)
         elif select=='5': #종료
             exit(0) # return 으로 해도 무방
-        elif select=='입력실패' :
-            print("접근 할 선택지 번호를 입력해 주세요.")
-            time.sleep(2)
-            os.system('cls')
         else:
             print("1-5사이의 항목을 선택해 주세요.")    # 숫자입력규칙 적용필요
             time.sleep(2)

@@ -35,7 +35,7 @@ def printStudentList(): # 모든 학생 리스트 출력
 
 def addStudentInfo(): # 학생 정보 추가
     print("새로 추가할 학생의 이름을 입력하세요 '('10자 이내 문자')'")
-    studentName = input()
+    studentName = input() or '입력 실패'
     if len(studentName) > 10:
         print("입력 형식에 맞게 다시 입력하십시오.")
         return
@@ -51,7 +51,7 @@ def addStudentInfo(): # 학생 정보 추가
     textManager.Re_Student(studentName,studentTel)
 
 def deleteStudentInfo(): # 학생 정보 삭제
-    deleteCode=input("삭제하려는 학생의 고유번호를 입력하세요. : ")
+    deleteCode=input("삭제하려는 학생의 고유번호를 입력하세요. : ") or '입력 실패'
     # 존재하는 학생인지 확인
     if(textManager.Re_Student('1', deleteCode) == -1):
         print("입력한 학생의 정보를 찾을 수 없습니다.")
@@ -71,7 +71,7 @@ def studentManagerScreen(code):
         print(" " * 5, '1. 학생 정보 추가')
         print(" " * 5, '2. 학생 정보 삭제')
         print(" " * 5, '3. 뒤로가기')
-        menu = input('원하시는 항목을 선택해 주세요 : ')
+        menu = input('원하시는 항목을 선택해 주세요 : ') or '입력 실패'
         if rule.numberRule(menu)==0:
             time.sleep(2)
             os.system('cls')

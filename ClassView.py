@@ -45,7 +45,7 @@ def start(myID):
         #메뉴
         print('1. 수강생 정보 확인')
         print('2. 뒤로가기')
-        select = input('선택 : ')
+        select = input('선택 : ') or '입력실패'
         if rule.numberRule(select)==0:
             time.sleep(2)
             os.system('cls')

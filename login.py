@@ -27,12 +27,16 @@ def start():
         print(" "*22, "LISEO")
         print("="*50)  # 로그인 화면의 화면 제목
 
-        name = input("사용자의 고유번호를 입력해주세요: ")
+        name = input("사용자의 고유번호를 입력해주세요: ")  or '입력 실패'
 
         if name in LoginInfo:
             os.system('cls')
             return name
             #break
+        elif name == '입력 실패':
+            print("값을 입력해 주세요.")
+            time.sleep(2)
+            os.system('cls')
         else:
             print("해당하는 고유번호가 없습니다. 다시 입력해 주세요.")
             time.sleep(2)

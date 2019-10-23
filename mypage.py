@@ -40,7 +40,7 @@ def modifyInfo(code,myInfo):
     while True:
         printModifyinfo(code)
         print("1. 이름수정\n2. 전화번호수정\n3. 뒤로가기")
-        choice = input("원하시는 항목을 선택해 주세요 : ")
+        choice = input("원하시는 항목을 선택해 주세요 : ") or '입력 실패'
 
         if rule.numberRule(choice)==0: #숫자입력규칙 적용, import main 주석처리해서 __import__로 즉석해서 import함
             time.sleep(2)
@@ -86,7 +86,7 @@ def modifyName(code,myInfo):
     print(myInfo[1], end="")
     newName = input(">>>")
     if len(newName) > 10:
-        print("형식에 어긋납니다.다시 입력하십시오")
+        print("형식에 어긋납니다.다시 입력하십시오") or '입력 실패'
         time.sleep(2)
         os.system('cls')
         return 0
@@ -102,7 +102,7 @@ def modifyPhone(code,myInfo):
         textManager.RenewalName(code, myInfo[2], newPhone) #수정!
         return 1
     else:
-        print("형식에 맞게 다시 입력하십시오.")
+        print("형식에 맞게 다시 입력하십시오.") or '입력 실패'
         time.sleep(2)
         os.system('cls')
         return 0
@@ -114,7 +114,7 @@ def screen(code):
         else:
             myInfo =printTeacherinfo(code)
         print("1. 정보수정\n2. 뒤로가기")
-        choice = input("원하시는 항목을 선택해 주세요 : ")
+        choice = input("원하시는 항목을 선택해 주세요 : ") or '입력 실패'
 
         #숫자입력규칙
         if rule.numberRule(choice)==0: #숫자입력규칙 적용, import main 주석처리해서 __import__로 즉석해서 import함

@@ -21,9 +21,18 @@ def myClass(code):    # code : 해당 학생/선생 정보 배열    classInfo :
                 print("\t1. 수강 신청")
                 print("\t2. 수강 취소")
                 print("\t3. 뒤로 가기")
-                ans = int(input("원하는 항목 : "))
+                ans = input("원하는 항목 : ") or '입력 실패'
                 os.system('cls')
-                if ans == 1:
+                if ans == '입력 실패':
+                    print("접근 할 선택지 번호를 입력해 주세요.")
+                    time.sleep(2)
+                    os.system('cls')
+                    continue
+                elif rule.numberRule(ans) == 0:
+                    time.sleep(2)
+                    os.system('cls')
+                    continue
+                elif ans == 1:
                     enrolement(code)
                 elif ans == 2:
                     cancelClass(code)
@@ -48,8 +57,17 @@ def myClass(code):    # code : 해당 학생/선생 정보 배열    classInfo :
                 print("\t3. 강의 삭제")
                 print("\t4. 뒤로 가기")
                 print("==========================================")
-                ans = int(input("원하는 항목 : "))
+                ans = input("원하는 항목 : ") or '입력 실패'
                 os.system('cls')
+                if ans == '입력 실패':
+                    print("접근 할 선택지 번호를 입력해 주세요.")
+                    time.sleep(2)
+                    os.system('cls')
+                    continue
+                elif rule.numberRule(ans) == 0:
+                    time.sleep(2)
+                    os.system('cls')
+                    continue
                 if ans == 1:
                     makeClass(code)
                     # textManager.modify_Room("C5",5,"R5",0)
@@ -68,7 +86,7 @@ def enrolement(code):  # 수강 신청
     print("=" * 18, end='')
     print("[수강 신청]", end='')
     print("=" * 21)
-    classCode = input("내가 수강하고 싶은 강의의 고유 번호를 입력하세요. : ")
+    classCode = input("내가 수강하고 싶은 강의의 고유 번호를 입력하세요. : ") or '입력 실패'
     if classCode in classCodeInfo:
         classInfo=textManager.readText_Class_c(classCode)
         if int(classInfo[3].replace(u"\ufeff", '')) > len(classInfo[6]):    # 최대인원 > 현재 수강인원
@@ -85,7 +103,7 @@ def cancelClass(code): # 수강 취소
     print("=" * 18, end='')
     print("[수강 취소]", end='')
     print("=" * 21)
-    classCode = input("내가 수강 취소하고 싶은 강의의 고유 번호를 입력하세요. : ")
+    classCode = input("내가 수강 취소하고 싶은 강의의 고유 번호를 입력하세요. : ") or '입력 실패'
     if classCode in classInfo:
         textManager.enrollOrCancelClass(classCode,code,1)
     else:
@@ -118,9 +136,9 @@ def makeClass(code):  # 강의 개설
     print("=" * 21)
     printSchedule(schedule)     # 현재 강의 시간표 출력
     print("==============================================")
-    className = input("내가 개설할 강의의 이름을 입력하세요. : ")
-    classRoom = input("강의를 진행할 강의실의 고유번호를 입력하세요. : ")
-    classTime = input("내가 개설할 강의의 시간대를 입력하세요. (-교시) : ")
+    className = input("내가 개설할 강의의 이름을 입력하세요. : ") or '입력 실패'
+    classRoom = input("강의를 진행할 강의실의 고유번호를 입력하세요. : ") or '입력 실패'
+    classTime = input("내가 개설할 강의의 시간대를 입력하세요. (-교시) : ") or '입력 실패'
     # schedule[3][0]   == R1교실(교실 배열의 첫 번째 idx)에서 진행되는 3교시의 수업. 공란일 경우(0으로 정의하자) 수업 X, 강의 고유번호가 있을 경우 수업 이미 O.
     # for i, Class in enumerate(schedule[int(classTime)]):
         # if Class.replace(u'\ufeff', '') == "N":
@@ -146,7 +164,7 @@ def modifyClass(code): # 강의 정보 수정 (code : 선생 고유 번호)
     print("=" * 16, end='')
     print("[강의 정보 수정]", end='')
     print("=" * 18)
-    classCode=input("수정할 강의의 고유 번호를 입력하세요. : ")
+    classCode=input("수정할 강의의 고유 번호를 입력하세요. : ") or '입력 실패'
     if classCode in classArr:   # 여기부터 수정예정
         Class=textManager.readText_Class_c(classCode)   # 해당 고유번호 수업의 정보 리스트 받기
         while 1:
@@ -163,7 +181,7 @@ def modifyClass(code): # 강의 정보 수정 (code : 선생 고유 번호)
                 break
             elif ans==2:
                 schedule = textManager.readText_Room()
-                newRoom=input(Class[2]+" >> ")
+                newRoom=input(Class[2]+" >> ") or '입력 실패'
                 if not newRoom in schedule[0]:     # 새로 입력한 강의실이 현재 강의실 목록에 존재하지 않으면
                     print("존재하지 않는 강의실입니다.")
                     time.sleep(2)
@@ -174,7 +192,7 @@ def modifyClass(code): # 강의 정보 수정 (code : 선생 고유 번호)
                 # 사실 들어가는 척만 함. 나중에 newTime까지 입력받고 한꺼번에 넣을거임.
                 # print("정보가 성공적으로 수정되었습니다.") --> newTime까지 입력받아야 수정 가능한지 여부 검사 가능할 듯.
 
-                newTime=input("classTime"+" >> ")
+                newTime=input("classTime"+" >> ") or '입력 실패'
                 if not newTime>=1 and newTime<=5:    # 숫자입력규칙 어긋남
                     print("존재하지 않는 시간대입니다.")
                 elif schedule[newTime][newRoom] != 0:
@@ -201,7 +219,7 @@ def deleteClass(code):
     print("=" * 18, end='')
     print("[강의 삭제]", end='')
     print("=" * 21)
-    classCode=input("삭제할 강의의 고유 번호를 입력하세요. : ")
+    classCode=input("삭제할 강의의 고유 번호를 입력하세요. : ") or '입력 실패'
     classInfo=textManager.readText_ClassCode()
     if code in textManager.readText_Class_ttoc(code):
         deletedClass = textManager.readText_Class_c(classCode)   # 삭제하려고 하는 강의의 정보
