@@ -7,6 +7,10 @@ import rule
 def myClass(code):    # code : 해당 학생/선생 정보 배열    classInfo : 수업들의 코드가 담긴 배열, roomInfo : 강의실의 코드가 담긴 배열
         if "S" in code[0]:
             while 1:
+                os.system('cls')
+                print("=" * 18, end='')
+                print("[내 강의]", end='')
+                print("=" * 21)
                 print("내가 수강하는 강의 :")
                 # 해당 학생이 수강하는 강의 목록 출력
                 studentInfo = textManager.readText_Student_c(code)  # 해당 학생의 정보를 저장해놓은 1차원 배열
@@ -31,7 +35,10 @@ def myClass(code):    # code : 해당 학생/선생 정보 배열    classInfo :
                 # 해당 선생이 개설한 강의 목록 출력
                 teacherInfo = textManager.readText_Teacher_c(code)  # 해당 선생의 정보를 저장해놓은 1차원 배열
                 classArr = textManager.Re_UserInfo(code)
-                print("==========================================")
+                os.system('cls')
+                print("=" * 18, end='')
+                print("[내 강의]", end='')
+                print("=" * 21)
                 print("내가 개설한 강의")
                 for i in range(len(classArr)):               # --> 반복문이 실행될 때 마다 계속 불러오므로 Data갱신에 대한 걱정 안해도 됨
                     print("(" + classArr[i][0] + ") " + classArr[i][1])
@@ -57,6 +64,10 @@ def myClass(code):    # code : 해당 학생/선생 정보 배열    classInfo :
 
 def enrolement(code):  # 수강 신청
     classCodeInfo=textManager.readText_ClassCode()
+    os.system('cls')
+    print("=" * 18, end='')
+    print("[수강 신청]", end='')
+    print("=" * 21)
     classCode = input("내가 수강하고 싶은 강의의 고유 번호를 입력하세요. : ")
     if classCode in classCodeInfo:
         classInfo=textManager.readText_Class_c(classCode)
@@ -71,6 +82,9 @@ def enrolement(code):  # 수강 신청
 
 def cancelClass(code): # 수강 취소
     classInfo=textManager.readText_ClassCode()
+    print("=" * 18, end='')
+    print("[수강 취소]", end='')
+    print("=" * 21)
     classCode = input("내가 수강 취소하고 싶은 강의의 고유 번호를 입력하세요. : ")
     if classCode in classInfo:
         textManager.enrollOrCancelClass(classCode,code,1)
@@ -98,6 +112,10 @@ def printSchedule(schedule):
 
 def makeClass(code):  # 강의 개설
     schedule=textManager.readText_Room()
+    os.system('cls')
+    print("=" * 18, end='')
+    print("[강의 개설]", end='')
+    print("=" * 21)
     printSchedule(schedule)     # 현재 강의 시간표 출력
     print("==============================================")
     className = input("내가 개설할 강의의 이름을 입력하세요. : ")
@@ -124,6 +142,10 @@ def makeClass(code):  # 강의 개설
 
 def modifyClass(code): # 강의 정보 수정 (code : 선생 고유 번호)
     classArr=textManager.readText_Class_ttoc(code)  # 해당 선생이 개설한 강의의 고유 번호 리스트 출력
+    os.system('cls')
+    print("=" * 16, end='')
+    print("[강의 정보 수정]", end='')
+    print("=" * 18)
     classCode=input("수정할 강의의 고유 번호를 입력하세요. : ")
     if classCode in classArr:   # 여기부터 수정예정
         Class=textManager.readText_Class_c(classCode)   # 해당 고유번호 수업의 정보 리스트 받기
@@ -175,6 +197,10 @@ def modifyClass(code): # 강의 정보 수정 (code : 선생 고유 번호)
     os.system('cls')
 
 def deleteClass(code):
+    os.system('cls')
+    print("=" * 18, end='')
+    print("[강의 삭제]", end='')
+    print("=" * 21)
     classCode=input("삭제할 강의의 고유 번호를 입력하세요. : ")
     classInfo=textManager.readText_ClassCode()
     if code in textManager.readText_Class_ttoc(code):
