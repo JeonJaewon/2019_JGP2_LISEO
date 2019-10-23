@@ -28,7 +28,9 @@ def start(myID):
         # 모든 강의정보 출력 ( 자신의 수강 or 개설강의 별표로 표시)
         os.system('cls')
         classInfo = textManager.readText_Class()
-        print('========================================')
+        print("=" * 16, end='')
+        print("[강의 정보 열람]", end='')
+        print("=" * 18)
         for classData in classInfo:
             for className in myClassList:
                 if classData[0]==className:
@@ -73,7 +75,10 @@ def start(myID):
             # 수강생 목록 받기
             studentList = textManager.classID_to_studentList(myClassCode)
             while True:
-                print('========================================')
+                os.system('cls')
+                print("=" * 16, end='')
+                print("[수강생 정보 확인]", end='')
+                print("=" * 18)
                 print('('+myClassCode+')'+' 수강 학생 :') #classData 그냥 C4 뜨네요.. myClassCode교체
                 for studentCode in studentList:
                     #전재원 (S21), 01017345312
