@@ -64,6 +64,7 @@ def studentManagerScreen(code):
     while True:
         if checkIfTeacher(code) == False: #선생이 아니면 종료
             print("사용자는 해당 기능에 접근할 수 없습니다.")
+            time.sleep(2)
             break
 
         printStudentList()
