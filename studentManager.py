@@ -14,7 +14,10 @@ def checkIfTeacher(code): # 고유번호가 학생인지 선생인지 검사
 
 def printStudentList(): # 모든 학생 리스트 출력
     studentInfo=textManager.readText_Student()
-    print('==================================')
+    os.system('cls')
+    print("=" * 18, end='')
+    print("[학생 관리]", end='')
+    print("=" * 21)
     print('학생 리스트')
     for studentData in studentInfo:
         # 수강중인 강의 목록 가져오기
