@@ -10,6 +10,7 @@ import rule
 
 def screen(code):
     while True:
+        os.system('cls')
         print("="*18, end='')
         print("[메인 화면]", end='')
         print("=" * 21)
