@@ -7,7 +7,9 @@ import rule
 
 def printStudentinfo(code):
     #학생정보출력
-    print("="*50)
+    print("=" * 18, end='')
+    print("[마이페이지]", end='')
+    print("=" * 21)
     myInfo=textManager.readText_Student_c(code) #code학번학생의 정보 배열 받아옴
     print(myInfo[1] + " ( " + myInfo[0] + " ) ")
     print("hp : " + myInfo[2])
@@ -19,7 +21,9 @@ def printStudentinfo(code):
     return myInfo
 def printTeacherinfo(code):
     #선생님정보출력
-    print("="*50)
+    print("=" * 18, end='')
+    print("[마이페이지]", end='')
+    print("=" * 21)
     myInfo=textManager.readText_Teacher_c(code) #code학번학생의 정보 배열 받아옴
     print(myInfo[1]+" ( "+myInfo[0]+" ) ")
     print("hp : "+myInfo[2])
@@ -64,7 +68,9 @@ def modifyInfo(code,myInfo):
             return 0
 def printModifyinfo(code):
     #정보수정화면 정보 출력화면
-    print("=" * 50)
+    print("=" * 18, end='')
+    print("[정보 수정]", end='')
+    print("=" * 21)
     if code[0] == 'S':
         myInfo = textManager.readText_Student_c(code)
     else:
