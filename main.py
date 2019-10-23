@@ -10,7 +10,9 @@ import rule
 
 def screen(code):
     while True:
-        print("="*50)
+        print("="*18, end='')
+        print("[메인 화면]", end='')
+        print("=" * 21)
         print(" "*18,'1. 마이페이지')
         print(" "*18,'2. 강의 정보 열람')
         print(" "*18,'3. 내 강의')
