@@ -22,6 +22,7 @@ def start():
         LoginInfo.append(StudentLogin[0])
 
     while True:
+        os.system('cls')
         print("="*50)
         print(" "*22, "LISEO")
         print("="*50)  # 로그인 화면의 화면 제목
