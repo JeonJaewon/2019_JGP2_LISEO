@@ -25,16 +25,12 @@ def screen(code):
             os.system('cls')
             continue
         if select=='1': #마이페이지->MyPage
-            print('you select : ', select)
             mypage.screen(code)
         elif select=='2': #강의 정보 열람->ClassView
-            print('you select : ', select)
             ClassView.start(code)
         elif select=='3': #내 강의->MyClass
-            # print('you select : ', select)
             myClass.myClass(code)
         elif select=='4': #학생 관리->StudentCare
-            print('you select : ', select)
             studentManager.studentManagerScreen(code)
         elif select=='5': #종료
             exit(0) # return 으로 해도 무방
