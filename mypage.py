@@ -7,6 +7,7 @@ import rule
 
 def printStudentinfo(code):
     #학생정보출력
+    os.system('cls')
     print("=" * 18, end='')
     print("[마이페이지]", end='')
     print("=" * 21)
@@ -21,6 +22,7 @@ def printStudentinfo(code):
     return myInfo
 def printTeacherinfo(code):
     #선생님정보출력
+    os.system('cls')
     print("=" * 18, end='')
     print("[마이페이지]", end='')
     print("=" * 21)
@@ -68,6 +70,7 @@ def modifyInfo(code,myInfo):
             return 0
 def printModifyinfo(code):
     #정보수정화면 정보 출력화면
+    os.system('cls')
     print("=" * 18, end='')
     print("[정보 수정]", end='')
     print("=" * 21)
