@@ -3,8 +3,8 @@ import time
 import os
 
 def start():
-    teacher = open("./teacher.txt", 'r', encoding='UTF-8-SIG')
-    student = open("./student.txt", 'r', encoding='UTF-8-SIG')
+    teacher = open("teacher.txt", 'r', encoding='UTF-8-SIG')
+    student = open("student.txt", 'r', encoding='UTF-8-SIG')
 
     LoginInfo = []
     while True:

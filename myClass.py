@@ -40,6 +40,10 @@ def myClass(code):    # code : 해당 학생/선생 정보 배열    classInfo :
                         cancelClass(code)
                     elif ans == 3:
                         return
+                    else:
+                        print("1-3사이의 항목을 선택해 주세요.")  # 숫자입력규칙 적용필요
+                        time.sleep(2)
+                        os.system('cls')
                 # 1,2,3을 제외한 이상한 답이 나왔을 경우는 다시 반복문 처음으로~~~
         else:
             while 1:
@@ -81,6 +85,10 @@ def myClass(code):    # code : 해당 학생/선생 정보 배열    classInfo :
                         deleteClass(code)
                     elif ans == 4:
                         return
+                    else:
+                        print("1-4사이의 항목을 선택해 주세요.")  # 숫자입력규칙 적용필요
+                        time.sleep(2)
+                        os.system('cls')
                     # 1,2,3,4를 제외한 이상한 답이 나왔을 경우는 다시 반복문 처음으로~~~
 
 
