@@ -150,17 +150,28 @@ def makeClass(code):  # 강의 개설
     print("==============================================")
     className = input("내가 개설할 강의의 이름을 입력하세요. : ") or '입력 실패'
     classRoom = input("강의를 진행할 강의실의 고유번호를 입력하세요. : ") or '입력 실패'
+    if not classRoom in schedule[0]:  # 새로 입력한 강의실이 현재 강의실 목록에 존재하지 않으면
+        print("존재하지 않는 강의실입니다.")
+        time.sleep(2)
+        os.system('cls')
+        return
     classTime = input("내가 개설할 강의의 시간대를 입력하세요. (-교시) : ") or '입력 실패'
+    if(int(classTime)>5 or int(classTime)<1):
+        print("존재하지 않는 시간대입니다.")
+        time.sleep(2)
+        os.system('cls')
+        return
     # schedule[3][0]   == R1교실(교실 배열의 첫 번째 idx)에서 진행되는 3교시의 수업. 공란일 경우(0으로 정의하자) 수업 X, 강의 고유번호가 있을 경우 수업 이미 O.
     # for i, Class in enumerate(schedule[int(classTime)]):
         # if Class.replace(u'\ufeff', '') == "N":
             # roomCode = "R"+str(i+1)
-    roomIdx=classRoom[1:]-1
+    classTime=int(classTime)
+    roomIdx=int(classRoom[1:])-1
     if schedule[classTime][roomIdx].replace(u'\ufeff', '') == "N":
         classCode = textManager.add_class(code, classRoom, classTime, 10, className)    # class.txt에 쓰기
         textManager.modify_Room(classCode, classTime, classRoom, 0)  # 시간표 갱신
         print("성공적으로 강의가 개설되었습니다.")
-        print("강의명 : "+className+", 시간 : "+classTime+"교시")
+        #print("강의명 : "+className+", 시간 : "+str(classTime)+"교시")
         # time.sleep(2)
         # os.system('cls')
         # return
@@ -204,10 +215,10 @@ def modifyClass(code): # 강의 정보 수정 (code : 선생 고유 번호)
                 # 사실 들어가는 척만 함. 나중에 newTime까지 입력받고 한꺼번에 넣을거임.
                 # print("정보가 성공적으로 수정되었습니다.") --> newTime까지 입력받아야 수정 가능한지 여부 검사 가능할 듯.
 
-                newTime=input("classTime"+" >> ") or '입력 실패'
+                newTime=input(str(Class[4])+" >> ") or '입력 실패'
                 newTime=int(newTime) # str -> int
                 RoomNumber = int(newRoom[1]) - 1 # 배열은 0부터 시작
-                if not newTime>=1 and newTime<=5:    # 숫자입력규칙 어긋남
+                if newTime<1 or newTime>5:    # 숫자입력규칙 어긋남
                     print("존재하지 않는 시간대입니다.")
                 elif schedule[newTime][RoomNumber] != 'N':
                     print("이미 등록된 강의실입니다.")
@@ -235,7 +246,8 @@ def deleteClass(code):
     print("=" * 21)
     classCode=input("삭제할 강의의 고유 번호를 입력하세요. : ") or '입력 실패'
     classInfo=textManager.readText_ClassCode()
-    if code in textManager.readText_Class_ttoc(code):
+    print(textManager.readText_Class_ttoc(code))
+    if classCode in textManager.readText_Class_ttoc(code):
         deletedClass = textManager.readText_Class_c(classCode)   # 삭제하려고 하는 강의의 정보
         textManager.deleteClassText(classCode)  # --> 해당 강의가 속해있는 줄 모두 삭제
         textManager.modify_Room(classCode, deletedClass[4], deletedClass[2], 1) # 표 갱신

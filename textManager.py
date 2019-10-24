@@ -399,6 +399,13 @@ def modify_Room(classCode, time, room, flag):    # flag : 0(추가), 1(삭제)
 
 def modify_ClassInfo(classCode,newName,newTime,newRoom): # 강의실 정보 수정 함수. 인자에 -1이 들어가지 않은 것만 고침
     Class=readText_Class_c(classCode)
+    if newName == -1:
+        newName = Class[5]
+    if newTime == -1:
+        newTime = Class[4]
+    if newRoom == -1:
+        newRoom = Class[2]
+#    idx=int(classCode[1:])-1    # 해당 고유 번호가 전체 강의 목록 3차원 배열에서 몇 층인지
     if newName != -1:
         Class[5] = newName
     if newTime != -1:
@@ -407,19 +414,31 @@ def modify_ClassInfo(classCode,newName,newTime,newRoom): # 강의실 정보 수�
         Class[2] = newRoom
     idx=int(classCode[1:])-1    # 해당 고유 번호가 전체 강의 목록 3차원 배열에서 몇 층인지
     classArr=readText_Class()
-    classArr[idx]=Class
+#    classArr[idx]=Class
 
-    data=""
+    dataArr=[]
     for i in range(len(classArr)):
+        if classCode==classArr[i][0]:
+            data=classArr[i][0]+"@"+classArr[i][1]+"@"+newRoom+"@"+classArr[i][3]+"@"+str(newTime)+"@"+newName
+            if classArr[i][6]:
+                for students in classArr[i][6]:
+                    data+=students+"@"
+            data=data.rstrip("@")
+            dataArr.append(data)
+            continue
+        data=""
         for j in range(6):  # 강의명까지(수강생 목록 전까지) 입력
            data+=str(classArr[i][j])+"@"
         if classArr[i][6]:  # 수강생이 있는지 없는지 확인
             for students in classArr[i][6]:
                 data+=students+"@"
         data=data.rstrip('@')
-        data+="\n"
+        dataArr.append(data)
     wf = open("class.txt", 'w', encoding='UTF-8-SIG')
-    wf.write(data)
+    for i in range(len(dataArr)):
+        if i!=0:
+            wf.write('\n')
+        wf.write(dataArr[i])
     wf.close()
 
 
@@ -432,9 +451,14 @@ def deleteClassText(code):
         classLines[0] = classLines[0].replace(u"\ufeff", '')  # utf-8-sig로도 안없어져서 강제로 없앰
     classWrite = open("class.txt", 'w', encoding='UTF-8-SIG') # W로 오픈하면 텍스트 전부 삭제됨.
 
+    fstFlag=0 #classCode에 첫번쨰 문장이 들어가면 1로 바뀜
     for line in classLines:
         if code != line.split('@')[0]: # code랑 저장해놨던 line들의 코드랑 비교해서
-            classWrite.write(line) # 같지 않으면, 즉 삭제할려고 했던게 아니면 다시 써준다
+            if(fstFlag!=0):
+                classWrite.write('\n')
+            else:
+                fstFlag=1
+            classWrite.write(line[:-1]) # 같지 않으면, 즉 삭제할려고 했던게 아니면 다시 써준다
     classFile.close()
     classWrite.close()
 
@@ -484,7 +508,7 @@ def add_class(teacherCode, roomCode, classTime, maxSeat, className):
     readClass = readText_Class()
     classCode = 'C'+str(int(readClass[len(readClass)-1][0][1:])+1)
     # class.txt 양식 : 강의고유번호 선생고유번호 강의실고유번호 최대수용인원수 교시 이름 수강학생들
-    inputString = '\n'+classCode+'@'+teacherCode+'@'+roomCode+'@'+str(maxSeat)+'@'+classTime+'@'+className
+    inputString = '\n'+classCode+'@'+teacherCode+'@'+roomCode+'@'+str(maxSeat)+'@'+str(classTime)+'@'+className
     writeClass.write(inputString)
     writeClass.close()
     return classCode
