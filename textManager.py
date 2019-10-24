@@ -428,7 +428,7 @@ def modify_ClassInfo(classCode,newName,newTime,newRoom): # 강의실 정보 수�
     dataArr=[]
     for i in range(len(classArr)):
         if classCode==classArr[i][0]:
-            data=classArr[i][0]+"@"+classArr[i][1]+"@"+newRoom+"@"+classArr[i][3]+"@"+str(newTime)+"@"+newName
+            data=classArr[i][0]+"@"+classArr[i][1]+"@"+newRoom+"@"+classArr[i][3]+"@"+str(newTime)+"@"+newName+"@"
             if classArr[i][6]:
                 for students in classArr[i][6]:
                     data+=students+"@"
