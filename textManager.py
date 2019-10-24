@@ -159,11 +159,11 @@ def readText_Room():
             break
         RoomCol = RoomRow.rstrip("\n").split('@')# rstrip으로 개행문자 제거
         RoomInfo.append(RoomCol)
-    for j, roomName in enumerate(RoomInfo[0]):
-        for i,tempStr in enumerate(roomName):
-            if tempStr.replace("u\ufeff", '')==",":     # ,나오기 전까지 자르기
-                RoomInfo[0][j]=RoomInfo[0][j][:i]
-                break
+#    for j, roomName in enumerate(RoomInfo[0]):
+#        for i,tempStr in enumerate(roomName):
+#            if tempStr.replace("u\ufeff", '')==",":     # ,나오기 전까지 자르기
+#                RoomInfo[0][j]=RoomInfo[0][j][:i]
+#                break
     room.close()
     return RoomInfo # 장소 정보 반환
 
@@ -214,6 +214,14 @@ def teacherID_to_teacherPhone(code):
     #teacher의 고유번호 >> teacher의 이름 반환함수
     teacherData = readText_Teacher_c(code)
     return teacherData[2]
+
+def roomID_to_roomMaxSeat(roomCode):
+    #room의 고유번호  >>  room의 최대수용인원
+    roomInfo = open("roomInfo.txt",'r', encoding='UTF-8-SIG')
+    for roomData in roomInfo:
+        roomData = roomData.split('@')
+        if roomData[0]==roomCode:
+            return roomData[1][:-1]
 
 def classID_to_classTime(classCode, roomCode):
     #class의 고유번호, class의 강의교실 고유번호 >> class의 강의시간(교시) 반환함수
@@ -379,6 +387,7 @@ def modify_Class(code, flag):   # flag : 0(추가), 1(삭제)
 
 def modify_Room(classCode, time, room, flag):    # flag : 0(추가), 1(삭제)
     roomInfo=readText_Room()
+    print(roomInfo)
     roomNum=int(room[1:])   # 강의실 코드(R1,..)에서 숫자 부분만 자름
     if flag==0:
             roomInfo[int(time)][roomNum-1] = classCode

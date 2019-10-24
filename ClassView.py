@@ -40,7 +40,7 @@ def start(myID):
             print('연락처 : ' + textManager.teacherID_to_teacherPhone(classData[1]))
             print('강의실 : ' + classData[2])
             print('수업 시간 : '+ textManager.classID_to_classTime(classData[0], classData[2]) + '교시')  #classID >> classTime
-            print('수용학생인원 : ' + classData[3] + '명')
+            print('수용학생인원 : ' + textManager.roomID_to_roomMaxSeat(classData[2]) + '명')
             print('========================================')
         #메뉴
         print('1. 수강생 정보 확인')

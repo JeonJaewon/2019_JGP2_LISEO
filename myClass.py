@@ -101,7 +101,7 @@ def enrolement(code):  # 수강 신청
     classCode = input("내가 수강하고 싶은 강의의 고유 번호를 입력하세요. : ") or '입력 실패'
     if classCode in classCodeInfo:
         classInfo=textManager.readText_Class_c(classCode)
-        if int(classInfo[3].replace(u"\ufeff", '')) > len(classInfo[6]):    # 최대인원 > 현재 수강인원
+        if int(textManager.roomID_to_roomMaxSeat(classInfo[2])) > len(classInfo[6]):    # 최대인원 > 현재 수강인원
             textManager.enrollOrCancelClass(classCode,code,0)
         else:
             print("해당 강의의 정원이 다 찼습니다.")
