@@ -32,12 +32,14 @@ def myClass(code):    # code : 해당 학생/선생 정보 배열    classInfo :
                     time.sleep(2)
                     os.system('cls')
                     continue
-                elif ans == 1:
-                    enrolement(code)
-                elif ans == 2:
-                    cancelClass(code)
-                elif ans == 3:
-                    return
+                else:
+                    ans=int(ans)
+                    if ans == 1:
+                        enrolement(code)
+                    elif ans == 2:
+                        cancelClass(code)
+                    elif ans == 3:
+                        return
                 # 1,2,3을 제외한 이상한 답이 나왔을 경우는 다시 반복문 처음으로~~~
         else:
             while 1:
@@ -68,16 +70,18 @@ def myClass(code):    # code : 해당 학생/선생 정보 배열    classInfo :
                     time.sleep(2)
                     os.system('cls')
                     continue
-                if ans == 1:
-                    makeClass(code)
-                    # textManager.modify_Room("C5",5,"R5",0)
-                elif ans == 2:
-                    modifyClass(code)
-                elif ans == 3:
-                    deleteClass(code)
-                elif ans == 4:
-                    return
-                # 1,2,3,4를 제외한 이상한 답이 나왔을 경우는 다시 반복문 처음으로~~~
+                else:
+                    ans=int(ans)
+                    if ans == 1:
+                        makeClass(code)
+                        # textManager.modify_Room("C5",5,"R5",0)
+                    elif ans == 2:
+                        modifyClass(code)
+                    elif ans == 3:
+                        deleteClass(code)
+                    elif ans == 4:
+                        return
+                    # 1,2,3,4를 제외한 이상한 답이 나왔을 경우는 다시 반복문 처음으로~~~
 
 
 def enrolement(code):  # 수강 신청
