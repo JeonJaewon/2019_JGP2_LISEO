@@ -221,7 +221,7 @@ def roomID_to_roomMaxSeat(roomCode):
     for roomData in roomInfo:
         roomData = roomData.split('@')
         if roomData[0]==roomCode:
-            return roomData[1][:-1]
+            return str(int(roomData[1]))
 
 def classID_to_classTime(classCode, roomCode):
     #class의 고유번호, class의 강의교실 고유번호 >> class의 강의시간(교시) 반환함수
