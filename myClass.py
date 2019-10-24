@@ -215,7 +215,7 @@ def modifyClass(code): # 강의 정보 수정 (code : 선생 고유 번호)
                     # 정보 수정된 것 들어감
                     textManager.modify_Room(classCode, Class[4], Class[2], 1)  # 시간표에서 해당 수업 삭제하고
                     textManager.modify_ClassInfo(classCode, -1, newTime, newRoom)  # class.txt 정보 수정
-                    textManager.modify_Room(classCode, Class[4], Class[2], 0)  # 바뀐 시간대로 시간표 갱신
+                    textManager.modify_Room(classCode, newTime, newRoom, 0)  # 바뀐 시간대로 시간표 갱신
                     print("정보가 성공적으로 수정되었습니다.")
                     break
             elif ans==3:

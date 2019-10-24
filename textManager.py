@@ -399,11 +399,11 @@ def modify_Room(classCode, time, room, flag):    # flag : 0(추가), 1(삭제)
 
 def modify_ClassInfo(classCode,newName,newTime,newRoom): # 강의실 정보 수정 함수. 인자에 -1이 들어가지 않은 것만 고침
     Class=readText_Class_c(classCode)
-    if newName != 1:
+    if newName != -1:
         Class[5] = newName
-    if newTime != 1:
+    if newTime != -1:
         Class[4] = newTime
-    if newRoom != 1:
+    if newRoom != -1:
         Class[2] = newRoom
     idx=int(classCode[1:])-1    # 해당 고유 번호가 전체 강의 목록 3차원 배열에서 몇 층인지
     classArr=readText_Class()
