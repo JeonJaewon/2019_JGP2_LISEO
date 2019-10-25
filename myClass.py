@@ -285,12 +285,8 @@ def deleteClass(code):
         print("강의 삭제가 완료되었습니다.")
     elif classCode == '입력 실패':
         print("데이터 값을 입력해주세요.")
-        time.sleep(2)
-        os.system('cls')
     elif classCode in classInfo:
         print("내가 개설한 강의가 아닙니다.")
-        time.sleep(2)
-        os.system('cls')
     else:
         print("존재하지 않는 고유번호입니다.")
     time.sleep(2)

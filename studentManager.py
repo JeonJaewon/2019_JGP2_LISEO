@@ -36,13 +36,20 @@ def printStudentList(): # 모든 학생 리스트 출력
 def addStudentInfo(): # 학생 정보 추가
     print("새로 추가할 학생의 이름을 입력하세요 '('10자 이내 문자')'")
     studentName = input() or '입력 실패'
-    if len(studentName) > 10:
+    if studentName == '입력 실패':
+        print("데이터 값을 입력해 주세요")
+        return
+    elif len(studentName) > 10:
         print("입력 형식에 맞게 다시 입력하십시오.")
         return
 
+
     print("새로 추가할 학생의 전화번호를 입력하세요 '('11자리 숫자')'")
-    studentTel = input()
-    if len(studentTel) != 11:
+    studentTel = input() or '입력 실패'
+    if studentTel == '입력 실패':
+        print("데이터 값을 입력해 주세요.")
+        return
+    elif len(studentTel) != 11:
         print("입력 형식에 맞게 다시 입력하십시오.")
         return
 
