@@ -60,7 +60,10 @@ def addStudentInfo(): # 학생 정보 추가
 def deleteStudentInfo(): # 학생 정보 삭제
     deleteCode=input("삭제하려는 학생의 고유번호를 입력하세요. : ") or '입력 실패'
     # 존재하는 학생인지 확인
-    if(textManager.Re_Student('1', deleteCode) == -1):
+    if deleteCode == '입력 실패':
+        print("데이터 값을 입력해 주세요.")
+        return
+    elif(textManager.Re_Student('1', deleteCode) == -1):
         print("입력한 학생의 정보를 찾을 수 없습니다.")
         return
     else:
