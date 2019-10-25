@@ -152,13 +152,28 @@ def makeClass(code):  # 강의 개설
     printSchedule(schedule)     # 현재 강의 시간표 출력
     print("==============================================")
     className = input("내가 개설할 강의의 이름을 입력하세요. : ") or '입력 실패'
+    if className=='입력 실패':
+        print("데이터 값을 입력해주십시오.")
+        time.sleep(2)
+        os.system('cls')
+        return
     classRoom = input("강의를 진행할 강의실의 고유번호를 입력하세요. : ") or '입력 실패'
+    if classRoom=='입력 실패':
+        print("데이터 값을 입력해주십시오.")
+        time.sleep(2)
+        os.system('cls')
+        return
     if not classRoom in schedule[0]:  # 새로 입력한 강의실이 현재 강의실 목록에 존재하지 않으면
         print("존재하지 않는 강의실입니다.")
         time.sleep(2)
         os.system('cls')
         return
     classTime = input("내가 개설할 강의의 시간대를 입력하세요. (-교시) : ") or '입력 실패'
+    if classTime=='입력 실패':
+        print("데이터 값을 입력해주십시오.")
+        time.sleep(2)
+        os.system('cls')
+        return
     if(int(classTime)>5 or int(classTime)<1):
         print("존재하지 않는 시간대입니다.")
         time.sleep(2)

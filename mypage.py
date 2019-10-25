@@ -46,7 +46,12 @@ def modifyInfo(code,myInfo):
             time.sleep(2)
             os.system('cls')
             return 0
-        if choice == '1':
+        elif choice == '입력 실패':
+            print("형식에 맞게 다시 입력하십시오.")
+            time.sleep(2)
+            os.system('cls')
+            continue
+        elif choice == '1':
             if modifyName(code,myInfo)==1:
                 print("정보가 성공적으로 수정되었습니다.")
                 time.sleep(2)
@@ -86,7 +91,7 @@ def modifyName(code,myInfo):
     print(myInfo[1], end="")
     newName = input(">>>") or '입력 실패'
     if len(newName) > 10:
-        print("형식에 어긋납니다.다시 입력하십시오")
+        print("형식에 어긋납니다. 다시 입력하십시오")
         time.sleep(2)
         os.system('cls')
         return 0
@@ -126,13 +131,18 @@ def screen(code):
         print("1. 정보수정\n2. 뒤로가기")
         choice = input("원하시는 항목을 선택해 주세요 : ") or '입력 실패'
 
+        if choice=='입력 실패':
+            print('접근 할 선택지 번호를 입력해 주세요.')
+            time.sleep(2)
+            os.system('cls')
+            continue
         #숫자입력규칙
-        if rule.numberRule(choice)==0: #숫자입력규칙 적용, import main 주석처리해서 __import__로 즉석해서 import함
+        elif rule.numberRule(choice)==0: #숫자입력규칙 적용, import main 주석처리해서 __import__로 즉석해서 import함
             time.sleep(2)
             os.system('cls')
             continue
         #메뉴 분기
-        if choice == '1':
+        elif choice == '1':
             #"1. 정보수정" 이동
             os.system('cls')
             modifyInfo(code, myInfo)
