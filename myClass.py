@@ -274,7 +274,15 @@ def deleteClass(code):
         textManager.deleteClassText(classCode)  # --> 해당 강의가 속해있는 줄 모두 삭제
         textManager.modify_Room(classCode, deletedClass[4], deletedClass[2], 1) # 표 갱신
         print("강의 삭제가 완료되었습니다.")
-    else:
+    elif classCode == '입력 실패':
+        print("데이터 값을 입력해주세요.")
+        time.sleep(2)
+        os.system('cls')
+    elif classCode in classInfo:
         print("내가 개설한 강의가 아닙니다.")
+        time.sleep(2)
+        os.system('cls')
+    else:
+        print("존재하지 않는 고유번호입니다.")
     time.sleep(2)
     os.system('cls')
