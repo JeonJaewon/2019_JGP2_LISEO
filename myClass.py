@@ -110,6 +110,7 @@ def enrolement(code):  # 수강 신청
 
 def cancelClass(code): # 수강 취소
     classInfo=textManager.readText_ClassCode()
+    os.system('cls')
     print("=" * 18, end='')
     print("[수강 취소]", end='')
     print("=" * 21)
