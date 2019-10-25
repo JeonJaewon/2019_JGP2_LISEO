@@ -244,7 +244,6 @@ def deleteClass(code):
     print("=" * 21)
     classCode=input("삭제할 강의의 고유 번호를 입력하세요. : ") or '입력 실패'
     classInfo=textManager.readText_ClassCode()
-    print(textManager.readText_Class_ttoc(code))
     if classCode in textManager.readText_Class_ttoc(code):
         deletedClass = textManager.readText_Class_c(classCode)   # 삭제하려고 하는 강의의 정보
         textManager.deleteClassText(classCode)  # --> 해당 강의가 속해있는 줄 모두 삭제
@@ -252,3 +251,5 @@ def deleteClass(code):
         print("강의 삭제가 완료되었습니다.")
     else:
         print("내가 개설한 강의가 아닙니다.")
+    time.sleep(2)
+    os.system('cls')
