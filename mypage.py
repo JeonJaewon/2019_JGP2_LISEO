@@ -84,9 +84,14 @@ def printModifyinfo(code):
 def modifyName(code,myInfo):
     #이름수정
     print(myInfo[1], end="")
-    newName = input(">>>")
+    newName = input(">>>") or '입력 실패'
     if len(newName) > 10:
-        print("형식에 어긋납니다.다시 입력하십시오") or '입력 실패'
+        print("형식에 어긋납니다.다시 입력하십시오")
+        time.sleep(2)
+        os.system('cls')
+        return 0
+    elif newName=='입력 실패':
+        print('변경할 값을 입력해주십시오')
         time.sleep(2)
         os.system('cls')
         return 0
@@ -96,13 +101,18 @@ def modifyName(code,myInfo):
 def modifyPhone(code,myInfo):
     #전화번호수정
     print(myInfo[2], end="")
-    newPhone = input(">>>")
+    newPhone = input(">>>") or '입력 실패'
     if len(newPhone) == 11 and newPhone.isdecimal():  # type(newPhone)=='int' int로 하면 len이 안되는거 같아오
         # 전화번호수정하고
         textManager.RenewalName(code, myInfo[2], newPhone) #수정!
         return 1
+    elif newPhone=='입력 실패':
+        print("변경할 값을 입력해주십시오")
+        time.sleep(2)
+        os.system('cls')
+        return 0
     else:
-        print("형식에 맞게 다시 입력하십시오.") or '입력 실패'
+        print("형식에 맞게 다시 입력하십시오")
         time.sleep(2)
         os.system('cls')
         return 0
