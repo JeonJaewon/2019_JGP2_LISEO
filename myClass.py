@@ -22,7 +22,6 @@ def myClass(code):    # code : 해당 학생/선생 정보 배열    classInfo :
                 print("\t2. 수강 취소")
                 print("\t3. 뒤로 가기")
                 ans = input("원하는 항목 : ") or '입력 실패'
-                os.system('cls')
                 if ans == '입력 실패':
                     print("접근 할 선택지 번호를 입력해 주세요.")
                     time.sleep(2)
@@ -64,7 +63,6 @@ def myClass(code):    # code : 해당 학생/선생 정보 배열    classInfo :
                 print("\t4. 뒤로 가기")
                 print("==========================================")
                 ans = input("원하는 항목 : ") or '입력 실패'
-                os.system('cls')
                 if ans == '입력 실패':
                     print("접근 할 선택지 번호를 입력해 주세요.")
                     time.sleep(2)
