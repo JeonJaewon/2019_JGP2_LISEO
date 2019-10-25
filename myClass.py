@@ -174,6 +174,11 @@ def makeClass(code):  # 강의 개설
         time.sleep(2)
         os.system('cls')
         return
+    if rule.numberRule(classTime):
+        print("숫자 입력 규칙에 어긋납니다.")
+        time.sleep(2)
+        os.system('cls')
+        return
     if(int(classTime)>5 or int(classTime)<1):
         print("존재하지 않는 시간대입니다.")
         time.sleep(2)

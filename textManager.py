@@ -387,7 +387,7 @@ def modify_Class(code, flag):   # flag : 0(추가), 1(삭제)
 
 def modify_Room(classCode, time, room, flag):    # flag : 0(추가), 1(삭제)
     roomInfo=readText_Room()
-    print(roomInfo)
+    # print(roomInfo)
     roomNum=int(room[1:])   # 강의실 코드(R1,..)에서 숫자 부분만 자름
     if flag==0:
             roomInfo[int(time)][roomNum-1] = classCode
