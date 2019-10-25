@@ -262,6 +262,10 @@ def modifyClass(code): # 강의 정보 수정 (code : 선생 고유 번호)
             time.sleep(2)   # 위의 ans case문 안에서 if로 걸러진 것들은 다 이 밑으로 내려가겠져? (존재하지 않는 강의실 경우 제외)
             os.system('cls')    # 그게 밑으로 내려가면 이렇게 딱! 화면이 지워지고 다시 while문의 처음으로 돌아간다 이말이야~
 
+    elif classCode == '입력 실패':
+        print("데이터 값을 입력해 주세요.")
+        time.sleep(2)
+        os.system('cls')
     else:
         print("존재하지 않은 고유 번호입니다.")
     time.sleep(2)
