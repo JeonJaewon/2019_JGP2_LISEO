@@ -256,14 +256,18 @@ def modifyClass(code): # 강의 정보 수정 (code : 선생 고유 번호)
                 # print("정보가 성공적으로 수정되었습니다.") --> newTime까지 입력받아야 수정 가능한지 여부 검사 가능할 듯.
 
                 newTime=input(str(Class[4])+" >> ") or '입력 실패'
-                newTime=int(newTime) # str -> int
                 RoomNumber = int(newRoom[1]) - 1 # 배열은 0부터 시작
-                if newTime<1 or newTime>5:    # 숫자입력규칙 어긋남
+                if newTime == '입력 실패':
+                    print("데이터 값을 입력해 주세요.")
+                elif rule.numberRule(newTime) == 0:
+                    pass
+                elif int(newTime)<1 or int(newTime)>5:    # 숫자입력규칙 어긋남
                     print("존재하지 않는 시간대입니다.")
-                elif schedule[newTime][RoomNumber] != 'N':
+                elif schedule[int(newTime)][RoomNumber] != 'N':
                     print("이미 등록된 강의실입니다.")
                 else: # --> 정상적인 경우
                     # 정보 수정된 것 들어감
+                    newTime=int(newTime)
                     textManager.modify_Room(classCode, Class[4], Class[2], 1)  # 시간표에서 해당 수업 삭제하고
                     textManager.modify_ClassInfo(classCode, -1, newTime, newRoom)  # class.txt 정보 수정
                     textManager.modify_Room(classCode, newTime, newRoom, 0)  # 바뀐 시간대로 시간표 갱신
