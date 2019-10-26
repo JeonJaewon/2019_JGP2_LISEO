@@ -256,6 +256,11 @@ def modifyClass(code): # 강의 정보 수정 (code : 선생 고유 번호)
                     time.sleep(2)
                     os.system('cls')
                     continue
+                elif int(textManager.roomID_to_roomMaxSeat(newRoom)) < len(Class[6]): # 현재 수강 인원이 바꾸려는 방의 정원보다 클 경우
+                    print("현재 수강 인원이 바꾸려는 강의실의 수용 인원을 초과합니다.")
+                    time.sleep(2)
+                    os.system('cls')
+                    continue
                 # 새로 입력한 강의실이 현재 강의실 목록에 존재 할 경우
                 # 정보 수정된 것 들어감
                 # 사실 들어가는 척만 함. 나중에 newTime까지 입력받고 한꺼번에 넣을거임.

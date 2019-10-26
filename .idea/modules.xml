@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/2019_JGP2_LISEO.iml" filepath="$PROJECT_DIR$/.idea/2019_JGP2_LISEO.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/JGP2.iml" filepath="$PROJECT_DIR$/.idea/JGP2.iml" />
     </modules>
   </component>
 </project>
