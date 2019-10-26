@@ -82,7 +82,12 @@ def studentManagerScreen(code):
         print(" " * 5, '2. 학생 정보 삭제')
         print(" " * 5, '3. 뒤로가기')
         menu = input('원하시는 항목을 선택해 주세요 : ') or '입력 실패'
-        if rule.numberRule(menu)==0:
+        if menu == '입력 실패':
+            print("데이터 값을 입력해 주세요.")
+            time.sleep(2)
+            os.system('cls')
+            continue
+        elif rule.numberRule(menu)==0:
             time.sleep(2)
             os.system('cls')
             continue
