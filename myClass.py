@@ -221,8 +221,17 @@ def modifyClass(code): # 강의 정보 수정 (code : 선생 고유 번호)
             print("1. 강의명 수정")
             print("2. 교실 및 시간 변경")
             print("3. 뒤로 가기")
-            ans=int(input("원하는 항목 : "))
-            if ans==1:
+            ans=input("원하는 항목 : ") or '입력 실패'
+            if ans == '입력 실패':
+                print("데이터 값을 입력해 주세요.")
+                time.sleep(2)
+                os.system('cls')
+                continue
+            elif rule.numberRule(ans) == 0:
+                time.sleep(2)
+                os.system('cls')
+                continue
+            elif ans=='1':
                 newName=input(Class[5]+" >> ") or '입력 실패'
                 if newName=='입력 실패':
                     print("데이터 값을 입력해 주세요.")
@@ -233,7 +242,7 @@ def modifyClass(code): # 강의 정보 수정 (code : 선생 고유 번호)
                 textManager.modify_ClassInfo(classCode,newName,-1,-1)
                 print("정보가 성공적으로 수정되었습니다.")
                 break
-            elif ans==2:
+            elif ans=='2':
                 schedule = textManager.readText_Room()
                 newRoom=input(Class[2]+" >> ") or '입력 실패'
                 if not newRoom in schedule[0]:     # 새로 입력한 강의실이 현재 강의실 목록에 존재하지 않으면
@@ -260,8 +269,10 @@ def modifyClass(code): # 강의 정보 수정 (code : 선생 고유 번호)
                     textManager.modify_Room(classCode, newTime, newRoom, 0)  # 바뀐 시간대로 시간표 갱신
                     print("정보가 성공적으로 수정되었습니다.")
                     break
-            elif ans==3:
+            elif ans=='3':
                 break
+            else:
+                print("1-4사이의 항목을 선택해 주세요.")
             time.sleep(2)   # 위의 ans case문 안에서 if로 걸러진 것들은 다 이 밑으로 내려가겠져? (존재하지 않는 강의실 경우 제외)
             os.system('cls')    # 그게 밑으로 내려가면 이렇게 딱! 화면이 지워지고 다시 while문의 처음으로 돌아간다 이말이야~
 
