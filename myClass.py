@@ -245,7 +245,12 @@ def modifyClass(code): # 강의 정보 수정 (code : 선생 고유 번호)
             elif ans=='2':
                 schedule = textManager.readText_Room()
                 newRoom=input(Class[2]+" >> ") or '입력 실패'
-                if not newRoom in schedule[0]:     # 새로 입력한 강의실이 현재 강의실 목록에 존재하지 않으면
+                if newRoom == '입력 실패':
+                    print("데이터 값을 입력해 주세요.")
+                    time.sleep(2)
+                    os.system('cls')
+                    continue
+                elif not newRoom in schedule[0]:     # 새로 입력한 강의실이 현재 강의실 목록에 존재하지 않으면
                     print("존재하지 않는 강의실입니다.")
                     time.sleep(2)
                     os.system('cls')
