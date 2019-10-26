@@ -119,7 +119,7 @@ def cancelClass(code): # 수강 취소
     classCode = input("내가 수강 취소하고 싶은 강의의 고유 번호를 입력하세요. : ") or '입력 실패'
     if classCode == '입력 실패':
         print("데이터 값을 입력해 주세요.")
-    if classCode in classInfo:
+    elif classCode in classInfo:
         textManager.enrollOrCancelClass(classCode,code,1)
     else:
         print("존재하지 않은 고유 번호입니다.")
