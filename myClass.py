@@ -129,11 +129,11 @@ def cancelClass(code): # 수강 취소
 def printSchedule(schedule):
     #roomMaxNum=textManager.readText_RoomMaxNum()    # 강의실 최대 수용 인원 저장 배열
     print("** 현재 강의 시간표 ** ")
-    tempStr="    "
+    tempStr = "    "
     for i,room in enumerate(schedule[0]):
-        tempStr+="\t\t"+room
+        tempStr+="\t"+room
     print(tempStr)
-    tempStr='         '
+    tempStr='     '
     for i,room in enumerate(schedule[0]):
         tempStr+="  "+"(" + textManager.roomID_to_roomMaxSeat(room) + "명)"
     print(tempStr)
@@ -142,9 +142,9 @@ def printSchedule(schedule):
         tempStr=str(i)+"교시"
         for Class in schedule[i]:
             if Class.replace(u"\ufeff", '') == "N":
-                tempStr += "\t\t" + "-"
+                tempStr += "\t" + "-"
             else:
-                tempStr+="\t\t" + Class
+                tempStr+="\t" + Class
         print(tempStr)
 
 def makeClass(code):  # 강의 개설
