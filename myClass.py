@@ -208,6 +208,7 @@ def makeClass(code):  # 강의 개설
     os.system('cls')
 
 def modifyClass(code): # 강의 정보 수정 (code : 선생 고유 번호)
+    totalClassArr=textManager.readText_ClassCode()  # 전체 강의 고유 번호 리스트
     classArr=textManager.readText_Class_ttoc(code)  # 해당 선생이 개설한 강의의 고유 번호 리스트 출력
     os.system('cls')
     print("=" * 16, end='')
@@ -287,8 +288,8 @@ def modifyClass(code): # 강의 정보 수정 (code : 선생 고유 번호)
 
     elif classCode == '입력 실패':
         print("데이터 값을 입력해 주세요.")
-        time.sleep(2)
-        os.system('cls')
+    elif classCode in totalClassArr:
+        print("내가 개설한 강의가 아닙니다.")
     else:
         print("존재하지 않은 고유 번호입니다.")
     time.sleep(2)
