@@ -97,7 +97,9 @@ def enrolement(code):  # 수강 신청
     print("[수강 신청]", end='')
     print("=" * 21)
     classCode = input("내가 수강하고 싶은 강의의 고유 번호를 입력하세요. : ") or '입력 실패'
-    if classCode in classCodeInfo:
+    if classCode == '입력 실패':
+        print("데이터 값을 입력해 주세요.")
+    elif classCode in classCodeInfo:
         classInfo=textManager.readText_Class_c(classCode)
         if int(textManager.roomID_to_roomMaxSeat(classInfo[2])) > len(classInfo[6]):    # 최대인원 > 현재 수강인원
             textManager.enrollOrCancelClass(classCode,code,0)
@@ -115,6 +117,8 @@ def cancelClass(code): # 수강 취소
     print("[수강 취소]", end='')
     print("=" * 21)
     classCode = input("내가 수강 취소하고 싶은 강의의 고유 번호를 입력하세요. : ") or '입력 실패'
+    if classCode == '입력 실패':
+        print("데이터 값을 입력해 주세요.")
     if classCode in classInfo:
         textManager.enrollOrCancelClass(classCode,code,1)
     else:
