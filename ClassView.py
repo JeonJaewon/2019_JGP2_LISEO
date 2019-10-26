@@ -86,8 +86,10 @@ def start(myID):
                     print(studentCode[1]+' ('+studentCode[0]+'), '+studentCode[2])
                 print('========================================')
                 print('1. 뒤로 가기')
-                mySelect = input('')
-                if rule.numberRule(mySelect) == 0:
+                mySelect = input('') or '입력 실패'
+                if mySelect == '입력 실패':
+                    print("데이터 값을 입력해 주세요.")
+                elif rule.numberRule(mySelect) == 0:
                     time.sleep(2)
                     os.system('cls')
                     continue
