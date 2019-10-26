@@ -45,8 +45,13 @@ def start(myID):
         #메뉴
         print('1. 수강생 정보 확인')
         print('2. 뒤로가기')
-        select = input('선택 : ') or '입력실패'
-        if rule.numberRule(select)==0:
+        select = input('선택 : ') or '입력 실패'
+        if select == '입력 실패':
+            print("데이터 값을 입력해 주세요.")
+            time.sleep(2)
+            os.system('cls')
+            continue
+        elif rule.numberRule(select)==0:
             time.sleep(2)
             os.system('cls')
             continue
