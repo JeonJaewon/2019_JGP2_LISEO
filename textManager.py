@@ -374,7 +374,7 @@ def Re_Student(number,content):
     else: #이쪽은 학생 정보 추가
         addstudent = open("student.txt", 'a+', encoding='UTF-8-SIG')  # txt 문장 추가
         code = student[len(student)-1][0] # 코드 전체 부분
-        codenum = int(code[1])+1  #코드 숫자 부분
+        codenum = int(code[1:])+1  #코드 숫자 부분
         code = code[0] + str(codenum) #새로운 코드 생성
         newline = code + '@' + number +'@'+ content+'\n' # 한 문장으로 합치기 number = 이름 content = 전화번호/공백으로 변경
         addstudent.write(newline) # 글 쓰기
