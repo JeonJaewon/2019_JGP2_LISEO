@@ -166,6 +166,11 @@ def makeClass(code):  # 강의 개설
         time.sleep(2)
         os.system('cls')
         return
+    if len(className)>30:
+        print("강의명은 30자 이내여야 합니다.")
+        time.sleep(2)
+        os.system('cls')
+        return
     classRoom = input("강의를 진행할 강의실의 고유번호를 입력하세요. : ") or '입력 실패'
     if classRoom=='입력 실패':
         print("데이터 값을 입력해주십시오.")
