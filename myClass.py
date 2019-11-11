@@ -155,9 +155,14 @@ def makeClass(code):  # 강의 개설
     print("=" * 21)
     printSchedule(schedule)     # 현재 강의 시간표 출력
     print("==============================================")
-    className = input("내가 개설할 강의의 이름을 입력하세요. : ") or '입력 실패'
+    className = input("내가 개설할 강의의 이름을 입력하세요. (30자 이내) : ") or '입력 실패'
     if className=='입력 실패':
         print("데이터 값을 입력해주십시오.")
+        time.sleep(2)
+        os.system('cls')
+        return
+    if "@" in className:    # 강의 명에 '@'가 들어갔을 경우
+        print("강의명에 '@' 가 들어갈 수 없습니다.")
         time.sleep(2)
         os.system('cls')
         return
