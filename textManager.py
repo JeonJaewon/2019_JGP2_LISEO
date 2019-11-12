@@ -532,3 +532,11 @@ def studentID_to_classList(studentCode):
             if code==studentCode:
                 classList.append(classData[0])
     return classList
+
+# PPT 4.3 빈 강의실 먼저 확인 하는 함수
+def checkEmptyRoom(code):
+    room = readText_Room() #room.txt 정보
+    for i in [1,2,3,4,5]:
+        if room[i][code-1] == 'N':
+            return 1
+    return 0
