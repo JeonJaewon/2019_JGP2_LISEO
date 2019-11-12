@@ -182,6 +182,11 @@ def makeClass(code):  # 강의 개설
         time.sleep(2)
         os.system('cls')
         return
+    if textManager.checkEmptyRoom(int(classRoom[1])) == 0: #강의실이 꽉 차있을 경우
+        print("빈 강의실이 없습니다.")
+        time.sleep(2)
+        os.system('cls')
+        return
     classTime = input("내가 개설할 강의의 시간대를 입력하세요. (-교시) : ") or '입력 실패'
     if classTime=='입력 실패':
         print("데이터 값을 입력해주십시오.")
