@@ -36,7 +36,10 @@ def printStudentList(): # 모든 학생 리스트 출력
 def addStudentInfo(): # 학생 정보 추가
     print("새로 추가할 학생의 이름을 입력하세요 '('10자 이내 문자')'")
     studentName = input() or '입력 실패'
-    if studentName == '입력 실패':
+    if "@" in studentName:    # 학생 명에 '@'가 들어갔을 경우
+        print("이름에 '@' 가 들어갈 수 없습니다.")
+        return
+    elif studentName == '입력 실패':
         print("데이터 값을 입력해 주세요")
         return
     elif len(studentName) > 10:
