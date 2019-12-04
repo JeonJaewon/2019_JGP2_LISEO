@@ -254,6 +254,17 @@ def modifyClass(code): # 강의 정보 수정 (code : 선생 고유 번호)
                     time.sleep(2)
                     os.system('cls')
                     continue
+                if "@" in newName:  # 강의 명에 '@'가 들어갔을 경우
+                    print("강의명에 '@' 가 들어갈 수 없습니다.")
+                    time.sleep(2)
+                    os.system('cls')
+                    return
+                if len(newName) > 30:
+                    print("강의명은 30자 이내여야 합니다.")
+                    time.sleep(2)
+                    os.system('cls')
+                    return
+
                 # 여기에서 입력조건 검사도 들어가야겠죵? 근데 입력 조건이 따로 있나
                 textManager.modify_ClassInfo(classCode,newName,-1,-1)
                 print("정보가 성공적으로 수정되었습니다.")
@@ -335,3 +346,4 @@ def deleteClass(code):
         print("존재하지 않는 고유번호입니다.")
     time.sleep(2)
     os.system('cls')
+modifyClass('T1')
