@@ -346,4 +346,3 @@ def deleteClass(code):
         print("존재하지 않는 고유번호입니다.")
     time.sleep(2)
     os.system('cls')
-modifyClass('T1')
